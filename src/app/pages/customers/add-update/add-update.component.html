@@ -1,0 +1,336 @@
+<mat-card>
+  <div class="container">
+    <div  fxLayout="column" fxLayoutAlign="end end" class="button-container">
+      <button  routerLink="/customers" mat-raised-button  class="demo-button">
+        <mat-icon aria-label="Example icon-button with a heart icon">keyboard_backspace</mat-icon> Cancel
+      </button>
+
+
+    </div>
+
+    <span mat-card-title>Add New Customer</span>
+    <br />
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <mat-stepper orientation="vertical" linear #stepper>
+        <mat-step [stepControl]="personalInfo" >
+          <form [formGroup]="personalInfo">
+            <ng-template matStepLabel>Fill out your personal info</ng-template>
+            <mat-form-field>
+              <mat-label> First Name </mat-label>
+              <input
+                formControlName="firstName"
+                matInput
+                placeholder="First Name"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Middle Name </mat-label>
+              <input
+                formControlName="middleName"
+                matInput
+                placeholder="Middle Name"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Last Name </mat-label>
+              <input
+                formControlName="lastName"
+                matInput
+                placeholder="Last Name"
+              />
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label> User Name </mat-label>
+              <input
+                formControlName="userName"
+                matInput
+                placeholder="User Name"
+              />
+            </mat-form-field>
+            <div>
+              <button type="button" mat-button color="primary" matStepperNext>
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="password">
+          <form [formGroup]="password">
+            <ng-template matStepLabel>Set your password</ng-template>
+
+            <mat-form-field>
+              <mat-label> password </mat-label>
+              <input
+                formControlName="password"
+                matInput
+                placeholder="Password"
+              />
+            </mat-form-field>
+            <!--     <mat-form-field>
+            <mat-label> Confirm password </mat-label>
+            <input
+              formControlName="confirmPassword"
+              matInput
+              placeholder="Password"
+            />
+          </mat-form-field> -->
+            <div>
+              <button
+                color="accent"
+                type="button"
+                mat-button
+                matStepperPrevious
+              >
+                Back
+              </button>
+              <button color="primary" type="button" mat-button matStepperNext>
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step [stepControl]="contactInfo">
+          <form [formGroup]="contactInfo">
+            <ng-template matStepLabel>Fill your contact info</ng-template>
+            <mat-form-field>
+              <mat-label> Telephone </mat-label>
+              <input
+                formControlName="telephone"
+                matInput
+                placeholder="Telephone"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label> Company Name </mat-label>
+              <input
+                formControlName="companyName"
+                matInput
+                placeholder="Company Name"
+              />
+            </mat-form-field>
+
+            <mat-form-field>
+              <mat-label>Email </mat-label>
+              <input
+                formControlName="email"
+                matInput
+                type="email"
+                placeholder="Email"
+              />
+            </mat-form-field>
+
+            <div>
+              <button
+                color="accent"
+                type="button"
+                mat-button
+                matStepperPrevious
+              >
+                Back
+              </button>
+              <button color="primary" type="button" mat-button matStepperNext>
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+        <mat-step [stepControl]="addressInfo">
+          <form [formGroup]="addressInfo">
+            <ng-template matStepLabel>Manage shipment addresses</ng-template>
+
+            <div formArrayName="addresses">
+              <div fxLayout="column" fxLayoutAlign="end end">
+                <p mat-card-subtitle>
+                  Add addres  <button
+                    mat-mini-fab
+                    type="button"
+                    color="primary"
+                    (click)="addNewShipmentAddr()"
+                  >
+                    <mat-icon>add</mat-icon>
+                  </button>
+                </p>
+              </div>
+
+              <div
+                *ngFor="
+                  let shipmentAddrGroup of addresses.controls;
+                  let i = index
+                "
+              >
+                <mat-card class="addSpace" [formGroupName]="i">
+                  <mat-card-subtitle>
+                    Shipment Address # {{ i + 1 }}
+                    <mat-card-actions align="end">
+                      <button
+                        type="button"
+                        (click)="removeShipmentAddr(i)"
+                        mat-icon-button
+                        color="warn"
+                      >
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                    </mat-card-actions>
+                  </mat-card-subtitle>
+
+                  <mat-form-field>
+                    <mat-label>Contact Name </mat-label>
+                    <input
+                      type="text"
+                      formControlName="contactName"
+                      matInput
+                      placeholder="contact Name"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Phone Number 1 </mat-label>
+                    <input
+                      type="tel"
+                      formControlName="phoneNumber1"
+                      matInput
+                      placeholder="phone Number 1"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Phone Number 2 </mat-label>
+                    <input
+                      type="tel"
+                      formControlName="phoneNumber2"
+                      matInput
+                      placeholder="phone Number 2"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Email </mat-label>
+                    <input
+                      type="email"
+                      formControlName="email"
+                      matInput
+                      placeholder="email"
+                    />
+                  </mat-form-field>
+                  <br />
+
+                  <mat-form-field>
+                    <mat-label>Street </mat-label>
+                    <input
+                      type="text"
+                      formControlName="street"
+                      matInput
+                      placeholder="street"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>City </mat-label>
+                    <input
+                      type="text"
+                      formControlName="city"
+                      matInput
+                      placeholder="city"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>State </mat-label>
+                    <input
+                      type="text"
+                      formControlName="state"
+                      matInput
+                      placeholder="state"
+                    />
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <mat-label>Zipcode </mat-label>
+                    <input
+                      type="text"
+                      formControlName="zipCode"
+                      matInput
+                      placeholder="zipCode"
+                    />
+                  </mat-form-field>
+
+                  <br />
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Country</mat-label>
+                    <mat-select formControlName="country">
+                      <mat-option
+                        *ngFor="let country of countries"
+                        [value]="country.value"
+                      >
+                        {{ country.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Address Type</mat-label>
+                    <mat-select formControlName="addressType">
+                      <mat-option
+                        *ngFor="let adrs of addressType"
+                        [value]="adrs.value"
+                      >
+                        {{ adrs.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </mat-card>
+              </div>
+            </div>
+
+            <div>
+              <button
+                color="accent"
+                type="button"
+                mat-button
+                matStepperPrevious
+              >
+                Back
+              </button>
+              <button color="primary" type="button" mat-button matStepperNext>
+                Next
+              </button>
+            </div>
+          </form>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>Done</ng-template>
+          <p>You are now done.</p>
+          <div>
+            <button color="accent" mat-button matStepperPrevious>Back</button>
+            <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="onSubmit()"
+              type="submit"
+              [disabled]="!this.personalInfo.valid && this.password.valid && this.contactInfo.valid"
+            >
+              Save
+            </button>
+          </div>
+        </mat-step>
+      </mat-stepper>
+
+      <!--      <div class="button-row">
+          <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">Save</button>
+          <a routerLink="/customers" mat-stroked-button color="primary" type="submit">Cancel</a>
+      </div> -->
+    </div>
+  </div>
+</mat-card>
+
+<pre>
+  {{ form | json }}
+</pre>

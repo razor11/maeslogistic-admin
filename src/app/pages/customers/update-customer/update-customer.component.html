@@ -1,0 +1,115 @@
+<mat-card >
+  <div class="container">
+    <span *ngIf="dataLoad" mat-card-title> Customer {{customer.firstName}} {{customer.lastName}}</span>
+      <br>
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+      <form [formGroup]="form">
+        <div>
+          <mat-form-field>
+            <mat-label> First Name </mat-label>
+            <input
+              formControlName="firstName"
+              matInput
+              placeholder="First Name"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label> Middle Name </mat-label>
+            <input
+              formControlName="middleName"
+              matInput
+              placeholder="Middle Name"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label> Last Name </mat-label>
+            <input
+              formControlName="lastName"
+              matInput
+              placeholder="Last Name"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label> User Name </mat-label>
+            <input
+              formControlName="userName"
+              matInput
+              placeholder="User Name"
+            />
+          </mat-form-field>
+
+
+
+        </div>
+
+        <div>
+
+          <mat-form-field>
+            <mat-label> Telephone </mat-label>
+            <input
+              formControlName="telephone"
+              matInput
+              placeholder="Telephone"
+            />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label> Company Name </mat-label>
+            <input
+              formControlName="companyName"
+              matInput
+              placeholder="Company Name"
+            />
+          </mat-form-field>
+
+
+          <mat-form-field>
+            <mat-label>Email </mat-label>
+            <input
+              formControlName="email"
+              matInput
+              type="email"
+              placeholder="Email"
+            />
+          </mat-form-field>
+
+
+          <div>
+
+            <button type="button"  mat-raised-button (click)="openPasswordDialog()">Change Password</button>
+            <button routerLink="/manage-addresses/{{id}}" type="button" mat-raised-button>Manage Addresses</button>
+          </div>
+
+     <!--      <mat-form-field>
+            <mat-label> password </mat-label>
+            <input formControlName="password" matInput placeholder="Password" />
+          </mat-form-field> -->
+      <!--     <mat-form-field>
+            <mat-label> Confirm password </mat-label>
+            <input
+              formControlName="confirmPassword"
+              matInput
+              placeholder="Password"
+            />
+          </mat-form-field> -->
+        </div>
+
+
+
+
+
+        <div align="end" class="button-row">
+          <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">Save</button>
+          <a routerLink="/customers" mat-stroked-button color="primary" type="submit">Cancel</a>
+      </div>
+      </form>
+    </div>
+  </div>
+</mat-card>
+<!-- <pre>
+  {{form.value | json}}
+  </pre>
+ -->
