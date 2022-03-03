@@ -1,32 +1,39 @@
-
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
   <mat-toolbar color="primary" class="example-toolbar">
-    <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
-    <h1 class="example-app-name" style="padding-top: 10px;"><img alt="logo" src="../../assets/img/Logo.png" width="140"></h1>
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <h1 class="example-app-name" style="padding-top: 10px">
+      <img alt="logo" src="../../assets/img/Logo.png" width="140" />
+    </h1>
     <span class="spacer"></span>
-    <span>{{userName}} </span>
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <span>{{ userName }} </span>
+    <button
+      mat-icon-button
+      [matMenuTriggerFor]="menu"
+      aria-label="Example icon-button with a menu"
+    >
       <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button  mat-menu-item (click)="logout()">
+      <button mat-menu-item (click)="logout()">
         <mat-icon>exit_to_app</mat-icon>
         <span>Exit</span>
       </button>
     </mat-menu>
-
-
-
-
-
   </mat-toolbar>
 
-  <mat-sidenav-container class="example-sidenav-container"
-                         [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
-                 [fixedInViewport]="mobileQuery.matches" fixedTopGap="56">
+  <mat-sidenav-container
+    class="example-sidenav-container"
+    [style.marginTop.px]="mobileQuery.matches ? 56 : 0"
+  >
+    <mat-sidenav
+      #snav
+      [mode]="mobileQuery.matches ? 'over' : 'side'"
+      [fixedInViewport]="mobileQuery.matches"
+      fixedTopGap="56"
+    >
       <mat-nav-list>
-
         <div>
           <a
             mat-list-item
@@ -47,37 +54,34 @@
                   <mat-icon matListIcon>person</mat-icon>
                   <span matLine>Customers</span>
                 </a>
-
-
-
               </mat-panel-title>
             </mat-expansion-panel-header>
-              <a  mat-list-item routerLink="/customers" routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}">
-                <mat-icon matListIcon aria-hidden="false" >grid_on</mat-icon>
-                <span matLine> Customers List</span>
-              </a>
+            <a
+              mat-list-item
+              routerLink="/customers"
+              routerLinkActive="active-list-item"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+              <span matLine> Customers List</span>
+            </a>
 
-              <a  mat-list-item routerLink="/customers/add" routerLinkActive="active-list-item" [routerLinkActiveOptions]="{exact: true}">
-                  <mat-icon matListIcon aria-hidden="false" >add_box</mat-icon>
-                  <span matLine>Add Customer</span>
-              </a>
-
-
+            <a
+              mat-list-item
+              routerLink="/customers/add"
+              routerLinkActive="active-list-item"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
+              <span matLine>Add Customer</span>
+            </a>
           </mat-expansion-panel>
-
         </div>
-
-
-
       </mat-nav-list>
     </mat-sidenav>
 
     <mat-sidenav-content fullscreen>
-
-
       <router-outlet></router-outlet>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
-

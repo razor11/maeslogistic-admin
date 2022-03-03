@@ -31,6 +31,7 @@ import { DataCustomersService } from './core/services/customers/data-customers.s
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DataAddressesService } from './core/services/addresses/data-addresses.service';
+import { AddressesDialogComponent } from './components/addresses-dialog/addresses-dialog.component';
 
 
 
@@ -44,7 +45,8 @@ export function tokenGetter() {
     AppComponent,
     HomeComponent,
     NavigationComponent,
-    LoginComponent
+    LoginComponent,
+    AddressesDialogComponent
 
   ],
   imports: [
