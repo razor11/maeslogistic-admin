@@ -12,7 +12,7 @@ import {
 import { Observable, from, throwError } from 'rxjs';
 import { catchError, switchMap, tap } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
-import { APIKEY } from '../enviroment';
+
 
 @Injectable()
 export class auth implements HttpInterceptor {

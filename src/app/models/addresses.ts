@@ -9,5 +9,8 @@ export class Addresses  {
   state: string;
   zipCode: string;
   country: string;
-  addressType: number;
+  addressType: {
+    id: number;
+    description:string;
+  };
 }

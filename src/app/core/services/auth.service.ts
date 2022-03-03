@@ -4,10 +4,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { take, map, switchMap, tap } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { environment } from '../enviroment';
 import { BehaviorSubject, from, Observable } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { tokenGetter } from 'src/app/app.module';
+import { environment } from 'src/environments/environment';
 
 const jwt = new JwtHelperService();
 const tokenStatus = tokenGetter();

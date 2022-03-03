@@ -3,7 +3,11 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  APIKEY: 'EAB0A38835EBA59230EF98D8879DC2C198DF96AF',
+  APIURL: 'https://app-tracking-services.herokuapp.com',
+  DUMMIES_URL: 'https://my-app-sar.herokuapp.com'
+
 };
 
 /*
