@@ -26,11 +26,11 @@ export class LogisticOperatorsComponent implements OnInit {
   displayedColumns: string[] = ['Id',
   'Name',
   'Country',
-  'Zip code',
+  'Zipcode',
   'City',
   'Street',
   'Suite',
-  'Contact number'
+  'ContactNumber'
 ];
 
 dataSource: MatTableDataSource<logisticOperator> = new MatTableDataSource();
@@ -52,7 +52,7 @@ added = true;
     this.logisticOperatorsService.getAll(this.currentPage, this.pageSize)
     .pipe(first())    
     .subscribe((data) => {
-      this.data = data;
+      this.dataSource.data = data;
       this.isLoading = false;
     });
   }

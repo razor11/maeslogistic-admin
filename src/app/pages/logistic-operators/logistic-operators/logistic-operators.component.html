@@ -22,35 +22,37 @@
             <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="Zipcode">
             <th mat-header-cell *matHeaderCellDef> ZipCode </th>
             <td mat-cell *matCellDef="let element"> {{element.ZipCode}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="Country">
             <th mat-header-cell *matHeaderCellDef> Country </th>
             <td mat-cell *matCellDef="let element"> {{element.Country}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="City">
             <th mat-header-cell *matHeaderCellDef> City </th>
             <td mat-cell *matCellDef="let element"> {{element.City}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="Street">
             <th mat-header-cell *matHeaderCellDef> Street </th>
             <td mat-cell *matCellDef="let element"> {{element.Street}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="Suite">
             <th mat-header-cell *matHeaderCellDef> Suite </th>
             <td mat-cell *matCellDef="let element"> {{element.Suite}} </td>
         </ng-container>
         <!-- Name Column -->
-        <ng-container matColumnDef="Name">
+        <ng-container matColumnDef="ContactNumber">
             <th mat-header-cell *matHeaderCellDef> ContactNumber </th>
             <td mat-cell *matCellDef="let element"> {{element.ContactNumber}} </td>
         </ng-container>
-
+        
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>   
   </div>
