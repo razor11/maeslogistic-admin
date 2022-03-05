@@ -3,6 +3,7 @@ import { NavigationComponent } from '../../navigation/navigation.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ManageAddressesComponent } from 'src/app/pages/manage-addresses/manage-addresses.component';
+import { LoLayoutComponent } from 'src/app/pages/logistic-operators/lo-layout/lo-layout.component';
 
 
 
@@ -21,6 +22,21 @@ const routes: Routes = [{
                 }
             ]
         },
+
+        {
+          path: 'logistic-operators',
+          children: [
+              {
+                  path: '',
+                  component: LoLayoutComponent,
+                  loadChildren: () =>
+                      import('../../modules/logistic-operators/logistic-operators.module').then(                                                  
+                          m => m.LogisticOperatorModule
+                      )
+              }
+          ]
+
+      },
 
         {
           path: 'customers',
