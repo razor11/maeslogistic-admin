@@ -5,11 +5,13 @@ import { EmbarcationRoutingModule } from 'src/app/routes/embarcation-routing.mod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/modules/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { EmLayoutComponent } from 'src/app/pages/embarcations/em-layout/em-layout.component';
+import { EmAdUpdateComponent } from 'src/app/pages/embarcations/em-ad-update/em-ad-update.component';
 
 
 
 @NgModule({
-  declarations: [EmbarcationsComponent],
+  declarations: [EmLayoutComponent,EmbarcationsComponent, EmAdUpdateComponent],
   imports: [
     CommonModule,
     EmbarcationRoutingModule,

@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ManageAddressesComponent } from 'src/app/pages/manage-addresses/manage-addresses.component';
 import { LoLayoutComponent } from 'src/app/pages/logistic-operators/lo-layout/lo-layout.component';
 import { EmbarcationsComponent } from 'src/app/pages/embarcations/embarcations.component';
+import { EmLayoutComponent } from 'src/app/pages/embarcations/em-layout/em-layout.component';
 
 
 
@@ -44,7 +45,7 @@ const routes: Routes = [{
         children: [
             {
                 path: '',
-                component: EmbarcationsComponent,
+                component: EmLayoutComponent,
                 loadChildren: () =>
                     import('../../modules/embarcations/embarcations.module').then(                                                  
                         m => m.EmbarcationsModule

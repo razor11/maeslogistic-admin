@@ -16,7 +16,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MaterialModule } from './shared/modules/material/material.module';
-import {MatStepperModule} from '@angular/material/stepper';
+
 
 
 import { JwtModule } from "@auth0/angular-jwt";
@@ -24,7 +24,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { AuthService } from './core/services/auth.service';
 import { auth } from './core/interceptors/request.interceptor';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CustomersComponent } from './pages/customers/customers.component';
+
 import { AppRoutingModule } from './core/router/app.routing';
 import { HomeComponent } from './pages/home/home.component';
 import { DataCustomersService } from './core/services/customers/data-customers.service';
@@ -33,8 +33,7 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DataAddressesService } from './core/services/addresses/data-addresses.service';
 import { LoAddUpdateComponent } from './pages/logistic-operators/lo-add-update/lo-add-update.component';
 import { IdLogisticOperatorsAddComponent } from './pages/logistic-operators/dialogs/id-logistic-operators-add/id-logistic-operators-add.component';
-import { EmbarcationsComponent } from './pages/embarcations/embarcations.component';
-import { EmAdUpdateComponent } from './pages/embarcations/em-ad-update/em-ad-update.component';
+
 
 
 export function tokenGetter() {
@@ -49,10 +48,7 @@ export function tokenGetter() {
     NavigationComponent,
     LoginComponent,
     LoAddUpdateComponent,
-    IdLogisticOperatorsAddComponent,    
-    EmAdUpdateComponent,
-
-
+    IdLogisticOperatorsAddComponent
   ],
   imports: [
     HttpClientModule,
