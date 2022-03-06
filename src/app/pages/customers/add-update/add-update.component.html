@@ -1,15 +1,19 @@
 <mat-card>
+  <mat-toolbar-row>
+    <mat-card-header>
+      <mat-card-title >
+        Add New Customer
+      </mat-card-title>
+    </mat-card-header>
+    <span class="spacer"></span>
+    <button  routerLink="/customers" mat-raised-button  class="demo-button">
+      <mat-icon aria-label="Example icon-button with a heart icon">keyboard_backspace</mat-icon> Cancel
+    </button>
+
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
   <div class="container">
-    <div  fxLayout="column" fxLayoutAlign="end end" class="button-container">
-      <button  routerLink="/customers" mat-raised-button  class="demo-button">
-        <mat-icon aria-label="Example icon-button with a heart icon">keyboard_backspace</mat-icon> Cancel
-      </button>
 
-
-    </div>
-
-    <span mat-card-title>Add New Customer</span>
-    <br />
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <mat-stepper orientation="vertical" linear #stepper>
         <mat-step [stepControl]="personalInfo" >
@@ -146,7 +150,7 @@
             <div formArrayName="addresses">
               <div fxLayout="column" fxLayoutAlign="end end">
                 <p mat-card-subtitle>
-                  Add addres  <button
+                  Add address  <button
                     mat-mini-fab
                     type="button"
                     color="primary"

@@ -1,9 +1,11 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Addresses } from './../../models/addresses';
 import { first } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DataAddressesService } from 'src/app/core/services/addresses/data-addresses.service';
 import { Location } from '@angular/common';
+import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/addresses-dialog.component';
 
 @Component({
   selector: 'app-manage-addresses',
@@ -18,7 +20,8 @@ export class ManageAddressesComponent implements OnInit {
     private addressesService: DataAddressesService,
     private route: ActivatedRoute,
     private router: Router,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit() {
@@ -35,6 +38,19 @@ export class ManageAddressesComponent implements OnInit {
         console.log(data);
       });
   }
+
+  updateDialog(param:any): void{
+    const dialogRef = this.dialog.open(AddressesDialogComponent, {
+      width: '480',
+      data: param,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.loadAddresses();
+      }
+    });
+  }
+
 
   goBack() {
     this.location.back();

@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from 'src/app/shared/modules/material/material.module';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChangePasswordComponent } from 'src/app/pages/customers/change-password/change-password.component';
+import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/addresses-dialog.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,6 @@ import { ChangePasswordComponent } from 'src/app/pages/customers/change-password
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-
     FlexLayoutModule
   ],
   declarations: [LayoutComponent,
@@ -25,6 +25,7 @@ import { ChangePasswordComponent } from 'src/app/pages/customers/change-password
     AddUpdateComponent,
     ChangePasswordComponent,
     UpdateCustomerComponent,
+    AddressesDialogComponent
 
 
   ],

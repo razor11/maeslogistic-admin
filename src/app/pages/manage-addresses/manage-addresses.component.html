@@ -4,12 +4,28 @@
       <mat-card-title> Manage Customer Addresses </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
-    <button (click)="goBack()" mat-raised-button class="demo-button">
-      <mat-icon aria-label="Example icon-button with a heart icon"
-        >keyboard_backspace</mat-icon
-      >
-      Back
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon class="mat-18">more_horiz</mat-icon>
     </button>
+    <mat-menu #menu="matMenu">
+      <button (click)="goBack()" mat-menu-item>
+        <mat-icon aria-label="Example icon-button with a heart icon"
+          >keyboard_backspace</mat-icon
+        >
+        Back
+      </button>
+      <button
+        mat-menu-item
+        routerLink="/manage-addresses/{{ id }}"
+        type="button"
+      >
+      <mat-icon
+      >add</mat-icon
+    >
+        Add new Address
+      </button>
+    </mat-menu>
+
   </mat-toolbar-row>
   <mat-divider></mat-divider>
   <mat-card-content>
@@ -40,7 +56,7 @@
           <p>Phone Number: {{ item.phoneNumber1 }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button mat-button>Edit</button>
+          <button mat-raised-button mat-button (click)="updateDialog(item)">Edit</button>
           <button mat-raised-button mat-button color="warn">
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>

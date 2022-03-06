@@ -20,7 +20,7 @@ export class AddressesDialogComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddressesDialogComponent>,
-    @Inject(MAT_DIALOG_DATA)() public data: Addresses,
+    @Inject(MAT_DIALOG_DATA) public data: Addresses,
     private fb: FormBuilder,
     private addrService: DataAddressesService
   ) {}
