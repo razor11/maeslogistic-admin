@@ -1,5 +1,5 @@
 export class logisticOperator{
-    id!: number
+    id!: number;
     Name!:string;
     Country!: string;
     ZipCode!:string;

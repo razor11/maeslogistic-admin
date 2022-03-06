@@ -33,6 +33,8 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DataAddressesService } from './core/services/addresses/data-addresses.service';
 import { LoAddUpdateComponent } from './pages/logistic-operators/lo-add-update/lo-add-update.component';
 import { IdLogisticOperatorsAddComponent } from './pages/logistic-operators/dialogs/id-logistic-operators-add/id-logistic-operators-add.component';
+import { EmbarcationsComponent } from './pages/embarcations/embarcations.component';
+import { EmAdUpdateComponent } from './pages/embarcations/em-ad-update/em-ad-update.component';
 
 
 export function tokenGetter() {
@@ -47,7 +49,8 @@ export function tokenGetter() {
     NavigationComponent,
     LoginComponent,
     LoAddUpdateComponent,
-    IdLogisticOperatorsAddComponent,
+    IdLogisticOperatorsAddComponent,    
+    EmAdUpdateComponent,
 
 
   ],
