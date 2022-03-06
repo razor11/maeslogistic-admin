@@ -31,6 +31,8 @@ import { DataCustomersService } from './core/services/customers/data-customers.s
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DataAddressesService } from './core/services/addresses/data-addresses.service';
+import { LoAddUpdateComponent } from './pages/logistic-operators/lo-add-update/lo-add-update.component';
+import { IdLogisticOperatorsAddComponent } from './pages/logistic-operators/dialogs/id-logistic-operators-add/id-logistic-operators-add.component';
 
 
 export function tokenGetter() {
@@ -44,6 +46,8 @@ export function tokenGetter() {
     HomeComponent,
     NavigationComponent,
     LoginComponent,
+    LoAddUpdateComponent,
+    IdLogisticOperatorsAddComponent,
 
 
   ],

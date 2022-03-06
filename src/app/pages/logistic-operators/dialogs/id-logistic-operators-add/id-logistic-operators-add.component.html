@@ -1,0 +1,48 @@
+<h1 mat-dialog-title>Add logistic operator</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <input
+        matInput
+        formControlName="Name"
+        placeholder="Name"
+      />
+      <input
+        matInput
+        formControlName="Country"
+        placeholder="Country"
+      />
+      <input
+        matInput
+        formControlName="Zipcode"
+        placeholder="Zipcode"
+      />
+      <input
+        matInput
+        formControlName="City"
+        placeholder="City"
+      />
+      <input
+        matInput
+        formControlName="Street"
+        placeholder="Street"
+      />
+      <input
+        matInput
+        formControlName="Suite"
+        placeholder="Suite"
+      />
+      <input
+        matInput
+        formControlName="ContactNumber"
+        placeholder="ContactNumber"
+      />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+  <button [mat-dialog-close]="data" type="button" mat-button (click)="onSubmit()"  [disabled]="!this.form.valid">
+    Add
+  </button>
+</div>
