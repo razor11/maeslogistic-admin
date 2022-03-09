@@ -1,11 +1,13 @@
 <mat-card class="container">
   <mat-toolbar-row>
     <mat-card-header>
-      <mat-card-title> Manage Customer Addresses </mat-card-title>
+      <mat-card-title>
+        Manage {{ customerName }} {{ customerLastName }} Addresses
+      </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon>
+      <mat-icon class="mat-18">more_horiz</mat-icon> Options
     </button>
     <mat-menu #menu="matMenu">
       <button (click)="goBack()" mat-menu-item>
@@ -14,35 +16,21 @@
         >
         Back
       </button>
-      <button
-        mat-menu-item
-        routerLink="/manage-addresses/{{ id }}"
-        type="button"
-      >
-      <mat-icon
-      >add</mat-icon
-    >
+      <button mat-menu-item type="button" (click)="addDialog(id)">
+        <mat-icon>add</mat-icon>
         Add new Address
       </button>
     </mat-menu>
-
   </mat-toolbar-row>
   <mat-divider></mat-divider>
   <mat-card-content>
-    <div
-      class="space"
-      fxLayout="row wrap"
-      fxLayout.xs="column"
-      fxLayoutAlign="space-around center"
-      fxLayoutGap="30px"
-    >
-      <mat-card
-        *ngFor="let item of addresses"
-        fxFlex="calc(33%-25px)"
-        fxFlex.sm="calc(50%-25px)"
-      >
+    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+    <div class="space" fxLayout="column wrap" fxLayoutGap="30px">
+      <mat-card *ngFor="let item of addresses">
         <h2>{{ item.contactName }}</h2>
-        <mat-card-subtitle>{{ item.addressType }}</mat-card-subtitle>
+        <mat-card-subtitle>{{
+          item.addressType.description
+        }}</mat-card-subtitle>
 
         <mat-card-content>
           <p>{{ item.street | uppercase }}</p>
@@ -53,11 +41,19 @@
           <p>
             {{ item.country }}
           </p>
-          <p>Phone Number: {{ item.phoneNumber1 }}</p>
+          <p>Primary Phone: {{ item.phoneNumber1 }}</p>
+          <p>Secondary Phone: {{ item.phoneNumber2 }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <button mat-raised-button mat-button (click)="updateDialog(item)">Edit</button>
-          <button mat-raised-button mat-button color="warn">
+          <button mat-raised-button mat-button (click)="updateDialog(item)">
+            Edit
+          </button>
+          <button
+            mat-raised-button
+            mat-button
+            color="warn"
+            (click)="deleteAddr(item.id)"
+          >
             <mat-icon aria-label="Delete">delete</mat-icon>
           </button>
         </mat-card-actions>

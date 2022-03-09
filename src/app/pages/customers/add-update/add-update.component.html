@@ -1,22 +1,19 @@
 <mat-card>
-  <mat-toolbar-row>
-    <mat-card-header>
-      <mat-card-title >
-        Add New Customer
-      </mat-card-title>
-    </mat-card-header>
+  <mat-card-header class="card-header-padding">
+    <mat-card-title> Add New Customer </mat-card-title>
     <span class="spacer"></span>
-    <button  routerLink="/customers" mat-raised-button  class="demo-button">
-      <mat-icon aria-label="Example icon-button with a heart icon">keyboard_backspace</mat-icon> Cancel
+    <button routerLink="/customers" mat-raised-button class="demo-button">
+      <mat-icon aria-label="Example icon-button with a heart icon"
+        >keyboard_backspace</mat-icon
+      >
     </button>
+  </mat-card-header>
 
-  </mat-toolbar-row>
   <mat-divider></mat-divider>
   <div class="container">
-
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <mat-stepper orientation="vertical" linear #stepper>
-        <mat-step [stepControl]="personalInfo" >
+        <mat-step [stepControl]="personalInfo">
           <form [formGroup]="personalInfo">
             <ng-template matStepLabel>Fill out your personal info</ng-template>
             <mat-form-field>
@@ -150,7 +147,8 @@
             <div formArrayName="addresses">
               <div fxLayout="column" fxLayoutAlign="end end">
                 <p mat-card-subtitle>
-                  Add address  <button
+                  Add address
+                  <button
                     mat-mini-fab
                     type="button"
                     color="primary"
@@ -319,7 +317,11 @@
               color="primary"
               (click)="onSubmit()"
               type="submit"
-              [disabled]="!this.personalInfo.valid && this.password.valid && this.contactInfo.valid"
+              [disabled]="
+                !this.personalInfo.valid &&
+                this.password.valid &&
+                this.contactInfo.valid
+              "
             >
               Save
             </button>

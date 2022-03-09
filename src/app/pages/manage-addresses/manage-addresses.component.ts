@@ -14,7 +14,10 @@ import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/ad
 })
 export class ManageAddressesComponent implements OnInit {
   id: number;
+  customerName: any;
+  customerLastName: any;
   addresses: Addresses[];
+  isLoading: boolean = true;
 
   constructor(
     private addressesService: DataAddressesService,
@@ -26,20 +29,38 @@ export class ManageAddressesComponent implements OnInit {
 
   ngOnInit() {
     this.id = this.route.snapshot.params['id'];
+    this.customerName = this.route.snapshot.queryParamMap.get('customerName');
+    this.customerLastName =
+      this.route.snapshot.queryParamMap.get('customerLastName');
     this.loadAddresses();
   }
 
   loadAddresses() {
+    this.isLoading = true;
     this.addressesService
       .getByAccount(this.id)
       .pipe(first())
       .subscribe((data) => {
         this.addresses = data;
-        console.log(data);
+        this.isLoading = false;
       });
   }
 
-  updateDialog(param:any): void{
+
+  addDialog(id:any): void {
+    const dialogRef = this.dialog.open(AddressesDialogComponent, {
+      width: '480',
+      data:id
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.loadAddresses();
+      }
+    });
+  }
+
+
+  updateDialog(param: any): void {
     const dialogRef = this.dialog.open(AddressesDialogComponent, {
       width: '480',
       data: param,
@@ -50,6 +71,17 @@ export class ManageAddressesComponent implements OnInit {
       }
     });
   }
+
+  deleteAddr(id: any){
+    const addr = this.addresses.find(x => x.id === id);
+    if(!addr) return;
+    this.addressesService.delete(id).pipe(first()).subscribe(() => {
+      this.addresses.filter(x => x.id !== id)
+      this.loadAddresses()
+    })
+
+  }
+
 
 
   goBack() {

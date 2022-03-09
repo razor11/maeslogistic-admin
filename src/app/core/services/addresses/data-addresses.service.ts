@@ -23,8 +23,8 @@ export class DataAddressesService {
   }
 
 
-  addNewAddr(params: any){
-       return this.http.post<Addresses>(`${this.API_URL}/api/v1/addresses`, params);
+  addNewAddr(id:number, params: any){
+       return this.http.post(`${this.API_URL}/api/v1/addresses/${id}`, params);
 
   }
 
@@ -33,8 +33,8 @@ export class DataAddressesService {
 
   }
 
-  deleteAddr(id: number){
-    this.http.delete(`${this.API_URL}/api/v1/addresses/${id}`);
+  delete(id: string){
+   return this.http.delete(`${this.API_URL}/api/v1/addresses/${id}`);
 
   }
 

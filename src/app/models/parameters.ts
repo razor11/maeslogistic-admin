@@ -1,4 +1,4 @@
 export class Parameters {
-  Id!: number;
-  Descripcion!: string;
+  id!: number;
+  description!: string;
 }

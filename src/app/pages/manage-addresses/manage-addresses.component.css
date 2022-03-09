@@ -5,6 +5,8 @@
 
 .space{
 padding: 70px;
+box-sizing: border-box;
+display: flex;
 }
 
 

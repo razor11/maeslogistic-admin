@@ -1,13 +1,13 @@
-<mat-card>
-  <mat-toolbar-row>
+<mat-card >
+  <mat-toolbar-row *ngIf="customer">
     <mat-card-header>
-      <mat-card-title *ngIf="dataLoad">
+      <mat-card-title>
         Customer {{ customer.firstName }} {{ customer.lastName }}
       </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon>
+      <mat-icon class="mat-18">more_horiz</mat-icon>More
     </button>
     <mat-menu #menu="matMenu">
       <button type="button" mat-menu-item (click)="openPasswordDialog()">
@@ -16,6 +16,7 @@
       <button
         mat-menu-item
         routerLink="/manage-addresses/{{ id }}"
+        [queryParams]="{customerName: customer.firstName,customerLastName: customer.lastName}"
         type="button"
       >
         Manage Addresses
@@ -27,34 +28,37 @@
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <form [formGroup]="form">
         <div>
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label> First Name </mat-label>
             <input
               formControlName="firstName"
               matInput
               placeholder="First Name"
             />
+            <mat-icon matSuffix>person_outline</mat-icon>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label> Middle Name </mat-label>
             <input
               formControlName="middleName"
               matInput
               placeholder="Middle Name"
             />
+            <mat-icon matSuffix>person_outline</mat-icon>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label> Last Name </mat-label>
             <input
               formControlName="lastName"
               matInput
               placeholder="Last Name"
             />
+            <mat-icon matSuffix>person_outline</mat-icon>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label> User Name </mat-label>
             <input
               formControlName="userName"
@@ -65,25 +69,27 @@
         </div>
 
         <div>
-          <mat-form-field>
-            <mat-label> Telephone </mat-label>
+          <mat-form-field appearance="fill">
+            <mat-label>Phone number</mat-label>
             <input
               formControlName="telephone"
               matInput
-              placeholder="Telephone"
+              placeholder="Phone Number"
             />
+            <mat-icon matSuffix>call</mat-icon>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label> Company Name </mat-label>
             <input
               formControlName="companyName"
               matInput
               placeholder="Company Name"
             />
+            <mat-icon matSuffix>store_mall_directory</mat-icon>
           </mat-form-field>
 
-          <mat-form-field>
+          <mat-form-field appearance="fill">
             <mat-label>Email </mat-label>
             <input
               formControlName="email"
@@ -91,6 +97,7 @@
               type="email"
               placeholder="Email"
             />
+            <mat-icon matSuffix>email</mat-icon>
           </mat-form-field>
 
           <div></div>

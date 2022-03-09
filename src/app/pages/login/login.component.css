@@ -1,7 +1,7 @@
 :host {
   display: flex;
   justify-content: center;
-  background-image: url('../../../assets/login.svg') ;
+  background-image: url('../../../assets/img/World-Map.svg') ;
   background-position: center;
   background-repeat: no-repeat;
   background-position: center;
@@ -16,8 +16,8 @@
 
 }
 
-.container{
-    margin-top: 15rem;
+.lcontainer{
+    margin-top: 14rem;
 
 }
 

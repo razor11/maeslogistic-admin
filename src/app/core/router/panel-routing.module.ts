@@ -1,3 +1,4 @@
+import { ParametersLayoutComponent } from './../../pages/parameters/parameters-layout/parameters-layout.component';
 import { LayoutComponent } from './../../pages/customers/layout/layout.component';
 import { NavigationComponent } from '../../navigation/navigation.component';
 import { NgModule } from '@angular/core';
@@ -32,12 +33,25 @@ const routes: Routes = [{
                   path: '',
                   component: LoLayoutComponent,
                   loadChildren: () =>
-                      import('../../modules/logistic-operators/logistic-operators.module').then(                                                  
+                      import('../../modules/logistic-operators/logistic-operators.module').then(
                           m => m.LogisticOperatorModule
                       )
               }
           ]
 
+      },
+
+      {
+        path:'parameters',
+        children:[
+          {
+            path:'',
+            component:ParametersLayoutComponent,
+            loadChildren:() => import('../../pages/parameters/modules/parameters/parameters.module').then(
+              m => m.ParametersModule
+            )
+          }
+        ]
       },
 
       {
@@ -47,7 +61,7 @@ const routes: Routes = [{
                 path: '',
                 component: EmLayoutComponent,
                 loadChildren: () =>
-                    import('../../modules/embarcations/embarcations.module').then(                                                  
+                    import('../../modules/embarcations/embarcations.module').then(
                         m => m.EmbarcationsModule
                     )
             }

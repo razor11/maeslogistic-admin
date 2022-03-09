@@ -11,11 +11,11 @@ export class AddressTypesService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<Parameters>(`${this.API_URL}/api/v1/address-types`);
+    return this.http.get<Parameters[]>(`${this.API_URL}/api/v1/address-types`);
   }
 
   getById(id: number) {
-    return this.http.get<Parameters[]>(
+    return this.http.get<Parameters>(
       `${this.API_URL}/api/v1/address-types/${id}`
     );
   }
