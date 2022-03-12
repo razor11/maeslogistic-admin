@@ -33,6 +33,8 @@ import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
 import { DataAddressesService } from './core/services/addresses/data-addresses.service';
 import { LoAddUpdateComponent } from './pages/logistic-operators/lo-add-update/lo-add-update.component';
 import { IdLogisticOperatorsAddComponent } from './pages/logistic-operators/dialogs/id-logistic-operators-add/id-logistic-operators-add.component';
+import { CountriesService } from './core/services/countries/countries.service';
+import { AddressTypesService } from './core/services/address-types/address-types.service';
 
 
 
@@ -83,6 +85,8 @@ export function tokenGetter() {
     DataCustomersService,
     DataAddressesService,
     SnackbarService,
+    AddressTypesService,
+    CountriesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass:JwtInterceptor,

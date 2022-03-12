@@ -12,7 +12,7 @@
   <mat-divider></mat-divider>
   <div class="container">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-      <mat-stepper orientation="vertical" linear #stepper>
+      <mat-stepper [orientation]="(stepperOrientation | async)!" linear #stepper>
         <mat-step [stepControl]="personalInfo">
           <form [formGroup]="personalInfo">
             <ng-template matStepLabel>Fill out your personal info</ng-template>
@@ -102,6 +102,7 @@
               <input
                 formControlName="telephone"
                 matInput
+                type="tel"
                 placeholder="Telephone"
               />
             </mat-form-field>
@@ -109,6 +110,7 @@
             <mat-form-field>
               <mat-label> Company Name </mat-label>
               <input
+                type="text"
                 formControlName="companyName"
                 matInput
                 placeholder="Company Name"
@@ -268,21 +270,21 @@
                     <mat-select formControlName="country">
                       <mat-option
                         *ngFor="let country of countries"
-                        [value]="country.value"
+                        [value]="country.description"
                       >
-                        {{ country.viewValue }}
+                        {{ country.description }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>
 
-                  <mat-form-field appearance="fill">
+                  <mat-form-field formGroupName="addressType"  appearance="fill">
                     <mat-label>Address Type</mat-label>
-                    <mat-select formControlName="addressType">
+                    <mat-select formControlName="id">
                       <mat-option
-                        *ngFor="let adrs of addressType"
-                        [value]="adrs.value"
+                        *ngFor="let adrs of addressTypes"
+                        [value]="adrs.id"
                       >
-                        {{ adrs.viewValue }}
+                        {{ adrs.description }}
                       </mat-option>
                     </mat-select>
                   </mat-form-field>

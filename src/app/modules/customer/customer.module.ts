@@ -25,7 +25,7 @@ import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/ad
     AddUpdateComponent,
     ChangePasswordComponent,
     UpdateCustomerComponent,
-    AddressesDialogComponent
+    AddressesDialogComponent,
 
 
   ],

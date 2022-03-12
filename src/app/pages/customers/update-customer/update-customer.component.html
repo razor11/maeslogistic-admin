@@ -1,4 +1,4 @@
-<mat-card >
+<mat-card>
   <mat-toolbar-row *ngIf="customer">
     <mat-card-header>
       <mat-card-title>
@@ -16,11 +16,22 @@
       <button
         mat-menu-item
         routerLink="/manage-addresses/{{ id }}"
-        [queryParams]="{customerName: customer.firstName,customerLastName: customer.lastName}"
+        [queryParams]="{
+          customerName: customer.firstName,
+          customerLastName: customer.lastName
+        }"
         type="button"
       >
         Manage Addresses
       </button>
+      <button
+      type="button"
+      routerLink="/customers"
+      mat-menu-item
+    >
+      <mat-icon color="accent" aria-label="Edit">list</mat-icon>Customers List
+    </button>
+
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
@@ -58,11 +69,12 @@
             <mat-icon matSuffix>person_outline</mat-icon>
           </mat-form-field>
 
-          <mat-form-field appearance="fill">
+          <mat-form-field *ngIf="customer" appearance="fill">
             <mat-label> User Name </mat-label>
             <input
-              formControlName="userName"
+              value="{{ customer.userName }}"
               matInput
+              disabled
               placeholder="User Name"
             />
           </mat-form-field>
@@ -74,7 +86,8 @@
             <input
               formControlName="telephone"
               matInput
-              placeholder="Phone Number"
+              type="tel"
+              placeholder="555-555-5550"
             />
             <mat-icon matSuffix>call</mat-icon>
           </mat-form-field>
@@ -117,15 +130,7 @@
         </div>
 
         <div align="end" class="button-row">
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="onSubmit()"
-            type="submit"
-            [disabled]="!form.valid"
-          >
-            Save
-          </button>
+
           <a
             routerLink="/customers"
             mat-stroked-button
@@ -133,12 +138,21 @@
             type="submit"
             >Cancel</a
           >
+          <button
+          mat-flat-button
+          color="primary"
+          (click)="confirmDialog()"
+          type="submit"
+          [disabled]="!form.valid"
+        >
+          Save
+        </button>
         </div>
       </form>
     </div>
   </div>
 </mat-card>
-<!-- <pre>
+<!--  <pre>
   {{form.value | json}}
   </pre>
  -->

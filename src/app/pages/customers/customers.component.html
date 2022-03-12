@@ -27,7 +27,7 @@
     <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let element">
       <span class="mobile-label">Name</span>
-      {{ element.firstName + element.lastName }}
+      {{ element.firstName + ' ' + element.lastName }}
     </mat-cell>
   </ng-container>
 
@@ -63,6 +63,14 @@
         >
           <mat-icon color="accent" aria-label="Edit">edit</mat-icon> Edit
         </button>
+        <button
+        type="button"
+        routerLink="/manage-addresses/{{ element.id }}"
+        [queryParams]="{customerName: element.firstName,customerLastName: element.lastName}"
+        mat-menu-item
+      >
+        <mat-icon color="accent" aria-label="Edit">person_pin</mat-icon> Manage addresses
+      </button>
 
         <button type="button" (click)="deleteClient(element.id)" mat-menu-item>
           <mat-icon color="accent" aria-label="Delete">delete</mat-icon>
