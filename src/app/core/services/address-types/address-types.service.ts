@@ -35,6 +35,6 @@ export class AddressTypesService {
   }
 
   delete(id: number) {
-    this.http.delete(`${this.API_URL}/api/v1/address-types/${id}`);
+    return this.http.delete(`${this.API_URL}/api/v1/address-types/${id}`);
   }
 }

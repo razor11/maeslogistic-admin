@@ -4,7 +4,7 @@
       <mat-card-title> Address Types </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
-    <button color="primary" mat-raised-button class="demo-button">
+    <button type="button" (click)="addDialog()" color="primary" mat-raised-button class="demo-button">
       <mat-icon aria-label="Example icon-button with a heart icon"
         >add</mat-icon
       >
@@ -17,5 +17,7 @@
     *ngIf="!isLoading"
     [dataTable]="data"
     [displayedColumns]="displayedColumns"
+    (updateParam)="openUpdateDialog($event)"
+    (deleteParam)="deleteAddr($event)"
   ></app-params-data-table>
 </mat-card>

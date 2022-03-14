@@ -35,6 +35,9 @@ import { LoAddUpdateComponent } from './pages/logistic-operators/lo-add-update/l
 import { IdLogisticOperatorsAddComponent } from './pages/logistic-operators/dialogs/id-logistic-operators-add/id-logistic-operators-add.component';
 import { CountriesService } from './core/services/countries/countries.service';
 import { AddressTypesService } from './core/services/address-types/address-types.service';
+import { ParametersUpdateDialogComponent } from './components/parameters-dialogs/parameters-update-dialog/parameters-update-dialog.component';
+import { AddParameterDialogComponent } from './components/parameters-dialogs/add-parameter-dialog/add-parameter-dialog.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
 
 
@@ -50,7 +53,10 @@ export function tokenGetter() {
     NavigationComponent,
     LoginComponent,
     LoAddUpdateComponent,
-    IdLogisticOperatorsAddComponent
+    IdLogisticOperatorsAddComponent,
+    ParametersUpdateDialogComponent,
+    AddParameterDialogComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     HttpClientModule,

@@ -1,0 +1,24 @@
+<h1 mat-dialog-title>{{ title }} {{ data.param.description }}</h1>
+
+<div mat-dialog-content>
+  <p>{{ message }}</p>
+  <form [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" placeholder="Description" />
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button type="button" mat-raised-button (click)="onDismiss()">Cancel</button>
+  <button
+    [mat-dialog-close]="data"
+    type="button"
+    mat-raised-button
+    color="primary"
+    [mat-dialog-close]="form.value"
+    [disabled]="!this.form.valid"
+  >
+    Save
+  </button>
+</div>

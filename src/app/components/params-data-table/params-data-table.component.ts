@@ -11,6 +11,7 @@ export class ParamsDataTableComponent implements OnInit {
   @Input() displayedColumns: any;
 
   @Output() public updateParam = new EventEmitter<number>();
+  @Output() public deleteParam = new EventEmitter<number>();
 
   dataSource!: any;
 
@@ -23,4 +24,9 @@ export class ParamsDataTableComponent implements OnInit {
   editParam(value: any) {
     this.updateParam.emit(value);
   }
+
+  removeParam(value:any){
+    this.deleteParam.emit(value);
+  }
+
 }
