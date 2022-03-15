@@ -1,9 +1,6 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Component, Inject, OnInit } from '@angular/core';
-import { Parameters } from 'src/app/models/parameters';
-import { AddressTypesService } from 'src/app/core/services/address-types/address-types.service';
-import { first } from 'rxjs';
 
 @Component({
   selector: 'app-add-parameter-dialog',

@@ -39,8 +39,6 @@ import { ParametersUpdateDialogComponent } from './components/parameters-dialogs
 import { AddParameterDialogComponent } from './components/parameters-dialogs/add-parameter-dialog/add-parameter-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 
-
-
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -56,7 +54,7 @@ export function tokenGetter() {
     IdLogisticOperatorsAddComponent,
     ParametersUpdateDialogComponent,
     AddParameterDialogComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     HttpClientModule,

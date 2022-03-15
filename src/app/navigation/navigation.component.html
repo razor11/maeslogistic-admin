@@ -168,6 +168,16 @@
               <span matLine>Address Types</span>
             </a>
 
+            <a
+            mat-list-item
+            routerLink="/parameters/countries"
+            routerLinkActive="active-list-item"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <mat-icon matListIcon aria-hidden="false">map</mat-icon>
+            <span matLine>Countries</span>
+          </a>
+
             </mat-expansion-panel>
           </mat-accordion>
         </div>

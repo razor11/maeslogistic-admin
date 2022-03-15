@@ -34,6 +34,6 @@ export class CountriesService {
   }
 
   delete(id: number) {
-    this.http.delete(`${this.API_URL}${this.API_METHOD}/${id}`);
+   return this.http.delete(`${this.API_URL}${this.API_METHOD}/${id}`);
   }
 }

@@ -1,3 +1,4 @@
+import { CountriesComponent } from './../../countries/countries.component';
 import { ParametersLayoutComponent } from './../../parameters-layout/parameters-layout.component';
 import { CommomModulesModule } from './../../../../shared/modules/material/commom-modules/commom-modules/commom-modules.module';
 import { NgModule } from '@angular/core';
@@ -7,7 +8,12 @@ import { ParamsDataTableComponent } from 'src/app/components/params-data-table/p
 import { AddressTypesComponent } from '../../address-types/address-types.component';
 
 @NgModule({
-  declarations: [ParametersLayoutComponent,ParamsDataTableComponent, AddressTypesComponent],
+  declarations: [
+    ParametersLayoutComponent,
+    ParamsDataTableComponent,
+    AddressTypesComponent,
+    CountriesComponent
+  ],
   imports: [CommonModule, CommomModulesModule, ParametersRoutingModule],
 })
 export class ParametersModule {}

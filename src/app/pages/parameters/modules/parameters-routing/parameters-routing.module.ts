@@ -1,3 +1,4 @@
+import { CountriesComponent } from './../../countries/countries.component';
 import { AddressTypesComponent } from './../../address-types/address-types.component';
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -11,8 +12,12 @@ const routes: Routes = [
 
     children: [
       {
-        path:'address-types',
-        component: AddressTypesComponent
+        path: 'address-types',
+        component: AddressTypesComponent,
+      },
+      {
+        path: 'countries',
+        component: CountriesComponent,
       },
     ],
   },
