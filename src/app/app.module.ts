@@ -38,7 +38,7 @@ import { AddressTypesService } from './core/services/address-types/address-types
 import { ParametersUpdateDialogComponent } from './components/parameters-dialogs/parameters-update-dialog/parameters-update-dialog.component';
 import { AddParameterDialogComponent } from './components/parameters-dialogs/add-parameter-dialog/add-parameter-dialog.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
-
+import { ChartsModule} from 'ng2-charts';
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -82,6 +82,7 @@ export function tokenGetter() {
     MaterialModule,
     AppRoutingModule,
     FlexLayoutModule,
+    ChartsModule
 
   ],
   providers: [

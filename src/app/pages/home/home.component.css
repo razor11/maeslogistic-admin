@@ -8,6 +8,14 @@
   left: 15px;
   right: 15px;
   bottom: 15px;
+  background-color: #308FE8;
+  color: #ffff;
+}
+
+.mat-card-title{
+  font-size: large;
+  font-weight: lighter;
+  padding: 10px;
 }
 
 .more-button {

@@ -1,40 +1,48 @@
-<div fxLayout="row" fxLayoutAlign="end end" class="button-container">
-    <h2>Embarcations</h2>
+<mat-card>
+  <mat-card-header class="card-header-padding">
+    <mat-card-title> Embarcations </mat-card-title>
     <span class="spacer"></span>
-    <button color="primary" routerLink="/embarcations/add" mat-raised-button  class="demo-button">
-     <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon> Add Embarcations
-   </button>
-</div>
-<div>
-    <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-    <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">         
-        <!-- Position Column -->
-        <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> No. </th>
-            <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-        </ng-container>        
-        
-        <!-- Name Column -->
-        <ng-container matColumnDef="EstimatedDepartureDate">
-            <th mat-header-cell *matHeaderCellDef> Estimated Departure Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.EstimatedDepartureDate}} </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="EstimatedArrivingDate">
-            <th mat-header-cell *matHeaderCellDef> Estimated Arriving Date </th>
-            <td mat-cell *matCellDef="let element"> {{element.EstimatedArrivingDate}} </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="VeselNumber">
-            <th mat-header-cell *matHeaderCellDef> Vesel Number </th>
-            <td mat-cell *matCellDef="let element"> {{element.VeselNumber}} </td>
-        </ng-container>
-        <!-- Name Column -->
-        <ng-container matColumnDef="LogisticOperatorId">
-            <th mat-header-cell *matHeaderCellDef> Logistic Operator Id </th>
-            <td mat-cell *matCellDef="let element"> {{element.LogisticOperatorId}} </td>
-        </ng-container>
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>   
-</div>
+    <button color="primary" routerLink="/embarcations/add" mat-raised-button>
+      <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
+      Add
+    </button>
+  </mat-card-header>
+
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>No.</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="EstimatedDepartureDate">
+      <th mat-header-cell *matHeaderCellDef>Estimated Departure Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.EstimatedDepartureDate | date}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="EstimatedArrivingDate">
+      <th mat-header-cell *matHeaderCellDef>Estimated Arriving Date</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.EstimatedArrivingDate | date}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="VeselNumber">
+      <th mat-header-cell *matHeaderCellDef>Vesel Number</th>
+      <td mat-cell *matCellDef="let element">{{ element.VeselNumber }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="LogisticOperatorId">
+      <th mat-header-cell *matHeaderCellDef>Logistic Operator Id</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.LogisticOperatorId }}
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</mat-card>

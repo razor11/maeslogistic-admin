@@ -1,5 +1,5 @@
 <div class="example-container" [class.example-is-mobile]="mobileQuery.matches">
-  <mat-toolbar color="primary" class="example-toolbar">
+  <mat-toolbar class="example-toolbar">
     <button mat-icon-button (click)="snav.toggle()">
       <mat-icon>menu</mat-icon>
     </button>
@@ -13,7 +13,7 @@
       [matMenuTriggerFor]="menu"
       aria-label="Example icon-button with a menu"
     >
-      <mat-icon>more_vert</mat-icon>
+      <mat-icon>expand_more</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="logout()">
@@ -40,9 +40,25 @@
             routerLink="/home"
             routerLinkActive="active-list-item"
           >
-            <mat-icon matListIcon aria-hidden="false">home</mat-icon>
-            <span matLine>Inicio</span>
+            <mat-icon matListIcon aria-hidden="false">dashboard</mat-icon>
+            <span matLine>Dashboard</span>
           </a>
+        </div>
+
+        <div>
+          <mat-accordion>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Cabeceras del submenu -->
+                  <a mat-list-item>
+                    <mat-icon matListIcon>shop_two</mat-icon>
+                    <span matLine>Shipments</span>
+                  </a>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
 
         <div>

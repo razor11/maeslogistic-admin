@@ -34,24 +34,23 @@ table {
   width: 100%;
 }
 
-.active-list-item {
-  color: #3F51B5 !important; /* Note: You could also use a custom theme */
+.mat-list-item {
+  color: rgb(54, 54, 54) !important;
 }
 
+.active-list-item {
+  color: #1e88e5 !important; /* Note: You could also use a custom theme */
+}
 
 .active-link {
-  color: #3F51B5 !important; /* Note: You could also use a custom theme */
+  color: #1e88e5 !important; /* Note: You could also use a custom theme */
 }
-
 
 .mat-expansion-panel-header {
-
   padding-left: 0px;
-
 }
 
-
-
-
-
-
+.mat-toolbar {
+  background-color: #30323d;
+  color: #ffff;
+}
