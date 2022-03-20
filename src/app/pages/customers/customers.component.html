@@ -9,13 +9,14 @@
   </mat-card-header>
 
   <mat-form-field appearance="standard">
-    <mat-label>Filter</mat-label>
+    <mat-label>Filter by Name</mat-label>
     <input
       matInput
       (keyup)="applyFilter($event)"
       placeholder="Ex. Mia"
       #input
     />
+    <mat-icon matSuffix>search</mat-icon>
   </mat-form-field>
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">

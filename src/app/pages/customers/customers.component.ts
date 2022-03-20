@@ -41,7 +41,17 @@ export class CustomersComponent implements OnInit, AfterViewInit {
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+
+    if (filterValue.length > 0) {
+      this.customersService
+        .getByName(this.currentPage, this.pageSize, filterValue)
+        .subscribe((data) => {
+          this.dataSource.data = data.customers;
+          this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+        });
+    } else {
+      this.loadCustomers();
+    }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();

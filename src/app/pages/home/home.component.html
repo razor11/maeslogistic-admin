@@ -15,19 +15,21 @@
     </mat-card></mat-grid-tile
   >
 </mat-grid-list>
-<!--
-<mat-grid-list cols="2" rowHeight="2:1">
-  <mat-grid-tile>
-    <canvas
-      baseChart
-      [data]="pieChartData"
-      [labels]="pieChartLabels"
-      [chartType]="pieChartType"
-      [options]="pieChartOptions"
-      [plugins]="pieChartPlugins"
-      [legend]="pieChartLegend"
-    >
-    </canvas>
-  </mat-grid-tile>
-  <mat-grid-tile>2</mat-grid-tile>
-</mat-grid-list> -->
+
+<div fxLayout="row" fxLayoutAlign="space-between start">
+  <mat-card class="pie-card">
+    <mat-card-title>Embarcation April 11, 2022</mat-card-title>
+    <mat-card-content>
+      <canvas
+        baseChart
+        [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [colors]="pieChartColors"
+      >
+      </canvas>
+    </mat-card-content>
+  </mat-card>
+</div>

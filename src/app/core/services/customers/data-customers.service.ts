@@ -33,6 +33,10 @@ export class DataCustomersService {
     return this.http.get<Customers>(`${environment.APIURL}/api/v1/customers/${id}`);
   }
 
+  getByName(page:number, limit:number, name:string){
+    return this.http.get<any>(`${this.API_URL}/api/v1/customers/${page}/${limit}/${name}`);
+  }
+
   addCLient(params: any){
      return this.http.post<any>(`${environment.APIURL}/api/v1/customers`, params);
   }

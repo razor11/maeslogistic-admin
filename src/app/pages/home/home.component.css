@@ -27,3 +27,12 @@
 .dashboard-card-content {
   text-align: center;
 }
+
+
+.mat-card{
+  left: 15px;
+}
+
+.pie-card{
+  width: 380px;
+}
