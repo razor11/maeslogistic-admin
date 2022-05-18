@@ -1,88 +1,88 @@
 <mat-card>
-    <div class="container">
-        <div fxLayout="column" fxLayoutAlign="end end" class="button-container">
-            <button  routerLink="/logistic-operators" mat-raised-button  class="demo-button">
-                <mat-icon aria-label="Example icon-button with a heart icon">keyboard_backspace</mat-icon> Cancel
-            </button>
-            
-            
-        </div>
-        <span mat-card-title>New logistic operator</span>
-        <br/>
-        <div fxLayout="row" fxLayoutAlign="space-around center">
-            <form [formGroup]="logisticOperator">
-              <ng-template matStepLabel>Fill your info</ng-template>
-              <mat-form-field>
-                <mat-label> Name </mat-label>
-                <input
-                  formControlName="Name"
-                  matInput
-                  placeholder="Name"
-                />
-              </mat-form-field>
-  
-              <mat-form-field>
-                <mat-label> Country </mat-label>
-                <input
-                  formControlName="Country"
-                  matInput
-                  placeholder="Country"
-                />
-              </mat-form-field>
-  
-              <mat-form-field>
-                <mat-label> ZipCode </mat-label>
-                <input
-                  formControlName="ZipCode"
-                  matInput
-                  placeholder="ZipCode"
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label> City </mat-label>
-                <input
-                  formControlName="City"
-                  matInput
-                  placeholder="City"
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label> Street </mat-label>
-                <input
-                  formControlName="Street"
-                  matInput
-                  placeholder="Street"
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label> Suite </mat-label>
-                <input
-                  formControlName="Suite"
-                  matInput
-                  placeholder="Suite"
-                />
-              </mat-form-field>
-              <mat-form-field>
-                <mat-label> Contact Number </mat-label>
-                <input
-                  formControlName="ContactNumber"
-                  matInput
-                  placeholder="ContactNumber"
-                />
-              </mat-form-field>
-            </form>            
-            <button
-                mat-flat-button
-                color="primary"
-                (click)="onSubmit()"
-                type="submit"
-                [disabled]="!this.logisticOperator.valid"
-              >
-                Save
-            </button>
-        </div>
-    </div>
+  <mat-card-header class="card-header-padding">
+    <mat-card-title>Add New Logistic Operator</mat-card-title>
+    <span class="spacer"></span>
+    <button
+      routerLink="/logistic-operators"
+      mat-raised-button
+      class="demo-button"
+    >
+      <mat-icon aria-label="Example icon-button with a heart icon"
+        >keyboard_backspace</mat-icon
+      >
+    </button>
+  </mat-card-header>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content class="container">
+    <form [formGroup]="logisticOperator" class="form-width">
+      <ng-template matStepLabel>Fill your info</ng-template>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label> Name </mat-label>
+          <input formControlName="Name" matInput placeholder="Name" />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label> Contact Number </mat-label>
+          <input
+            formControlName="ContactNumber"
+            matInput
+            placeholder="ContactNumber"
+          />
+        </mat-form-field>
+      </div>
+
+      <mat-form-field class="full-width" appearance="fill">
+        <mat-label> Street </mat-label>
+        <input formControlName="Street" matInput placeholder="Street" />
+      </mat-form-field>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label> Suite </mat-label>
+          <input formControlName="Suite" matInput placeholder="Suite" />
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label> City </mat-label>
+          <input formControlName="City" matInput placeholder="City" />
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option
+              *ngFor="let country of countries"
+              [value]="country.description"
+            >
+              {{ country.description }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label> ZipCode </mat-label>
+          <input formControlName="ZipCode" matInput placeholder="ZipCode" />
+        </mat-form-field>
+      </div>
+    </form>
+    <mat-card-actions align="end">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="onSubmit()"
+        type="submit"
+        [disabled]="!this.logisticOperator.valid"
+      >
+        Save
+      </button>
+    </mat-card-actions>
+  </mat-card-content>
 </mat-card>
+
 <pre>
   {{ form | json }}
 </pre>

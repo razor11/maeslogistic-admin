@@ -1,10 +1,11 @@
+import { CountriesService } from './../../../core/services/countries/countries.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { LogisticOperatorsService } from 'src/app/core/services/logistic-operators/logistic-operators.service';
 import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
-
+import { Parameters } from 'src/app/models/parameters';
 @Component({
   selector: 'app-lo-add-update',
   templateUrl: './lo-add-update.component.html',
@@ -16,27 +17,33 @@ export class LoAddUpdateComponent implements OnInit {
   logisticOperator: FormGroup;
   id: string;
   submited = false;
+  countries: Parameters[];
 
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private loService: LogisticOperatorsService,
     private fb: FormBuilder,
-    private snackBar: SnackbarService
-    
+    private snackBar: SnackbarService,
+    private countriesService: CountriesService,
+
   ) { }
 
   ngOnInit(){
     this.id = this.route.snapshot.params['id'];
 
-    this.logisticOperator = this.fb.group({      
+    this.countriesService.getAll().pipe(first()).subscribe( data => {
+      this.countries = data;
+    })
+
+    this.logisticOperator = this.fb.group({
       Name: ['', Validators.required],
       Country: ['', Validators.required],
       ZipCode: ['', Validators.required],
       City: ['', Validators.required],
       Street: ['', Validators.required],
       Suite: ['', Validators.required],
-      ContactNumber: ['', Validators.required],      
+      ContactNumber: ['', Validators.required],
     })
   }
 
@@ -47,7 +54,7 @@ export class LoAddUpdateComponent implements OnInit {
 
   private createLogisticOperator(){
     const data = Object.assign(this.logisticOperator.value)
-    
+
     console.log(data);
     this.loService
     .addLogisticOperator(data)

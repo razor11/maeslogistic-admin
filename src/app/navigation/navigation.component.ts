@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -12,11 +12,13 @@ import {MediaMatcher} from '@angular/cdk/layout';
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.css']
 })
-export class NavigationComponent {
+export class NavigationComponent implements OnInit{
 
   mobileQuery: MediaQueryList;
   private _mobileQueryListener: () => void;
   public userName!: any;
+  clock=""
+  clockHandle:any;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -34,6 +36,12 @@ export class NavigationComponent {
       this.userName = this.authenticationService.getUserNameValue;
     }
 
+
+    ngOnInit(){
+      this.clockHandle = setInterval(()=>{
+        this.clock = new Date().toLocaleString();
+      },1000);
+    }
 
 
     ngOnDestroy(): void {
