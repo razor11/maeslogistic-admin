@@ -1,3 +1,4 @@
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Customers } from './../../models/customers';
 import { first } from 'rxjs/operators';
@@ -6,6 +7,10 @@ import { DataCustomersService } from 'src/app/core/services/customers/data-custo
 
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -30,8 +35,11 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['Name', 'Email', 'User Name', 'Actions'];
   dataSource: MatTableDataSource<Customers> = new MatTableDataSource();
 
-  constructor(private customersService: DataCustomersService,
-              private router: Router) {}
+  constructor(
+    private customersService: DataCustomersService,
+    private router: Router,
+    public dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.loadCustomers();
@@ -44,24 +52,19 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-
     if (filterValue.length) {
       this.customersService
         .getByName(this.currentPage, this.pageSize, filterValue)
         .subscribe((data) => {
           this.dataSource.data = data.customers;
           this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
-
         });
     } else {
-
       this.loadCustomers();
-
     }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
-
     }
   }
 
@@ -87,6 +90,21 @@ export class CustomersComponent implements OnInit, AfterViewInit {
     this.loadCustomers();
   }
 
+  confirmDialog(id: string): void {
+    const message = `Are you want to delete this customer?`;
+    const dialogData = new ConfirmDialogModel('Confirm Changes', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.deleteClient(id);
+      }
+    });
+  }
+
   deleteClient(id: any) {
     const client = this.dataSource.data.find((x) => x.id === id);
     console.log(client);
@@ -100,11 +118,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
         this.loadCustomers();
       });
   }
-
-
 }
-
-
 
 /*
 .subscribe(data => {this.dataSource = new MatTableDataSource<Customers>(data);

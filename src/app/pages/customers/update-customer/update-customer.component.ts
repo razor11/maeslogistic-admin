@@ -74,7 +74,13 @@ export class UpdateCustomerComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(dialogResult => {
-     this.onSubmit()
+      if(dialogResult){
+        this.onSubmit()
+      }
+      else{
+        this.loadData();
+      }
+
     });
   }
 
