@@ -64,11 +64,12 @@
         </div>
 
         <div>
-          <mat-expansion-panel>
+          <mat-accordion>
+          <mat-expansion-panel [expanded]="url.startsWith('/customers')">
             <mat-expansion-panel-header>
               <mat-panel-title>
                 <!-- Cabeceras del submenu -->
-                <a mat-list-item>
+                <a mat-list-item    routerLinkActive="active-list-item">
                   <mat-icon matListIcon>person</mat-icon>
                   <span matLine>Customers</span>
                 </a>
@@ -79,6 +80,7 @@
               routerLink="/customers"
               routerLinkActive="active-list-item"
               [routerLinkActiveOptions]="{ exact: true }"
+              (isActiveChange)="this.expand($event)"
             >
               <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
               <span matLine> Customers List</span>
@@ -94,6 +96,7 @@
               <span matLine>Add Customer</span>
             </a>
           </mat-expansion-panel>
+        </mat-accordion>
         </div>
 
         <div>

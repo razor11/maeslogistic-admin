@@ -1,6 +1,6 @@
 <mat-card>
   <mat-card-header class="card-header-padding">
-    <mat-card-title>Customer List</mat-card-title>
+    <mat-card-title>Customers List</mat-card-title>
     <span class="spacer"></span>
     <button color="primary" routerLink="/customers/add" mat-raised-button>
       <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
@@ -8,7 +8,7 @@
     </button>
   </mat-card-header>
 
-  <mat-form-field appearance="standard">
+  <mat-form-field appearance="standard" style="padding-left: 10px">
     <mat-label>Filter by Name</mat-label>
     <input
       matInput
@@ -20,14 +20,6 @@
   </mat-form-field>
   <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
   <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-    <ng-container matColumnDef="Id">
-      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <span class="mobile-label">No.</span>
-        {{ element.id }}</mat-cell
-      >
-    </ng-container>
-
     <ng-container matColumnDef="Name">
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let element">
@@ -59,6 +51,10 @@
           <mat-icon class="mat-18">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
+          <button type="button" routerLink="customer-detail" mat-menu-item>
+            <mat-icon color="accent" aria-label="View">visibility</mat-icon>
+            View
+          </button>
           <button
             type="button"
             routerLink="update/{{ element.id }}"

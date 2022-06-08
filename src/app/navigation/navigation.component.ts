@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
@@ -19,6 +19,10 @@ export class NavigationComponent implements OnInit{
   public userName!: any;
   clock=""
   clockHandle:any;
+  url: string = '';
+
+
+  @Output()isActiveChange!: EventEmitter<boolean>;
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
     .pipe(
@@ -46,6 +50,12 @@ export class NavigationComponent implements OnInit{
 
     ngOnDestroy(): void {
       this.mobileQuery.removeListener(this._mobileQueryListener);
+    }
+
+    expand(event: boolean){
+      if(event){
+        this.url = this.router.url;
+      }
     }
 
     logout() {

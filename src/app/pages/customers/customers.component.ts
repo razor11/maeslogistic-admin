@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Customers } from './../../models/customers';
 import { first } from 'rxjs/operators';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
@@ -26,10 +27,11 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   pageEvent: PageEvent;
   isLoading: boolean = true;
 
-  displayedColumns: string[] = ['Id', 'Name', 'Email', 'User Name', 'Actions'];
+  displayedColumns: string[] = ['Name', 'Email', 'User Name', 'Actions'];
   dataSource: MatTableDataSource<Customers> = new MatTableDataSource();
 
-  constructor(private customersService: DataCustomersService) {}
+  constructor(private customersService: DataCustomersService,
+              private router: Router) {}
 
   ngOnInit() {
     this.loadCustomers();
@@ -42,19 +44,24 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-    if (filterValue.length > 0) {
+
+    if (filterValue.length) {
       this.customersService
         .getByName(this.currentPage, this.pageSize, filterValue)
         .subscribe((data) => {
           this.dataSource.data = data.customers;
           this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+
         });
     } else {
+
       this.loadCustomers();
+
     }
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
+
     }
   }
 
@@ -93,7 +100,11 @@ export class CustomersComponent implements OnInit, AfterViewInit {
         this.loadCustomers();
       });
   }
+
+
 }
+
+
 
 /*
 .subscribe(data => {this.dataSource = new MatTableDataSource<Customers>(data);
