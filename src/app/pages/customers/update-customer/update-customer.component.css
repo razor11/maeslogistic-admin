@@ -8,6 +8,11 @@
   padding-bottom: 7em;
 }
 
+.card-icon{
+ font-size: 90px;
+ margin-left: 25px;
+}
+
 .container span {
   text-align: center;
 }
@@ -28,6 +33,18 @@
 }
 
 .full-width{
-  width: auto;
+  width: 100%;
+}
+
+.mat-form-field + .mat-form-field {
+  margin-left: 0px !important;
+}
+
+.mat-form-field-disabled {
+  color: rgba(black, 0.38) !important;
+}
+
+.mat-input-element:disabled{
+  color: black !important;
 }
 

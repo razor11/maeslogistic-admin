@@ -5,7 +5,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { ChangePasswordComponent } from '../change-password/change-password.component';
-import { ConfirmDialogComponent, ConfirmDialogModel } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-update-customer',
@@ -18,6 +21,7 @@ export class UpdateCustomerComponent implements OnInit {
   submited = false;
   customer: any;
   dataLoad = false;
+  hide = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +49,7 @@ export class UpdateCustomerComponent implements OnInit {
     });
 
     this.loadData();
+    this.form.disable();
   }
 
   loadData() {
@@ -65,22 +70,20 @@ export class UpdateCustomerComponent implements OnInit {
     });
   }
 
-  confirmDialog(): void{
+  confirmDialog(): void {
     const message = `Are you sure you want to apply the changes?`;
-    const dialogData = new ConfirmDialogModel("Confirm Changes", message);
+    const dialogData = new ConfirmDialogModel('Confirm Changes', message);
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: "400px",
-      data: dialogData
+      maxWidth: '400px',
+      data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if(dialogResult){
-        this.onSubmit()
-      }
-      else{
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult) {
+        this.onSubmit();
+      } else {
         this.loadData();
       }
-
     });
   }
 
@@ -91,6 +94,16 @@ export class UpdateCustomerComponent implements OnInit {
       .subscribe(() => {
         this.loadData();
       });
+  }
+
+  editCustomer() {
+    this.form.enable();
+    this.hide = false;
+  }
+
+  cancel() {
+    this.form.disable();
+    this.hide = true;
   }
 
   onSubmit() {

@@ -51,16 +51,13 @@
           <mat-icon class="mat-18">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button type="button" routerLink="customer-detail" mat-menu-item>
-            <mat-icon color="accent" aria-label="View">visibility</mat-icon>
-            View
-          </button>
+
           <button
             type="button"
-            routerLink="update/{{ element.id }}"
+            routerLink="detail-view/{{ element.id }}"
             mat-menu-item
           >
-            <mat-icon color="accent" aria-label="Edit">edit</mat-icon> Edit
+            <mat-icon color="basic" aria-label="View">visibility</mat-icon>View Customer
           </button>
           <button
             type="button"
@@ -71,7 +68,7 @@
             }"
             mat-menu-item
           >
-            <mat-icon color="accent" aria-label="Edit">person_pin</mat-icon>
+            <mat-icon color="basic" aria-label="Edit">person_pin</mat-icon>
             Manage addresses
           </button>
 
@@ -80,7 +77,7 @@
             (click)="confirmDialog(element.id)"
             mat-menu-item
           >
-            <mat-icon color="accent" aria-label="Delete">delete</mat-icon>
+            <mat-icon color="basic" aria-label="Delete">delete</mat-icon>
             Delete
           </button>
         </mat-menu>

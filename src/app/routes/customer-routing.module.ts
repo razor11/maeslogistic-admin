@@ -1,4 +1,3 @@
-import { ViewCustomerComponent } from './../pages/customers/view-customer/view-customer.component';
 import { UpdateCustomerComponent } from './../pages/customers/update-customer/update-customer.component';
 import { AddUpdateComponent } from './../pages/customers/add-update/add-update.component';
 import { CustomersComponent } from './../pages/customers/customers.component';
@@ -19,10 +18,7 @@ children: [
 
   },
   {
-    path: 'update/:id', component: UpdateCustomerComponent
-  },
-  {
-    path: 'customer-detail', component:ViewCustomerComponent
+    path: 'detail-view/:id', component: UpdateCustomerComponent
   }
 ]
 

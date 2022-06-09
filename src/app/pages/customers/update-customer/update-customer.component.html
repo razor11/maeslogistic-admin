@@ -1,125 +1,136 @@
 <mat-card>
   <mat-toolbar-row *ngIf="customer">
-    <mat-card-header>
-      <mat-card-title>
-        Customer {{ customer.firstName }} {{ customer.lastName }}
-      </mat-card-title>
-    </mat-card-header>
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon class="mat-18">more_horiz</mat-icon>More
     </button>
     <mat-menu #menu="matMenu">
-      <button type="button" mat-menu-item (click)="openPasswordDialog()">
-        Change Password
+      <button type="button" (click)="editCustomer()" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">edit</mat-icon>
+        Edit
       </button>
+      <button type="button" mat-menu-item (click)="openPasswordDialog()">
+        <mat-icon class="mat-18" color="basic">lock</mat-icon> Change Password
+      </button>
+
+      <button type="button" routerLink="/customers" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">list</mat-icon
+        >Customers List
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <div
+    class="container"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxFlexFill
+    fxLayoutGap="10"
+    fxLayoutAlign="space-around"
+  >
+    <div fxFlex="50%" fxFlex.xs="55">
+      <mat-icon class="card-icon" aria-hidden="false" aria-label="person icon"
+        >person</mat-icon
+      >
+      <mat-card-header *ngIf="customer">
+        <mat-card-title>
+          {{ customer.firstName | titlecase }}
+          {{ customer.lastName | titlecase }}
+        </mat-card-title>
+        <mat-card-subtitle>Total Shipments: 33</mat-card-subtitle>
+      </mat-card-header>
       <button
-        mat-menu-item
+        type="button"
         routerLink="/manage-addresses/{{ id }}"
         [queryParams]="{
           customerName: customer.firstName,
           customerLastName: customer.lastName
         }"
-        type="button"
+        mat-stroked-button
+        color="basic"
       >
-        Manage Addresses
+        Manage Addresses<mat-icon aria-hidden="false" aria-label="map icon"
+          >location_on</mat-icon
+        >
       </button>
-      <button
-      type="button"
-      routerLink="/customers"
-      mat-menu-item
-    >
-      <mat-icon color="accent" aria-label="Edit">list</mat-icon>Customers List
-    </button>
-
-    </mat-menu>
-  </mat-toolbar-row>
-  <mat-divider></mat-divider>
-  <div class="container">
-    <div fxLayout="row" fxLayoutAlign="space-around center">
+    </div>
+    <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
       <form [formGroup]="form">
-        <div>
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label> First Name </mat-label>
-            <input
-              formControlName="firstName"
-              matInput
-              placeholder="First Name"
-            />
-            <mat-icon matSuffix>person_outline</mat-icon>
-          </mat-form-field>
+        <h4>Personal Data</h4>
+        <mat-form-field appearance="fill">
+          <mat-label> First Name </mat-label>
+          <input
+            formControlName="firstName"
+            matInput
+            placeholder="First Name"
+          />
+          <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
 
-          <mat-form-field class="full-width" appearance="fill">
-            <mat-label> Middle Name </mat-label>
-            <input
-              formControlName="middleName"
-              matInput
-              placeholder="Middle Name"
-            />
-            <mat-icon matSuffix>person_outline</mat-icon>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label> Middle Name </mat-label>
+          <input
+            formControlName="middleName"
+            matInput
+            placeholder="Middle Name"
+          />
+          <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label> Last Name </mat-label>
-            <input
-              formControlName="lastName"
-              matInput
-              placeholder="Last Name"
-            />
-            <mat-icon matSuffix>person_outline</mat-icon>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label> Last Name </mat-label>
+          <input formControlName="lastName" matInput placeholder="Last Name" />
+          <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
 
-          <mat-form-field *ngIf="customer" appearance="fill">
-            <mat-label> User Name </mat-label>
-            <input
-              value="{{ customer.userName }}"
-              matInput
-              disabled
-              placeholder="User Name"
-            />
-          </mat-form-field>
-        </div>
+        <mat-form-field *ngIf="customer" appearance="fill">
+          <mat-label> User Name </mat-label>
+          <input
+            value="{{ customer.userName }}"
+            matInput
+            disabled
+            placeholder="User Name"
+          />
+          <mat-icon matSuffix>person_outline</mat-icon>
+        </mat-form-field>
 
-        <div>
-          <mat-form-field appearance="fill">
-            <mat-label>Phone number</mat-label>
-            <input
-              formControlName="telephone"
-              matInput
-              type="tel"
-              placeholder="555-555-5550"
-            />
-            <mat-icon matSuffix>call</mat-icon>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Phone number</mat-label>
+          <input
+            formControlName="telephone"
+            matInput
+            type="tel"
+            placeholder="555-555-5550"
+          />
+          <mat-icon matSuffix>call</mat-icon>
+        </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label> Company Name </mat-label>
-            <input
-              formControlName="companyName"
-              matInput
-              placeholder="Company Name"
-            />
-            <mat-icon matSuffix>store_mall_directory</mat-icon>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label> Company Name </mat-label>
+          <input
+            formControlName="companyName"
+            matInput
+            placeholder="Company Name"
+          />
+          <mat-icon matSuffix>store_mall_directory</mat-icon>
+        </mat-form-field>
 
-          <mat-form-field appearance="fill">
-            <mat-label>Email </mat-label>
-            <input
-              formControlName="email"
-              matInput
-              type="email"
-              placeholder="Email"
-            />
-            <mat-icon matSuffix>email</mat-icon>
-          </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Email </mat-label>
+          <input
+            formControlName="email"
+            matInput
+            type="email"
+            placeholder="Email"
+          />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
 
-          <div></div>
-
-          <!--      <mat-form-field>
+        <!--      <mat-form-field>
             <mat-label> password </mat-label>
             <input formControlName="password" matInput placeholder="Password" />
           </mat-form-field> -->
-          <!--     <mat-form-field>
+        <!--     <mat-form-field>
             <mat-label> Confirm password </mat-label>
             <input
               formControlName="confirmPassword"
@@ -127,26 +138,25 @@
               placeholder="Password"
             />
           </mat-form-field> -->
-        </div>
 
-        <div align="end" class="button-row">
-
-          <a
-            routerLink="/customers"
+        <div *ngIf="!hide" align="end" class="button-row">
+          <button
+            (click)="cancel()"
             mat-stroked-button
             color="primary"
-            type="submit"
-            >Cancel</a
+            type="button"
           >
+            Cancel
+          </button>
           <button
-          mat-flat-button
-          color="primary"
-          (click)="confirmDialog()"
-          type="submit"
-          [disabled]="!form.valid"
-        >
-          Save
-        </button>
+            mat-flat-button
+            color="primary"
+            (click)="confirmDialog()"
+            type="submit"
+            [disabled]="!form.valid"
+          >
+            Save
+          </button>
         </div>
       </form>
     </div>
