@@ -184,7 +184,7 @@ export class AddUpdateComponent implements OnInit {
             this.snackBar.openSnackBar(this.error, actionText);
             return;
           } else {
-            this.snackBar.openSnackBar('Customer Created', 'Dismiss')
+            this.snackBar.openSnackBar('Customer created', 'Dismiss')
             this.router.navigate(['../'], { relativeTo: this.route });
           }
           //
