@@ -12,7 +12,9 @@
   text-align: center;
 }
 
-
+.mat-stroked-button{
+  margin-right: 5px;
+}
 
 .mat-tab-labels {
   justify-content: center;

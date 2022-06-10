@@ -46,8 +46,8 @@ export class AddUpdateComponent implements OnInit {
     breakpointObserver: BreakpointObserver
   ) {
     this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+      .observe('(max-width: 1920px)')
+      .pipe(map(({ matches }) => (matches ? 'vertical' : 'horizontal')));
   }
 
   ngOnInit() {
@@ -105,7 +105,7 @@ export class AddUpdateComponent implements OnInit {
         contactName: [''],
         phoneNumber1: [''],
         phoneNumber2: [''],
-        email: [''],
+        email: ['', [Validators.required, Validators.email]],
         street: [''],
         city: [''],
         state: [''],
@@ -184,6 +184,7 @@ export class AddUpdateComponent implements OnInit {
             this.snackBar.openSnackBar(this.error, actionText);
             return;
           } else {
+            this.snackBar.openSnackBar('Customer Created', 'Dismiss')
             this.router.navigate(['../'], { relativeTo: this.route });
           }
           //
