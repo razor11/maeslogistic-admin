@@ -1,3 +1,4 @@
+import { LoDetailViewComponent } from './../pages/logistic-operators/lo-detail-view/lo-detail-view.component';
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { LoAddUpdateComponent } from "../pages/logistic-operators/lo-add-update/lo-add-update.component";
@@ -15,6 +16,9 @@ children:[
     {
         path: 'add', component:LoAddUpdateComponent
     },
+    {
+      path: 'detail-view/:id', component: LoDetailViewComponent
+    }
 
 ]
 

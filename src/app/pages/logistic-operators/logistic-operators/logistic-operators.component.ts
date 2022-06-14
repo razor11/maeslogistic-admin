@@ -15,7 +15,7 @@ export class LogisticOperatorsComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   isLoading: boolean = true;
-  
+
   isDeleting: boolean = false;
 
   totalRows = 0;
@@ -26,11 +26,8 @@ export class LogisticOperatorsComponent implements OnInit {
   displayedColumns: string[] = ['Id',
   'Name',
   'Country',
-  'Zipcode',
-  'City',
-  'Street',
-  'Suite',
-  'ContactNumber'
+  'ContactNumber',
+  'Actions'
 ];
 
 dataSource: MatTableDataSource<logisticOperator> = new MatTableDataSource();
@@ -50,7 +47,7 @@ added = true;
   {
     this.isLoading = true;
     this.logisticOperatorsService.getAll(this.currentPage, this.pageSize)
-    .pipe(first())    
+    .pipe(first())
     .subscribe((data) => {
       this.dataSource.data = data;
       this.isLoading = false;

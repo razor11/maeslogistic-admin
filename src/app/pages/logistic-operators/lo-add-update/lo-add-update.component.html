@@ -9,7 +9,7 @@
     >
       <mat-icon aria-label="Example icon-button with a heart icon"
         >keyboard_backspace</mat-icon
-      >
+      > Back
     </button>
   </mat-card-header>
 
@@ -29,6 +29,7 @@
             formControlName="ContactNumber"
             matInput
             placeholder="ContactNumber"
+            type="tel"
           />
         </mat-form-field>
       </div>
@@ -53,7 +54,7 @@
       <div>
         <mat-form-field appearance="fill">
           <mat-label>Country</mat-label>
-          <mat-select formControlName="country">
+          <mat-select formControlName="Country">
             <mat-option
               *ngFor="let country of countries"
               [value]="country.description"

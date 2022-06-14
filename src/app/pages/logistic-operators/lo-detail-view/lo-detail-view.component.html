@@ -1,0 +1,121 @@
+<mat-card *ngIf="this.operator">
+  <mat-toolbar-row>
+    <span class="spacer"> </span>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon class="mat-18">more_horiz</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button type="button" (click)="editMode()" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">edit</mat-icon>
+        Edit
+      </button>
+      <button type="button" routerLink="/logistic-operators/add" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">add</mat-icon
+        >Add Operator
+      </button>
+
+      <button type="button" routerLink="/logistic-operators" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">list</mat-icon
+        >Operators List
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <div
+    class="container"
+    fxLayout="row"
+    fxLayout.xs="column"
+    fxFlexFill
+    fxLayoutGap="10"
+    fxLayoutAlign="space-around"
+  >
+    <div fxFlex="50%" fxFlex.xs="55">
+      <mat-icon class="card-icon" aria-hidden="false" aria-label="person icon"
+        >local_shipping</mat-icon
+      >
+      <mat-card-header>
+        <mat-card-title>
+        <p style="padding-left: 5px">{{ operator.Name | titlecase }}</p>
+        </mat-card-title>
+      </mat-card-header>
+    </div>
+
+    <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
+      <form [formGroup]="form" action="">
+        <h4>Primary Info</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Logistic Operator Name</mat-label>
+          <input
+            formControlName="Name"
+            matInput
+            placeholder="Logistic Operator Name"
+          />
+          <mat-icon matSuffix>description</mat-icon>
+        </mat-form-field>
+        <h4>Address</h4>
+        <mat-form-field appearance="fill">
+          <mat-label>Street </mat-label>
+          <input formControlName="Street" matInput placeholder="Street" />
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Suite </mat-label>
+          <input formControlName="Suite" matInput placeholder="Suite" />
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>City </mat-label>
+          <input formControlName="City" matInput placeholder="City" />
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="Country">
+            <mat-option
+              *ngFor="let country of countries"
+              [value]="country.description"
+            >
+              {{ country.description }}
+            </mat-option>
+          </mat-select>
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>ZipCode </mat-label>
+          <input formControlName="ZipCode" matInput placeholder="ZipCode" />
+          <mat-icon matSuffix>place</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Contact Number </mat-label>
+          <input type="tel" formControlName="ContactNumber" matInput placeholder="Contact Number" />
+          <mat-icon matSuffix>phone</mat-icon>
+        </mat-form-field>
+
+        <div *ngIf="!hide" align="end" class="button-row">
+          <button
+            (click)="readMode()"
+            mat-stroked-button
+            color="primary"
+            type="button"
+          >
+            Cancel
+          </button>
+          <button
+            mat-flat-button
+            color="primary"
+            (click)="confirmDialog()"
+            type="submit"
+            [disabled]="!form.valid"
+          >
+            Save
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</mat-card>

@@ -32,6 +32,12 @@ body {
 
 
 
+.card-icon{
+  font-size: 90px;
+  margin-left: 25px;
+ }
+
+
 .card-header-padding {
   padding: 15px;
 }
@@ -41,6 +47,12 @@ body {
 }
 
 @media (max-width: 768px) {
+  .mat-form-field + .mat-form-field {
+    margin-left: 0px;
+  }
+}
+
+@media (max-width: 820px) {
   .mat-form-field + .mat-form-field {
     margin-left: 0px;
   }

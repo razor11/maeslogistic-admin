@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class LogisticOperatorsService {
-  
+
   private readonly API_URL = environment.APIURL;
   private readonly API_METHOD = '/api/v1/logistic-operators';
 
@@ -29,7 +29,7 @@ export class LogisticOperatorsService {
     return this.http.post<any>(`${this.API_URL}${this.API_METHOD}`,params);
   }
   updateLogisticOperator(id:number,params:any){
-    return this.http.put<any>(`${this.API_URL}${this.API_METHOD}/${ id }`,
+    return this.http.patch<any>(`${this.API_URL}${this.API_METHOD}/${ id }`,
     params);
   }
   deleteLogisticOperator(id:number){
