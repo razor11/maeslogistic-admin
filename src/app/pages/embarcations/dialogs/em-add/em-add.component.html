@@ -55,23 +55,26 @@
         </mat-option>
       </mat-select>
       <mat-icon matSuffix>description</mat-icon>
+
     </mat-form-field>
 
     <div>
-      <mat-form-field appearance="fill">
+      <mat-form-field  appearance="fill">
         <mat-label>Weigth Capacity</mat-label>
         <input formControlName="WeigthCapacity" matInput placeholder="Kg" />
         <mat-icon matSuffix>shopping_basket</mat-icon>
+        <mat-hint>Kg</mat-hint>
       </mat-form-field>
 
       <mat-form-field appearance="fill">
         <mat-label>Volume Capacity</mat-label>
         <input formControlName="volumeCapacity" matInput placeholder="Fts" />
         <mat-icon matSuffix>shopping_basket</mat-icon>
+        <mat-hint>ft3</mat-hint>
       </mat-form-field>
     </div>
 
-    <mat-form-field formGroupName="tracking" appearance="fill">
+    <mat-form-field class="top-space" formGroupName="tracking" appearance="fill">
       <mat-label>Tracking Status</mat-label>
       <mat-select formControlName="id">
         <mat-option *ngFor="let status of trackingTypes" [value]="status.id">
