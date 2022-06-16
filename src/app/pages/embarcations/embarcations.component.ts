@@ -6,6 +6,10 @@ import { first } from 'rxjs';
 import { EmbarcationsService } from 'src/app/core/services/embarcations/embarcations.service';
 import { embarcation } from 'src/app/models/embarcation';
 import { EmAddComponent } from './dialogs/em-add/em-add.component';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-embarcations',
@@ -25,11 +29,11 @@ export class EmbarcationsComponent implements OnInit {
   pageEvent: PageEvent;
 
   displayedColumns: string[] = [
-    'id',
     'EstimatedDepartureDate',
     'EstimatedArrivingDate',
     'VeselNumber',
     'Status',
+    'Actions',
   ];
 
   dataSource: MatTableDataSource<embarcation> = new MatTableDataSource();
@@ -68,5 +72,33 @@ export class EmbarcationsComponent implements OnInit {
         this.loadEmbarcations();
       }
     });
+  }
+
+  confirmDialog(id: string): void {
+    const message = `Are you want to delete this customer?`;
+    const dialogData = new ConfirmDialogModel('Confirm Changes', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+      }
+    });
+  }
+
+  deleteEmbarcation(id: any) {
+    const client = this.dataSource.data.find((x) => x.id === id);
+    console.log(client);
+    if (!client) return;
+    this.isDeleting = true;
+    this.embarcationService
+      .deleteEmbarcation(Number(id))
+      .pipe(first())
+      .subscribe(() => {
+        this.dataSource.data = this.dataSource.data.filter((x) => x.id !== id);
+        this.loadEmbarcations();
+      });
   }
 }
