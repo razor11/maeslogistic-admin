@@ -1,3 +1,8 @@
 .mat-card-title{
   text-align: center;
 }
+
+
+.mat-button{
+  margin: 8px;
+}

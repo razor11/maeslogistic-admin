@@ -8,7 +8,7 @@
     </h1>
     <span class="spacer"></span>
 
-<!--     <span style="padding-right: 10px; font-size: medium;"> {{clock}}</span> -->
+    <!--     <span style="padding-right: 10px; font-size: medium;"> {{clock}}</span> -->
     <span>{{ userName }} </span>
 
     <button
@@ -66,44 +66,44 @@
 
         <div>
           <mat-accordion>
-          <mat-expansion-panel [expanded]="url.startsWith('/customers')">
-            <mat-expansion-panel-header>
-              <mat-panel-title>
-                <!-- Cabeceras del submenu -->
-                <a mat-list-item    routerLinkActive="active-list-item">
-                  <mat-icon matListIcon>person</mat-icon>
-                  <span matLine>Customers</span>
-                </a>
-              </mat-panel-title>
-            </mat-expansion-panel-header>
-            <a
-              mat-list-item
-              routerLink="/customers"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (isActiveChange)="this.expand($event)"
-            >
-              <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
-              <span matLine> Customers List</span>
-            </a>
+            <mat-expansion-panel [expanded]="url.startsWith('/customers')">
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  <!-- Cabeceras del submenu -->
+                  <a mat-list-item routerLinkActive="active-list-item">
+                    <mat-icon matListIcon>person</mat-icon>
+                    <span matLine>Customers</span>
+                  </a>
+                </mat-panel-title>
+              </mat-expansion-panel-header>
+              <a
+                mat-list-item
+                routerLink="/customers"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+                <span matLine> Customers List</span>
+              </a>
 
-            <a
-              mat-list-item
-              routerLink="/customers/add"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (isActiveChange)="this.expand($event)"
-            >
-              <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
-              <span matLine>Add Customer</span>
-            </a>
-          </mat-expansion-panel>
-        </mat-accordion>
+              <a
+                mat-list-item
+                routerLink="/customers/add"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
+                <span matLine>Add Customer</span>
+              </a>
+            </mat-expansion-panel>
+          </mat-accordion>
         </div>
 
         <div>
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="url.startsWith('/embarcations')">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -113,31 +113,26 @@
                   </a>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            <a
-              mat-list-item
-              routerLink="/embarcations"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
-              <span matLine>List</span>
-            </a>
+              <a
+                mat-list-item
+                routerLink="/embarcations"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+                <span matLine>List</span>
+              </a>
 
-            <a
-              mat-list-item
-              routerLink="/embarcations/add"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
-              <span matLine>Add</span>
-            </a>
+
             </mat-expansion-panel>
           </mat-accordion>
         </div>
         <div>
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel
+              [expanded]="url.startsWith('/logistic-operators')"
+            >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -147,31 +142,33 @@
                   </a>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            <a
-              mat-list-item
-              routerLink="/logistic-operators"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
-              <span matLine>List</span>
-            </a>
+              <a
+                mat-list-item
+                routerLink="/logistic-operators"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+                <span matLine>List</span>
+              </a>
 
-            <a
-              mat-list-item
-              routerLink="/logistic-operators/add"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
-              <span matLine>Add</span>
-            </a>
+              <a
+                mat-list-item
+                routerLink="/logistic-operators/add"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
+                <span matLine>Add</span>
+              </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
         <div>
           <mat-accordion>
-            <mat-expansion-panel>
+            <mat-expansion-panel [expanded]="url.startsWith('/parameters')">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -181,26 +178,40 @@
                   </a>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            <a
-              mat-list-item
-              routerLink="/parameters/address-types"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-            >
-              <mat-icon matListIcon aria-hidden="false">pin_drop</mat-icon>
-              <span matLine>Address Types</span>
-            </a>
+              <a
+                mat-list-item
+                routerLink="/parameters/address-types"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">pin_drop</mat-icon>
+                <span matLine>Address Types</span>
+              </a>
 
-            <a
-            mat-list-item
-            routerLink="/parameters/countries"
-            routerLinkActive="active-list-item"
-            [routerLinkActiveOptions]="{ exact: true }"
-          >
-            <mat-icon matListIcon aria-hidden="false">map</mat-icon>
-            <span matLine>Countries</span>
-          </a>
+              <a
+                mat-list-item
+                routerLink="/parameters/countries"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false">map</mat-icon>
+                <span matLine>Countries</span>
+              </a>
 
+              <a
+                mat-list-item
+                routerLink="/parameters/tracking-status"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <mat-icon matListIcon aria-hidden="false"
+                  >track_changes</mat-icon
+                >
+                <span matLine>Tracking Status</span>
+              </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>

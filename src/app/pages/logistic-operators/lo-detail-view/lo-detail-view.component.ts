@@ -51,7 +51,7 @@ export class LoDetailViewComponent implements OnInit {
       Street: ['', Validators.required],
       Suite: ['', Validators.required],
       City: ['', Validators.required],
-      ZipCode: ['', Validators.required],
+      ZipCode: ['', [Validators.required, Validators.minLength(5)]],
       Country: ['', Validators.required],
       ContactNumber: ['', Validators.required],
     });

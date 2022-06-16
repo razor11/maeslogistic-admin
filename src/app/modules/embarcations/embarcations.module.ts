@@ -7,18 +7,22 @@ import { MaterialModule } from 'src/app/shared/modules/material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { EmLayoutComponent } from 'src/app/pages/embarcations/em-layout/em-layout.component';
 import { EmAdUpdateComponent } from 'src/app/pages/embarcations/em-ad-update/em-ad-update.component';
-
-
+import { EmAddComponent } from 'src/app/pages/embarcations/dialogs/em-add/em-add.component';
 
 @NgModule({
-  declarations: [EmLayoutComponent,EmbarcationsComponent, EmAdUpdateComponent],
+  declarations: [
+    EmLayoutComponent,
+    EmAddComponent,
+    EmbarcationsComponent,
+    EmAdUpdateComponent,
+  ],
   imports: [
     CommonModule,
     EmbarcationRoutingModule,
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    FlexLayoutModule
-  ]
+    FlexLayoutModule,
+  ],
 })
-export class EmbarcationsModule { }
+export class EmbarcationsModule {}

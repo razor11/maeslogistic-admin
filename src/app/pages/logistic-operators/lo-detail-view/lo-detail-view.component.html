@@ -1,4 +1,4 @@
-<mat-card *ngIf="this.operator">
+<mat-card>
   <mat-toolbar-row>
     <span class="spacer"> </span>
     <button mat-button [matMenuTriggerFor]="menu">
@@ -21,101 +21,124 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <div
-    class="container"
-    fxLayout="row"
-    fxLayout.xs="column"
-    fxFlexFill
-    fxLayoutGap="10"
-    fxLayoutAlign="space-around"
-  >
-    <div fxFlex="50%" fxFlex.xs="55">
-      <mat-icon class="card-icon" aria-hidden="false" aria-label="person icon"
-        >local_shipping</mat-icon
-      >
-      <mat-card-header>
-        <mat-card-title>
-        <p style="padding-left: 5px">{{ operator.Name | titlecase }}</p>
-        </mat-card-title>
-      </mat-card-header>
-    </div>
+  <mat-card-content *ngIf="this.operator">
+    <mat-progress-bar *ngIf="!this.operator" mode="query"></mat-progress-bar>
+    <div
+      class="container"
+      fxLayout="row"
+      fxLayout.xs="column"
+      fxFlexFill
+      fxLayoutGap="10"
+      fxLayoutAlign="space-around"
+    >
+      <div fxFlex="50%" fxFlex.xs="55">
+        <mat-icon
+          mat-card-avatar
+          class="card-icon"
+          aria-hidden="false"
+          aria-label="person icon"
+          >local_shipping</mat-icon
+        >
+        <mat-card-header>
+          <mat-card-title>
+            {{ operator.Name | titlecase }}
+          </mat-card-title>
+          <mat-card-subtitle>Country: {{ operator.Country }}</mat-card-subtitle>
+        </mat-card-header>
+        <button
+          type="button"
+          routerLink="/logistic-operators"
+          mat-raised-button
+          color="primary"
+        >
+          View Operators List
+          <mat-icon aria-hidden="false" aria-label="map icon">list</mat-icon>
+        </button>
+      </div>
 
-    <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
-      <form [formGroup]="form" action="">
-        <h4>Primary Info</h4>
-        <mat-form-field appearance="fill">
-          <mat-label>Logistic Operator Name</mat-label>
-          <input
-            formControlName="Name"
-            matInput
-            placeholder="Logistic Operator Name"
-          />
-          <mat-icon matSuffix>description</mat-icon>
-        </mat-form-field>
-        <h4>Address</h4>
-        <mat-form-field appearance="fill">
-          <mat-label>Street </mat-label>
-          <input formControlName="Street" matInput placeholder="Street" />
-          <mat-icon matSuffix>place</mat-icon>
-        </mat-form-field>
+      <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
+        <form [formGroup]="form" action="">
+          <h4>Primary Info</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Logistic Operator Name</mat-label>
+            <input
+              formControlName="Name"
+              matInput
+              placeholder="Logistic Operator Name"
+            />
+            <mat-icon matSuffix>description</mat-icon>
+          </mat-form-field>
+          <h4>Address</h4>
+          <mat-form-field appearance="fill">
+            <mat-label>Street </mat-label>
+            <input formControlName="Street" matInput placeholder="Street" />
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Suite </mat-label>
-          <input formControlName="Suite" matInput placeholder="Suite" />
-          <mat-icon matSuffix>place</mat-icon>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Suite </mat-label>
+            <input formControlName="Suite" matInput placeholder="Suite" />
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>City </mat-label>
-          <input formControlName="City" matInput placeholder="City" />
-          <mat-icon matSuffix>place</mat-icon>
-        </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>City </mat-label>
+            <input formControlName="City" matInput placeholder="City" />
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Country</mat-label>
-          <mat-select formControlName="Country">
-            <mat-option
-              *ngFor="let country of countries"
-              [value]="country.description"
+          <mat-form-field appearance="fill">
+            <mat-label>Country</mat-label>
+            <mat-select formControlName="Country">
+              <mat-option
+                *ngFor="let country of countries"
+                [value]="country.description"
+              >
+                {{ country.description }}
+              </mat-option>
+            </mat-select>
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>ZipCode </mat-label>
+            <input formControlName="ZipCode" matInput placeholder="ZipCode" />
+            <mat-icon matSuffix>place</mat-icon>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Contact Number </mat-label>
+            <input
+              type="tel"
+              formControlName="ContactNumber"
+              matInput
+              placeholder="Contact Number"
+            />
+            <mat-icon matSuffix>phone</mat-icon>
+          </mat-form-field>
+
+          <div *ngIf="!hide" align="end" class="button-row">
+            <button
+              (click)="readMode()"
+              mat-stroked-button
+              mat-button
+              color="primary"
+              type="button"
             >
-              {{ country.description }}
-            </mat-option>
-          </mat-select>
-          <mat-icon matSuffix>place</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>ZipCode </mat-label>
-          <input formControlName="ZipCode" matInput placeholder="ZipCode" />
-          <mat-icon matSuffix>place</mat-icon>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill">
-          <mat-label>Contact Number </mat-label>
-          <input type="tel" formControlName="ContactNumber" matInput placeholder="Contact Number" />
-          <mat-icon matSuffix>phone</mat-icon>
-        </mat-form-field>
-
-        <div *ngIf="!hide" align="end" class="button-row">
-          <button
-            (click)="readMode()"
-            mat-stroked-button
-            color="primary"
-            type="button"
-          >
-            Cancel
-          </button>
-          <button
-            mat-flat-button
-            color="primary"
-            (click)="confirmDialog()"
-            type="submit"
-            [disabled]="!form.valid"
-          >
-            Save
-          </button>
-        </div>
-      </form>
+              Cancel
+            </button>
+            <button
+              mat-flat-button
+              color="primary"
+              (click)="confirmDialog()"
+              type="submit"
+              [disabled]="!form.valid"
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
-  </div>
+  </mat-card-content>
 </mat-card>

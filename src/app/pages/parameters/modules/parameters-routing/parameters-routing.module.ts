@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParametersLayoutComponent } from '../../parameters-layout/parameters-layout.component';
+import { TrackingStatesComponent } from '../../tracking-states/tracking-states.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,10 @@ const routes: Routes = [
         path: 'countries',
         component: CountriesComponent,
       },
+      {
+        path:'tracking-status',
+        component: TrackingStatesComponent
+      }
     ],
   },
 ];

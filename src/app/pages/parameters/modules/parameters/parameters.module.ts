@@ -6,13 +6,15 @@ import { CommonModule } from '@angular/common';
 import { ParametersRoutingModule } from '../parameters-routing/parameters-routing.module';
 import { ParamsDataTableComponent } from 'src/app/components/params-data-table/params-data-table.component';
 import { AddressTypesComponent } from '../../address-types/address-types.component';
+import { TrackingStatesComponent } from '../../tracking-states/tracking-states.component';
 
 @NgModule({
   declarations: [
     ParametersLayoutComponent,
     ParamsDataTableComponent,
     AddressTypesComponent,
-    CountriesComponent
+    CountriesComponent,
+    TrackingStatesComponent
   ],
   imports: [CommonModule, CommomModulesModule, ParametersRoutingModule],
 })

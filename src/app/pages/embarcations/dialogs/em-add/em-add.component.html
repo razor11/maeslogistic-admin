@@ -1,0 +1,100 @@
+<h1 mat-dialog-title>Create New Embarcation</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form">
+    <div>
+      <mat-form-field class="date-width" appearance="fill">
+        <mat-label>Enter estimates dates</mat-label>
+        <mat-date-range-input [min]="minDate" [max]="maxDate" [rangePicker]="picker">
+          <input
+            matStartDate
+            formControlName="EstimatedDepartureDate"
+            placeholder="Departure date"
+          />
+          <input
+            matEndDate
+            formControlName="EstimatedArrivingDate"
+            placeholder="Arriving date"
+          />
+        </mat-date-range-input>
+        <mat-hint>Estimate departure Date – Estimate arriving date</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+
+        <mat-error
+          *ngIf="
+            form.controls['EstimatedDepartureDate'].hasError(
+              'matStartDateInvalid'
+            )
+          "
+          >Invalid start date</mat-error
+        >
+        <mat-error
+          *ngIf="
+            form.controls['EstimatedArrivingDate'].hasError('matEndDateInvalid')
+          "
+          >Invalid end date</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <mat-form-field class="top-space" appearance="fill">
+      <mat-label>Vessel Number</mat-label>
+      <input
+        formControlName="VeselNumber"
+        matInput
+        placeholder="Vessel Number"
+      />
+      <mat-icon matSuffix>description</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field formGroupName="LogisticOperator" appearance="fill">
+      <mat-label>Logistic Operator</mat-label>
+      <mat-select formControlName="id">
+        <mat-option *ngFor="let lo of lo" [value]="lo.id">
+          {{ lo.Name }}
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>description</mat-icon>
+    </mat-form-field>
+
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label>Weigth Capacity</mat-label>
+        <input formControlName="WeigthCapacity" matInput placeholder="Kg" />
+        <mat-icon matSuffix>shopping_basket</mat-icon>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Volume Capacity</mat-label>
+        <input formControlName="volumeCapacity" matInput placeholder="Fts" />
+        <mat-icon matSuffix>shopping_basket</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <mat-form-field formGroupName="tracking" appearance="fill">
+      <mat-label>Tracking Status</mat-label>
+      <mat-select formControlName="id">
+        <mat-option *ngFor="let status of trackingTypes" [value]="status.id">
+          {{ status.description }}
+        </mat-option>
+      </mat-select>
+      <mat-icon matSuffix>description</mat-icon>
+    </mat-form-field>
+  </form>
+</div>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onNoClick()" >Cancel</button>
+  <button
+    mat-button
+    (click)="createEmbarcation()"
+    [mat-dialog-close]="form.valid"
+    color="primary"
+    [disabled]="!form.valid"
+
+  >
+    Save
+  </button>
+</mat-dialog-actions>
+<!--
+ <p> {{form.value | json}}</p> -->

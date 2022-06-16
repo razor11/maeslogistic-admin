@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-toolbar-row>
+    <mat-card-header>
+      <mat-card-title> Tracking Status Types </mat-card-title>
+    </mat-card-header>
+    <span class="spacer"></span>
+    <button type="button" (click)="addDialog()" color="primary" mat-raised-button class="demo-button">
+      <mat-icon aria-label="Example icon-button with a heart icon"
+        >add</mat-icon
+      >
+      Add
+    </button>
+  </mat-toolbar-row>
+  <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+
+  <app-params-data-table
+    *ngIf="!isLoading"
+    [dataTable]="data"
+    [displayedColumns]="displayedColumns"
+    (updateParam)="openUpdateDialog($event)"
+    (deleteParam)="deleteStatus($event)"
+  ></app-params-data-table>
+</mat-card>

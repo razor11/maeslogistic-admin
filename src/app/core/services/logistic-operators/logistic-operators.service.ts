@@ -13,9 +13,9 @@ export class LogisticOperatorsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(limit:number, page:number){
+  getAll(page:number, limit:number){
     return this.http.get<logisticOperator[]>(
-      `${this.API_URL}${this.API_METHOD}/${limit}/${page}`
+      `${this.API_URL}${this.API_METHOD}/${page}/${limit}`
     );
   }
 
