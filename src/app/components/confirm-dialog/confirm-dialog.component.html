@@ -7,6 +7,8 @@
 </div>
 
 <div mat-dialog-actions>
-  <button mat-button (click)="onDismiss()">No</button>
-  <button mat-raised-button color="primary" [mat-dialog-close]="true">Yes</button>
+  <button mat-button  (click)="onDismiss()">No</button>
+  <button [mat-dialog-close]="data" mat-raised-button color="primary">Yes</button>
 </div>
+
+

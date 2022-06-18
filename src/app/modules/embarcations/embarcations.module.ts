@@ -8,6 +8,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { EmLayoutComponent } from 'src/app/pages/embarcations/em-layout/em-layout.component';
 import { EmAdUpdateComponent } from 'src/app/pages/embarcations/em-ad-update/em-ad-update.component';
 import { EmAddComponent } from 'src/app/pages/embarcations/dialogs/em-add/em-add.component';
+import { EmbarcationsFormComponent } from 'src/app/components/embarcations-form/embarcations-form.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { EmAddComponent } from 'src/app/pages/embarcations/dialogs/em-add/em-add
     EmAddComponent,
     EmbarcationsComponent,
     EmAdUpdateComponent,
+    EmbarcationsFormComponent
   ],
   imports: [
     CommonModule,

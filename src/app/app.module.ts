@@ -59,6 +59,7 @@ export function tokenGetter() {
     ConfirmDialogComponent,
     LoDetailViewComponent,
 
+
   ],
   imports: [
     HttpClientModule,

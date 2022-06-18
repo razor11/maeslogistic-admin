@@ -1,11 +1,21 @@
+import { EmbarcationsFormComponent } from 'src/app/components/embarcations-form/embarcations-form.component';
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { first } from 'rxjs';
 import { EmbarcationsService } from 'src/app/core/services/embarcations/embarcations.service';
 import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
 import { embarcation } from 'src/app/models/embarcation';
+import {
+  ConfirmDialogComponent,
+  ConfirmDialogModel,
+} from 'src/app/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-em-ad-update',
@@ -13,11 +23,14 @@ import { embarcation } from 'src/app/models/embarcation';
   styleUrls: ['./em-ad-update.component.css'],
 })
 export class EmAdUpdateComponent implements OnInit {
-  form: FormGroup;
+  @ViewChild(EmbarcationsFormComponent) EmbarcationsFormComponent: any;
+
+  embarcationForm: FormGroup;
   error = '';
   embarcation: embarcation;
-  id: string;
+  id: number;
   submited = false;
+  hide = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,32 +38,69 @@ export class EmAdUpdateComponent implements OnInit {
     private embarcationService: EmbarcationsService,
     private fb: FormBuilder,
     private snackBar: SnackbarService,
-    public dialog: MatDialog,
-
+    public dialog: MatDialog
   ) {
-
+    this.id = this.route.snapshot.params['id'];
+    this.loadData();
   }
 
   ngOnInit() {
-    this.id = this.route.snapshot.params['id'];
-
-    this.form = this.fb.group({
-      EstimatedDepartureDate: new FormControl,
-      EstimatedArrivingDate:  new FormControl,
-      VeselNumber: ['', Validators.required],
-      LogisticOperator: this.fb.group({
-        id: ['', Validators.required]
-      }),
-      WeigthCapacity: ['', Validators.required],
-      volumeCapacity:['', Validators.required],
-      tracking: this.fb.group({
-        id:['', Validators.required]
-      })
-
-
+    this.embarcationForm = this.fb.group({
+      embarcation: [],
     });
   }
 
+  loadData() {
+    this.embarcationService
+      .getById(this.id)
+      .pipe(first())
+      .subscribe((data) => {
+        this.embarcation = data;
+      });
+  }
 
+  private updateEmbarcaton() {
+    this.embarcationService
+      .upEmbarcation(
+        this.id,
+        this.embarcationForm.controls['embarcation'].value
+      )
+      .pipe(first())
+      .subscribe(() => {
+        this.loadData();
+      });
+  }
 
+  confirmDialog(): void {
+    const message = `Are you sure you want to apply the changes?`;
+    const dialogData = new ConfirmDialogModel('Confirm Changes', message);
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      if (dialogResult) {
+        this.saveChanges();
+      }
+    });
+  }
+
+  readMode() {
+    this.EmbarcationsFormComponent.readMode();
+    this.hide = true;
+  }
+
+  editMode() {
+    this.EmbarcationsFormComponent.editMode();
+    this.hide = false;
+  }
+
+  saveChanges() {
+    if (this.embarcationForm.invalid) {
+      return;
+    } else {
+      this.updateEmbarcaton();
+    }
+  }
 }

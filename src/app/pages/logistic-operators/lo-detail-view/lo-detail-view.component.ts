@@ -66,6 +66,7 @@ export class LoDetailViewComponent implements OnInit {
       .pipe(first())
       .subscribe((data) => {
         this.form.patchValue(data);
+        console.log(data)
         this.dataLoad = false;
         this.operator = data;
         this.dataLoad = true;

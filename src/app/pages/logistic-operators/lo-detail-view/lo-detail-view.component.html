@@ -26,20 +26,17 @@
     <div
       class="container"
       fxLayout="row"
+      fxLayout.sm="column"
       fxLayout.xs="column"
       fxFlexFill
       fxLayoutGap="10"
       fxLayoutAlign="space-around"
     >
-      <div fxFlex="50%" fxFlex.xs="55">
-        <mat-icon
-          mat-card-avatar
-          class="card-icon"
-          aria-hidden="false"
-          aria-label="person icon"
-          >local_shipping</mat-icon
-        >
-        <mat-card-header>
+      <div class="header-row" fxFlex="50%" fxFlex.xs="55%">
+        <mat-card-header class="detail-header">
+          <mat-icon class="icon" aria-hidden="false" aria-label="person icon"
+            >local_shipping</mat-icon
+          >
           <mat-card-title>
             {{ operator.Name | titlecase }}
           </mat-card-title>
@@ -52,11 +49,10 @@
           color="primary"
         >
           View Operators List
-          <mat-icon aria-hidden="false" aria-label="map icon">list</mat-icon>
         </button>
       </div>
 
-      <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
+      <div fxFlex="50%" fxFlex.xs="55%" fxLayoutAlign="center center">
         <form [formGroup]="form" action="">
           <h4>Primary Info</h4>
           <mat-form-field appearance="fill">
@@ -117,7 +113,7 @@
             <mat-icon matSuffix>phone</mat-icon>
           </mat-form-field>
 
-          <div *ngIf="!hide" align="end" class="button-row">
+          <mat-card-actions *ngIf="!hide" align="end">
             <button
               (click)="readMode()"
               mat-stroked-button
@@ -125,8 +121,8 @@
               color="primary"
               type="button"
             >
-              Cancel
-            </button>
+              Cancel</button
+            >ßß
             <button
               mat-flat-button
               color="primary"
@@ -136,7 +132,7 @@
             >
               Save
             </button>
-          </div>
+          </mat-card-actions>
         </form>
       </div>
     </div>

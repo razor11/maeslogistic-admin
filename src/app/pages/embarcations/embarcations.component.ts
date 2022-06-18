@@ -84,6 +84,7 @@ export class EmbarcationsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
+        this.deleteEmbarcation(id);
       }
     });
   }

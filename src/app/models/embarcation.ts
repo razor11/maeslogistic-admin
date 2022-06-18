@@ -3,7 +3,7 @@ export class embarcation {
   EstimatedDepartureDate!: Date;
   EstimatedArrivingDate!: Date;
   VeselNumber!: string;
-  LogisticOperator!: {
+  logisticOperator!: {
     id: number;
     Name: string;
     Country: string;
@@ -14,7 +14,7 @@ export class embarcation {
     ContactNumber: string;
   };
   WeigthCapacity!: number;
-  volumenCapacity:number;
+  volumeCapacity:number;
   tracking: {
     id: number;
     description: string;

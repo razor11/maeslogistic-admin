@@ -13,6 +13,17 @@ body {
   padding: 10px;
 }
 
+
+.mat-form-field-disabled {
+  color: rgba(black, 0.38) !important;
+}
+
+.mat-input-element:disabled{
+  color: black !important;
+}
+
+
+
 .spacer {
   flex: 1 1 auto;
 }
@@ -30,6 +41,9 @@ body {
   padding: 30px;
 }
 
+.icon{
+  font-size: 90px;
+}
 
 
 .card-icon{
@@ -42,13 +56,24 @@ body {
   padding: 15px;
 }
 
+.detail-header{
+  justify-content: center;
+}
+
+.header-row{
+  text-align: center;
+  margin-bottom: 10px;
+
+}
+
+
 .mat-form-field + .mat-form-field {
   margin-left: 0px;
 }
 
 @media (min-width : 1224px) {
   .mat-form-field + .mat-form-field {
-    margin-left: 8px;
+    margin-left: 2px;
   }
 }
 
@@ -57,7 +82,7 @@ body {
 and (min-device-width : 768px)
 and (max-device-width : 1180px) {
   .mat-form-field + .mat-form-field {
-    margin-left: 8px;
+    margin-left: 2px;
   }
 }
 

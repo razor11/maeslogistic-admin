@@ -27,7 +27,7 @@ export class EmbarcationsService {
     return this.http.post<any>(`${this.API_URL}${this.API_METHOD}`,params);
   }
   upEmbarcation(id:number,params:any){
-    return this.http.put<any>(`${this.API_URL}${this.API_METHOD}/${ id }`,
+    return this.http.patch<any>(`${this.API_URL}${this.API_METHOD}/${ id }`,
     params);
   }
   deleteEmbarcation(id:number){

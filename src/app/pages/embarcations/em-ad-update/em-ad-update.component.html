@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-toolbar-row>
+    <mat-card-title> Embarcation: {{ this.embarcation.id }} </mat-card-title>
+    <span class="spacer"> </span>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon class="mat-18">more_horiz</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button type="button" (click)="editMode()" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">edit</mat-icon>
+        Edit
+      </button>
+      <button type="button" routerLink="/logistic-operators/add" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">add</mat-icon
+        >Add Embarcation
+      </button>
+
+      <button type="button" routerLink="/embarcations" mat-menu-item>
+        <mat-icon class="mat-18" color="basic" aria-label="Edit">list</mat-icon
+        >Embarcation List
+      </button>
+    </mat-menu>
+  </mat-toolbar-row>
+  <mat-divider></mat-divider>
+  <mat-card-content *ngIf="this.embarcation">
+    <mat-progress-bar *ngIf="!this.id" mode="query"></mat-progress-bar>
+    <div
+      class="container"
+      fxLayout="row"
+      fxLayout.sm="column"
+      fxLayout.xs="column"
+      fxFlexFill
+      fxLayoutGap="10"
+      fxLayoutAlign="space-around"
+    >
+      <div class="header-row" fxFlex="50%" fxFlex.xs="55%">
+        <mat-card-header class="detail-header">
+          <mat-icon class="icon" aria-hidden="false" aria-label="boat icon"
+            >directions_boat</mat-icon
+          >
+          <mat-card-title>
+            Operated by: {{ this.embarcation.logisticOperator.Name }}
+          </mat-card-title>
+          <mat-card-subtitle
+            >Status:
+            {{ this.embarcation.tracking.description }}</mat-card-subtitle
+          >
+        </mat-card-header>
+
+        <button
+          type="button"
+          routerLink="/embarcations"
+          mat-raised-button
+          color="primary"
+        >
+          View Embarcations List
+        </button>
+      </div>
+
+      <div fxFlex="50%" fxFlex.xs="55%" fxLayoutAlign="center center">
+        <form [formGroup]="embarcationForm">
+          <app-embarcations-form
+            formControlName="embarcation"
+            [id]="this.id"
+            [data]="this.embarcation"
+          ></app-embarcations-form>
+        </form>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions align="end" *ngIf="!hide">
+    <button mat-stroked-button color="primary" (click)="readMode()" mat-button>
+      Cancel
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      (click)="confirmDialog()"
+      mat-button
+    >
+      Save
+    </button>
+  </mat-card-actions>
+</mat-card>

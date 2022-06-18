@@ -117,14 +117,12 @@
                 mat-list-item
                 routerLink="/embarcations"
                 routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: true }"
+                [routerLinkActiveOptions]="{ exact: false }"
                 (isActiveChange)="this.expand($event)"
               >
                 <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
                 <span matLine>List</span>
               </a>
-
-
             </mat-expansion-panel>
           </mat-accordion>
         </div>

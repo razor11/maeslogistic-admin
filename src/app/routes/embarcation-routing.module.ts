@@ -13,7 +13,7 @@ const routes: Routes = [{
             path: '', component: EmbarcationsComponent
         },
         {
-            path: 'add', component: EmAdUpdateComponent
+            path: 'detail-view/:id', component: EmAdUpdateComponent
         }
     ]
 }];
