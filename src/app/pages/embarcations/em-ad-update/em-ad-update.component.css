@@ -26,10 +26,8 @@
      margin-bottom: 10px;
   }
 
-
-  .button-row button,
-  .button-row a {
-    margin-right: 8px;
+  .list-button{
+    margin-right: 20px;
   }
 
 

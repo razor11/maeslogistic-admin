@@ -1,6 +1,6 @@
 <mat-card>
   <mat-toolbar-row>
-    <mat-card-title> Embarcation: {{ this.embarcation.id }} </mat-card-title>
+    <mat-card-title *ngIf="this.embarcation"> Embarcation: {{ this.embarcation.id }} </mat-card-title>
     <span class="spacer"> </span>
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon class="mat-18">more_horiz</mat-icon>
@@ -10,7 +10,7 @@
         <mat-icon class="mat-18" color="basic" aria-label="Edit">edit</mat-icon>
         Edit
       </button>
-      <button type="button" routerLink="/logistic-operators/add" mat-menu-item>
+      <button type="button" (click)="openAddDialog()" mat-menu-item>
         <mat-icon class="mat-18" color="basic" aria-label="Edit">add</mat-icon
         >Add Embarcation
       </button>
@@ -52,6 +52,7 @@
           routerLink="/embarcations"
           mat-raised-button
           color="primary"
+          class="list-button"
         >
           View Embarcations List
         </button>

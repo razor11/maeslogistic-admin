@@ -16,6 +16,7 @@ import {
   ConfirmDialogComponent,
   ConfirmDialogModel,
 } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { EmAddComponent } from '../dialogs/em-add/em-add.component';
 
 @Component({
   selector: 'app-em-ad-update',
@@ -82,6 +83,21 @@ export class EmAdUpdateComponent implements OnInit {
     dialogRef.afterClosed().subscribe((dialogResult) => {
       if (dialogResult) {
         this.saveChanges();
+      }
+    });
+  }
+
+  openAddDialog(): void {
+    const dialogRef = this.dialog.open(EmAddComponent, {
+      width: '580px',
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.router
+          .navigateByUrl('/', { skipLocationChange: true })
+          .then(() =>
+            this.router.navigate([`/embarcations/detail-view/${res}`])
+          );
       }
     });
   }

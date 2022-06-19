@@ -48,8 +48,9 @@ export class EmAddComponent implements OnInit {
           this.error = data.error;
           this.snackService.openSnackBar(this.error, actionText);
         } else {
+          console.log(data)
           this.snackService.openSnackBar('New embarcation created', actionText);
-          this.dialogRef.close();
+          this.dialogRef.close(data.id);
         }
       });
   }
