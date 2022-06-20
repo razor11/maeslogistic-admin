@@ -1,6 +1,8 @@
 <mat-card>
   <mat-toolbar-row>
-    <mat-card-title *ngIf="this.embarcation"> Embarcation: {{ this.embarcation.id }} </mat-card-title>
+    <mat-card-title *ngIf="this.embarcation">
+      Embarcation: {{ this.embarcation.id }}
+    </mat-card-title>
     <span class="spacer"> </span>
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon class="mat-18">more_horiz</mat-icon>
@@ -23,7 +25,10 @@
   </mat-toolbar-row>
   <mat-divider></mat-divider>
   <mat-card-content *ngIf="this.embarcation">
-    <mat-progress-bar *ngIf="!this.id" mode="query"></mat-progress-bar>
+    <mat-progress-bar
+      *ngIf="!this.embarcation"
+      mode="indeterminate"
+    ></mat-progress-bar>
     <div
       class="container"
       fxLayout="row"
