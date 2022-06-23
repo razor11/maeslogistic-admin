@@ -5,7 +5,7 @@
     </mat-card-title>
     <span class="spacer"> </span>
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon>
+      Options <mat-icon class="mat-18">more_horiz</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button type="button" (click)="editMode()" mat-menu-item>
@@ -24,11 +24,11 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
+  <mat-progress-bar
+    *ngIf="!this.embarcation"
+    mode="indeterminate"
+  ></mat-progress-bar>
   <mat-card-content *ngIf="this.embarcation">
-    <mat-progress-bar
-      *ngIf="!this.embarcation"
-      mode="indeterminate"
-    ></mat-progress-bar>
     <div
       class="container"
       fxLayout="row"
@@ -40,9 +40,6 @@
     >
       <div class="header-row" fxFlex="50%" fxFlex.xs="55%">
         <mat-card-header class="detail-header">
-          <mat-icon class="icon" aria-hidden="false" aria-label="boat icon"
-            >directions_boat</mat-icon
-          >
           <mat-card-title>
             Operated by: {{ this.embarcation.logisticOperator.Name }}
           </mat-card-title>
@@ -52,18 +49,55 @@
           >
         </mat-card-header>
 
-        <button
-          type="button"
-          routerLink="/embarcations"
-          mat-raised-button
-          color="primary"
-          class="list-button"
-        >
-          View Embarcations List
-        </button>
+        <mat-grid-list  cols="2" rowHeight="200px">
+          <mat-grid-tile>
+          <mat-card class="settings-card">
+            <mat-card-title>
+              {{weightPercentage}} %
+            </mat-card-title>
+            <mat-card-content>
+              <div>
+                <mat-progress-bar class="progress"  mode="determinate" [value]="100 - weightPercentage"></mat-progress-bar>
+                <span class="barStatus">weight</span>
+                <div class="barText">{{weightUsed}}/ {{embarcation.WeigthCapacity}} Kg</div>
+
+              </div>
+              <div>
+                <span class="cardLabel">Available weight:</span>
+                <span class="padRight"> {{availableWeight}} kg</span>
+              </div>
+            </mat-card-content>
+          </mat-card></mat-grid-tile>
+          <mat-grid-tile><mat-card class="settings-card">
+            <mat-card-title>
+               {{volumePercentage}} %
+            </mat-card-title>
+            <mat-card-content>
+              <div>
+                <mat-progress-bar class="progress"  mode="determinate" [value]="100 - volumePercentage"></mat-progress-bar>
+                <span class="barStatus">Volume</span>
+                <div class="barText">{{volumeUsed}}/ {{embarcation.volumeCapacity}} ft3</div>
+
+              </div>
+              <div>
+                <span class="cardLabel">Available volume:</span>
+                <span class="padRight"> {{availableVolumen}} ft3</span>
+              </div>
+            </mat-card-content>
+          </mat-card></mat-grid-tile>
+        </mat-grid-list>
       </div>
 
-      <div fxFlex="50%" fxFlex.xs="55%" fxLayoutAlign="center center">
+      <div fxFlex="50%" fxFlex.xs="55%">
+        <!--    <button
+        type="button"
+        routerLink="/embarcations"
+        mat-raised-button
+        color="primary"
+        class="list-button"
+      >
+        View Embarcations List
+      </button> -->
         <form [formGroup]="embarcationForm">
           <app-embarcations-form
             formControlName="embarcation"

@@ -17,6 +17,7 @@ import {
   ConfirmDialogModel,
 } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { EmAddComponent } from '../dialogs/em-add/em-add.component';
+import { calculatePercentageAvailable } from 'src/app/tools/utils';
 
 @Component({
   selector: 'app-em-ad-update',
@@ -32,6 +33,13 @@ export class EmAdUpdateComponent implements OnInit {
   id: number;
   submited = false;
   hide = true;
+
+  availableWeight: string;
+  availableVolumen: string;
+  weightPercentage: number;
+  volumePercentage: number;
+  weightUsed: string;
+  volumeUsed: string;
 
   constructor(
     private route: ActivatedRoute,
@@ -57,7 +65,31 @@ export class EmAdUpdateComponent implements OnInit {
       .pipe(first())
       .subscribe((data) => {
         this.embarcation = data;
+        this.chartFormatter(data);
       });
+  }
+
+  chartFormatter(data: embarcation) {
+    this.weightPercentage = calculatePercentageAvailable(
+      Number(data.WeigthCapacityUsed),
+      Number(data.WeigthCapacity)
+    );
+
+    console.log(this.weightPercentage);
+
+    this.volumePercentage = calculatePercentageAvailable(
+      Number(data.volumeCapacityUsed),
+      Number(data.volumeCapacity)
+    );
+
+    this.availableWeight = (
+      data.WeigthCapacity - data.WeigthCapacityUsed
+    ).toFixed(1);
+    this.availableVolumen = (
+      data.volumeCapacity - data.volumeCapacityUsed
+    ).toFixed(1);
+    this.weightUsed = Number(data.WeigthCapacityUsed).toFixed(1);
+    this.volumeUsed = Number(data.volumeCapacityUsed).toFixed(1);
   }
 
   private updateEmbarcaton() {
@@ -67,8 +99,16 @@ export class EmAdUpdateComponent implements OnInit {
         this.embarcationForm.controls['embarcation'].value
       )
       .pipe(first())
-      .subscribe(() => {
-        this.loadData();
+      .subscribe((data) => {
+        let actionText = 'Dismiss';
+        if (data.status > 202) {
+          this.error = data.error;
+          this.snackBar.openSnackBar(this.error, actionText);
+        } else {
+          this.snackBar.openSnackBar('Embarcation updated', actionText);
+          this.loadData();
+          this.readMode();
+        }
       });
   }
 
@@ -85,6 +125,10 @@ export class EmAdUpdateComponent implements OnInit {
         this.saveChanges();
       }
     });
+  }
+
+  format(results: any) {
+    return results.value + '%';
   }
 
   openAddDialog(): void {

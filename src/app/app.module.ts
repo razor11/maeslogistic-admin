@@ -87,7 +87,8 @@ export function tokenGetter() {
     MaterialModule,
     AppRoutingModule,
     FlexLayoutModule,
-    ChartsModule
+    ChartsModule,
+
 
   ],
   providers: [

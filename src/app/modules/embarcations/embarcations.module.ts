@@ -9,7 +9,7 @@ import { EmLayoutComponent } from 'src/app/pages/embarcations/em-layout/em-layou
 import { EmAdUpdateComponent } from 'src/app/pages/embarcations/em-ad-update/em-ad-update.component';
 import { EmAddComponent } from 'src/app/pages/embarcations/dialogs/em-add/em-add.component';
 import { EmbarcationsFormComponent } from 'src/app/components/embarcations-form/embarcations-form.component';
-
+import { NgxChartsModule }from '@swimlane/ngx-charts';
 @NgModule({
   declarations: [
     EmLayoutComponent,
@@ -25,6 +25,7 @@ import { EmbarcationsFormComponent } from 'src/app/components/embarcations-form/
     FormsModule,
     MaterialModule,
     FlexLayoutModule,
+    NgxChartsModule
   ],
 })
 export class EmbarcationsModule {}

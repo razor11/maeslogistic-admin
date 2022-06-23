@@ -14,7 +14,9 @@ export class embarcation {
     ContactNumber: string;
   };
   WeigthCapacity!: number;
+  WeigthCapacityUsed: number;
   volumeCapacity:number;
+  volumeCapacityUsed: number;
   tracking: {
     id: number;
     description: string;
