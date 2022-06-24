@@ -1,3 +1,4 @@
+import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
 import { first } from 'rxjs';
 import { LogisticOperatorsService } from 'src/app/core/services/logistic-operators/logistic-operators.service';
 import { Component, OnInit } from '@angular/core';
@@ -26,10 +27,13 @@ export class LoDetailViewComponent implements OnInit {
   countries: Parameters[];
   hide = true;
 
+  actionText = 'Dismiss';
+
   constructor(
     private logisticOperatorsService: LogisticOperatorsService,
     private route: ActivatedRoute,
     private router: Router,
+    private snackBar: SnackbarService,
     private fb: FormBuilder,
     public dialog: MatDialog,
     private countriesService: CountriesService
@@ -66,7 +70,7 @@ export class LoDetailViewComponent implements OnInit {
       .pipe(first())
       .subscribe((data) => {
         this.form.patchValue(data);
-        console.log(data)
+        console.log(data);
         this.dataLoad = false;
         this.operator = data;
         this.dataLoad = true;
@@ -94,8 +98,15 @@ export class LoDetailViewComponent implements OnInit {
     this.logisticOperatorsService
       .updateLogisticOperator(this.id, this.form.value)
       .pipe(first())
-      .subscribe(() => {
-        this.loadData();
+      .subscribe({
+        next: (data) => {
+          this.snackBar.openSnackBar('Operator updated', this.actionText);
+          this.loadData();
+        },
+
+        error: (e) => this.snackBar.openSnackBar(e, this.actionText),
+
+        complete: () => this.readMode(),
       });
   }
 

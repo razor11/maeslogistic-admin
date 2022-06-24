@@ -1,8 +1,11 @@
 <mat-card>
   <mat-toolbar-row>
+    <mat-card-title *ngIf="this.operator">
+      Logistic Operator: {{ this.operator.id }}
+    </mat-card-title>
     <span class="spacer"> </span>
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon>
+      Options <mat-icon class="mat-18">more_horiz</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button type="button" (click)="editMode()" mat-menu-item>
@@ -21,8 +24,8 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
+  <mat-progress-bar *ngIf="!this.operator" mode="query"></mat-progress-bar>
   <mat-card-content *ngIf="this.operator">
-    <mat-progress-bar *ngIf="!this.operator" mode="query"></mat-progress-bar>
     <div
       class="container"
       fxLayout="row"
@@ -34,9 +37,6 @@
     >
       <div class="header-row" fxFlex="50%" fxFlex.xs="55%">
         <mat-card-header class="detail-header">
-          <mat-icon class="icon" aria-hidden="false" aria-label="person icon"
-            >local_shipping</mat-icon
-          >
           <mat-card-title>
             {{ operator.Name | titlecase }}
           </mat-card-title>
@@ -121,8 +121,8 @@
               color="primary"
               type="button"
             >
-              Cancel</button
-            >ßß
+              Cancel
+            </button>
             <button
               mat-flat-button
               color="primary"

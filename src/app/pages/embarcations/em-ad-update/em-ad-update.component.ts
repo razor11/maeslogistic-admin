@@ -75,7 +75,7 @@ export class EmAdUpdateComponent implements OnInit {
       Number(data.WeigthCapacity)
     );
 
-    console.log(this.weightPercentage);
+
 
     this.volumePercentage = calculatePercentageAvailable(
       Number(data.volumeCapacityUsed),

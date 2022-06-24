@@ -70,6 +70,7 @@ export class CustomersComponent implements OnInit, AfterViewInit {
 
   loadCustomers() {
     this.isLoading = true;
+
     this.customersService
       .getAll(this.currentPage, this.pageSize)
       .pipe(first())
@@ -78,8 +79,10 @@ export class CustomersComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.paginator.pageIndex = this.currentPage;
           this.paginator.length = data.CustomerCant;
+
         });
         this.isLoading = false;
+
       });
   }
 

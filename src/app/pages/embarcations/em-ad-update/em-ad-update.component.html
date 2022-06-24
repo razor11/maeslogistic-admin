@@ -59,7 +59,7 @@
               <div>
                 <mat-progress-bar class="progress"  mode="determinate" [value]="100 - weightPercentage"></mat-progress-bar>
                 <span class="barStatus">weight</span>
-                <div class="barText">{{weightUsed}}/ {{embarcation.WeigthCapacity}} Kg</div>
+                <div class="barText">{{weightUsed}}/ {{embarcation.WeigthCapacity |  number : '1.1-1'}} Kg</div>
 
               </div>
               <div>

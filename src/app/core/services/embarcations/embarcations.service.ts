@@ -1,3 +1,4 @@
+import { PageEvent } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { embarcation } from 'src/app/models/embarcation';
@@ -12,9 +13,9 @@ export class EmbarcationsService {
 
   constructor(private http: HttpClient) { }
 
-  getAll(limit:number, page:number){
-    return this.http.get<embarcation[]>(
-      `${this.API_URL}${this.API_METHOD}/${limit}/${page}`
+  getAll(page:number, limit:number){
+    return this.http.get<any>(
+      `${this.API_URL}${this.API_METHOD}/${page}/${limit}`
     );
   }
 

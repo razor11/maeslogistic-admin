@@ -1,8 +1,8 @@
 import { MatDialog } from '@angular/material/dialog';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { first } from 'rxjs';
+import { first, merge } from 'rxjs';
 import { EmbarcationsService } from 'src/app/core/services/embarcations/embarcations.service';
 import { embarcation } from 'src/app/models/embarcation';
 import { EmAddComponent } from './dialogs/em-add/em-add.component';
@@ -10,22 +10,23 @@ import {
   ConfirmDialogComponent,
   ConfirmDialogModel,
 } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-embarcations',
   templateUrl: './embarcations.component.html',
   styleUrls: ['./embarcations.component.css'],
 })
-export class EmbarcationsComponent implements OnInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
+export class EmbarcationsComponent implements OnInit, AfterViewInit {
   isLoading: boolean = true;
 
   isDeleting: boolean = false;
 
-  totalRows = 0;
+  resultsLength = 0;
+  isLoadingResults = true;
+  isRateLimitReached = false;
   pageSize = 5;
-  currentPage = 1;
+  currentPage = 0;
   pageEvent: PageEvent;
 
   displayedColumns: string[] = [
@@ -41,24 +42,47 @@ export class EmbarcationsComponent implements OnInit {
   data: embarcation[] = [];
   added = true;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private embarcationService: EmbarcationsService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.loadEmbarcations();
+    this.loadData();
   }
-  loadEmbarcations() {
-    this.isLoading = true;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  loadData() {
+    this.isLoadingResults = true;
     this.embarcationService
       .getAll(this.currentPage, this.pageSize)
       .pipe(first())
-      .subscribe((data) => {
-        this.dataSource.data = data;
-        this.isLoading = false;
-        console.log(this.dataSource.data);
+      .subscribe({
+        next: (data) => {
+          this.dataSource.data = data.embarcations;
+          setTimeout(() => {
+            this.paginator.pageIndex = this.currentPage;
+            this.paginator.length = data.embarcationsCant;
+          });
+        },
+        error: (e) => console.log(e),
+        complete: () => {
+          this.isLoadingResults = false;
+        },
       });
+  }
+
+  pageChanged(event: PageEvent) {
+    console.log({ event });
+    this.pageSize = event.pageSize;
+    this.currentPage = event.pageIndex;
+    this.loadData();
   }
 
   openAddDialog(param: any): void {
@@ -69,7 +93,7 @@ export class EmbarcationsComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       console.log(res);
       if (res) {
-        this.loadEmbarcations();
+        this.router.navigate([`/embarcations/detail-view/${res}`]);
       }
     });
   }
@@ -99,7 +123,7 @@ export class EmbarcationsComponent implements OnInit {
       .pipe(first())
       .subscribe(() => {
         this.dataSource.data = this.dataSource.data.filter((x) => x.id !== id);
-        this.loadEmbarcations();
+        this.loadData();
       });
   }
 }
