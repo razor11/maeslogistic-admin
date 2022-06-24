@@ -1,3 +1,4 @@
+import { PackagesTypesComponent } from './../../packages-types/packages-types.component';
 import { CountriesComponent } from './../../countries/countries.component';
 import { ParametersLayoutComponent } from './../../parameters-layout/parameters-layout.component';
 import { CommomModulesModule } from './../../../../shared/modules/material/commom-modules/commom-modules/commom-modules.module';
@@ -14,7 +15,8 @@ import { TrackingStatesComponent } from '../../tracking-states/tracking-states.c
     ParamsDataTableComponent,
     AddressTypesComponent,
     CountriesComponent,
-    TrackingStatesComponent
+    TrackingStatesComponent,
+    PackagesTypesComponent
   ],
   imports: [CommonModule, CommomModulesModule, ParametersRoutingModule],
 })

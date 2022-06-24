@@ -41,6 +41,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ChartsModule} from 'ng2-charts';
 import { LoDetailViewComponent } from './pages/logistic-operators/lo-detail-view/lo-detail-view.component';
 
+
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }

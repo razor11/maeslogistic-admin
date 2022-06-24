@@ -210,6 +210,19 @@
                 >
                 <span matLine>Tracking Status</span>
               </a>
+
+              <a
+              mat-list-item
+              routerLink="/parameters/packages-types"
+              routerLinkActive="active-list-item"
+              [routerLinkActiveOptions]="{ exact: true }"
+              (isActiveChange)="this.expand($event)"
+            >
+              <mat-icon matListIcon aria-hidden="false"
+                >track_changes</mat-icon
+              >
+              <span matLine>Packages Types</span>
+            </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>

@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ParametersLayoutComponent } from '../../parameters-layout/parameters-layout.component';
 import { TrackingStatesComponent } from '../../tracking-states/tracking-states.component';
+import { PackagesTypesComponent } from '../../packages-types/packages-types.component';
 
 const routes: Routes = [
   {
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path:'tracking-status',
         component: TrackingStatesComponent
+      },
+      {
+        path:'packages-types',
+        component: PackagesTypesComponent
       }
     ],
   },
