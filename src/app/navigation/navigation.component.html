@@ -16,7 +16,7 @@
       [matMenuTriggerFor]="menu"
       aria-label="Example icon-button with a menu"
     >
-      <mat-icon>expand_more</mat-icon>
+    <mat-icon>person_pin</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button mat-menu-item (click)="logout()">
@@ -55,7 +55,7 @@
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
                   <a mat-list-item>
-                    <mat-icon matListIcon>shop_two</mat-icon>
+                    <fa-icon  matListIcon [icon]="faShipments"></fa-icon>
                     <span matLine>Shipments</span>
                   </a>
                 </mat-panel-title>
@@ -71,7 +71,7 @@
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
                   <a mat-list-item routerLinkActive="active-list-item">
-                    <mat-icon matListIcon>person</mat-icon>
+                    <fa-icon  matListIcon [icon]="facustomers"></fa-icon>
                     <span matLine>Customers</span>
                   </a>
                 </mat-panel-title>
@@ -83,7 +83,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (isActiveChange)="this.expand($event)"
               >
-                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+              <fa-icon  matListIcon [icon]="faList"></fa-icon>
                 <span matLine> Customers List</span>
               </a>
 
@@ -108,7 +108,7 @@
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
                   <a mat-list-item>
-                    <mat-icon matListIcon>directions_boat</mat-icon>
+                    <fa-icon  matListIcon [icon]="faEmbarcations"></fa-icon>
                     <span matLine>Embarcations</span>
                   </a>
                 </mat-panel-title>
@@ -120,7 +120,7 @@
                 [routerLinkActiveOptions]="{ exact: false }"
                 (isActiveChange)="this.expand($event)"
               >
-                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+              <fa-icon  matListIcon [icon]="faList"></fa-icon>
                 <span matLine>List</span>
               </a>
             </mat-expansion-panel>
@@ -135,7 +135,7 @@
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
                   <a mat-list-item>
-                    <mat-icon matListIcon>local_shipping</mat-icon>
+                    <fa-icon  matListIcon [icon]="faLogisticOper"></fa-icon>
                     <span matLine>Logistic Operators</span>
                   </a>
                 </mat-panel-title>
@@ -147,7 +147,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (isActiveChange)="this.expand($event)"
               >
-                <mat-icon matListIcon aria-hidden="false">grid_on</mat-icon>
+              <fa-icon  matListIcon [icon]="faList"></fa-icon>
                 <span matLine>List</span>
               </a>
 
@@ -194,7 +194,7 @@
                 [routerLinkActiveOptions]="{ exact: true }"
                 (isActiveChange)="this.expand($event)"
               >
-                <mat-icon matListIcon aria-hidden="false">map</mat-icon>
+              <fa-icon  matListIcon [icon]="faCountries"></fa-icon>
                 <span matLine>Countries</span>
               </a>
 
@@ -218,9 +218,9 @@
               [routerLinkActiveOptions]="{ exact: true }"
               (isActiveChange)="this.expand($event)"
             >
-              <mat-icon matListIcon aria-hidden="false"
-                >track_changes</mat-icon
-              >
+
+                <fa-icon  matListIcon [icon]="faPackageTypes"></fa-icon>
+
               <span matLine>Packages Types</span>
             </a>
             </mat-expansion-panel>

@@ -40,6 +40,7 @@ import { AddParameterDialogComponent } from './components/parameters-dialogs/add
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { ChartsModule} from 'ng2-charts';
 import { LoDetailViewComponent } from './pages/logistic-operators/lo-detail-view/lo-detail-view.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 export function tokenGetter() {
@@ -89,6 +90,7 @@ export function tokenGetter() {
     AppRoutingModule,
     FlexLayoutModule,
     ChartsModule,
+    FontAwesomeModule,
 
 
   ],
