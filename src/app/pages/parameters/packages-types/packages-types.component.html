@@ -1,1 +1,32 @@
-<p>packages-types works!</p>
+<mat-card>
+  <mat-toolbar-row>
+    <mat-card-header>
+      <mat-card-title>Packages Types </mat-card-title>
+    </mat-card-header>
+    <span class="spacer"></span>
+    <button
+      type="button"
+      (click)="openAddDialog()"
+      color="primary"
+      mat-raised-button
+      class="demo-button"
+    >
+      <mat-icon aria-label="Example icon-button with a heart icon"
+        >add</mat-icon
+      >
+      Add
+    </button>
+  </mat-toolbar-row>
+  <mat-progress-bar
+    mode="indeterminate"
+    *ngIf="isLoadingResults"
+  ></mat-progress-bar>
+
+  <app-params-data-table
+    *ngIf="!isLoadingResults"
+    [dataTable]="data"
+    [displayedColumns]="displayedColumns"
+    (updateParam)="openUpdateDialog($event)"
+    (deleteParam)="deletePackageType($event)"
+  ></app-params-data-table>
+</mat-card>

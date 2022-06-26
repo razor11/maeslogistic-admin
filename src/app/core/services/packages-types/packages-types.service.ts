@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class PackagesTypesService {
   private readonly API_URL = environment.APIURL;
-  private readonly API_METHOD = '/api/v1/packages';
+  private readonly API_METHOD = '/api/v1/package-types';
 
   constructor(private http: HttpClient) {}
 

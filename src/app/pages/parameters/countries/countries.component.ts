@@ -31,7 +31,7 @@ export class CountriesComponent implements OnInit {
     const message = `rewrite the field below with the new record that would you like to upgrade`;
     const dialogBodyText = new updateDialogModel(title, message);
     const dialogRef = this.dialog.open(ParametersUpdateDialogComponent, {
-      width: '480',
+      width: '480px',
       data: { param, dialogBodyText },
     });
     dialogRef.afterClosed().subscribe((res) => {

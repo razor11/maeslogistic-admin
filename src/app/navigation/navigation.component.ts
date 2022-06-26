@@ -19,7 +19,8 @@ import {
   faAnchor,
   faEarthAmericas,
   faPeopleGroup,
-  faTableList
+  faTableList,
+  faUsersGear
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -42,6 +43,7 @@ export class NavigationComponent implements OnInit {
   faCountries = faEarthAmericas;
   facustomers = faPeopleGroup;
   faList = faTableList;
+  fausers = faUsersGear
 
 
   @Output() isActiveChange!: EventEmitter<boolean>;

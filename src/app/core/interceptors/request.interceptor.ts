@@ -39,6 +39,7 @@ export class auth implements HttpInterceptor {
 
         if (error instanceof HttpErrorResponse) {
           console.error('error status = ', error.status);
+           errorMessage = error.status
           // console.log('---> filter:', req.params.get('filter'));
 
           if (error.status === 401) {
