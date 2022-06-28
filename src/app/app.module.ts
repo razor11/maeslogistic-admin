@@ -42,7 +42,6 @@ import { ChartsModule} from 'ng2-charts';
 import { LoDetailViewComponent } from './pages/logistic-operators/lo-detail-view/lo-detail-view.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
-
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -59,7 +58,7 @@ export function tokenGetter() {
     ParametersUpdateDialogComponent,
     AddParameterDialogComponent,
     ConfirmDialogComponent,
-    LoDetailViewComponent,
+    LoDetailViewComponent
 
 
   ],

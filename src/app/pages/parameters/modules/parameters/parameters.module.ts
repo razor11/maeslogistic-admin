@@ -1,3 +1,5 @@
+import { ServiceTypesComponent } from './../../service-types/service-types.component';
+import { ShippingTypesComponent } from './../../shipping-types/shipping-types.component';
 import { PackagesTypesComponent } from './../../packages-types/packages-types.component';
 import { CountriesComponent } from './../../countries/countries.component';
 import { ParametersLayoutComponent } from './../../parameters-layout/parameters-layout.component';
@@ -16,7 +18,9 @@ import { TrackingStatesComponent } from '../../tracking-states/tracking-states.c
     AddressTypesComponent,
     CountriesComponent,
     TrackingStatesComponent,
-    PackagesTypesComponent
+    PackagesTypesComponent,
+    ShippingTypesComponent,
+    ServiceTypesComponent
   ],
   imports: [CommonModule, CommomModulesModule, ParametersRoutingModule],
 })

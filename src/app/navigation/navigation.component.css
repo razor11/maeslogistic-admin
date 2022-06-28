@@ -35,15 +35,15 @@ table {
 }
 
 .mat-list-item {
-  color: rgb(54, 54, 54) !important;
+  color: #424242 !important;
 }
 
 .active-list-item {
-  color: #1e88e5 !important; /* Note: You could also use a custom theme */
+  color: #1565C0 !important; /* Note: You could also use a custom theme */
 }
 
 .active-link {
-  color: #1e88e5 !important; /* Note: You could also use a custom theme */
+  color: #1565C0 !important; /* Note: You could also use a custom theme */
 }
 
 .mat-expansion-panel-header {
@@ -53,7 +53,7 @@ table {
 
 
 .mat-toolbar {
-  background-color: #30323d;
+  background-color: #212121;
   color: #ffff;
 }
 

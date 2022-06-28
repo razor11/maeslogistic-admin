@@ -1,0 +1,32 @@
+<mat-card>
+  <mat-toolbar-row>
+    <mat-card-header>
+      <mat-card-title>Service Types </mat-card-title>
+    </mat-card-header>
+    <span class="spacer"></span>
+    <button
+      type="button"
+      (click)="openAddDialog()"
+      color="primary"
+      mat-raised-button
+      class="demo-button"
+    >
+      <mat-icon aria-label="Add Icon"
+        >add</mat-icon
+      >
+      Add
+    </button>
+  </mat-toolbar-row>
+  <mat-progress-bar
+    mode="indeterminate"
+    *ngIf="isLoadingResults"
+  ></mat-progress-bar>
+
+  <app-params-data-table
+    *ngIf="!isLoadingResults"
+    [dataTable]="data"
+    [displayedColumns]="displayedColumns"
+    (updateParam)="openUpdateDialog($event)"
+    (deleteParam)="deleteServiceType($event)"
+  ></app-params-data-table>
+</mat-card>

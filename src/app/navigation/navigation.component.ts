@@ -20,7 +20,9 @@ import {
   faEarthAmericas,
   faPeopleGroup,
   faTableList,
-  faUsersGear
+  faUsersGear,
+  faTruckFast,
+  faCartFlatbed
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -43,7 +45,9 @@ export class NavigationComponent implements OnInit {
   faCountries = faEarthAmericas;
   facustomers = faPeopleGroup;
   faList = faTableList;
-  fausers = faUsersGear
+  fausers = faUsersGear;
+  faTruck = faTruckFast
+  faServicesTypes = faCartFlatbed;
 
 
   @Output() isActiveChange!: EventEmitter<boolean>;
