@@ -41,6 +41,7 @@ import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dial
 import { ChartsModule} from 'ng2-charts';
 import { LoDetailViewComponent } from './pages/logistic-operators/lo-detail-view/lo-detail-view.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DatePipe } from '@angular/common';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -98,6 +99,7 @@ export function tokenGetter() {
     DataCustomersService,
     DataAddressesService,
     SnackbarService,
+    DatePipe,
     AddressTypesService,
     CountriesService,
     {

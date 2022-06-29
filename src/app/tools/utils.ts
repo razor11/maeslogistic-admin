@@ -1,3 +1,5 @@
+
+
 export const calculatePercentageAvailable = (
   capacityUsed: number,
   maxCapacity: number
@@ -8,3 +10,5 @@ export const calculatePercentageAvailable = (
 
   return Number(calculate.toFixed(1));
 };
+
+

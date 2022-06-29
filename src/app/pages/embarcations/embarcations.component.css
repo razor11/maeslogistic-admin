@@ -12,6 +12,26 @@ table {
   position: relative;
 }
 
+mat-form-field {
+  margin-right: 12px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+
+}
+
+mat-button-toggle-group {
+  margin: 10px;
+}
+
+.mat-mini-fab{
+  margin-right: 5px;
+}
+
+.test{
+  margin: 10px;
+
+}
+
 .table-loading-shade {
   position: absolute;
   top: 0;

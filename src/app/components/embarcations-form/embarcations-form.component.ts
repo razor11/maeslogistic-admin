@@ -72,7 +72,6 @@ export class EmbarcationsFormComponent implements OnInit, AfterContentInit {
     private fb: FormBuilder,
     private loService: LogisticOperatorsService,
     private trackingTypesService: TrackingStatusService,
-    private embarcationService: EmbarcationsService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 0, 0, 1);

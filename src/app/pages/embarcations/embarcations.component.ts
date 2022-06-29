@@ -2,7 +2,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { first, merge } from 'rxjs';
+import { first } from 'rxjs';
 import { EmbarcationsService } from 'src/app/core/services/embarcations/embarcations.service';
 import { embarcation } from 'src/app/models/embarcation';
 import { EmAddComponent } from './dialogs/em-add/em-add.component';
@@ -11,6 +11,8 @@ import {
   ConfirmDialogModel,
 } from 'src/app/components/confirm-dialog/confirm-dialog.component';
 import { Router } from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-embarcations',
@@ -19,7 +21,6 @@ import { Router } from '@angular/router';
 })
 export class EmbarcationsComponent implements OnInit, AfterViewInit {
   isLoading: boolean = true;
-
   isDeleting: boolean = false;
 
   resultsLength = 0;
@@ -37,6 +38,15 @@ export class EmbarcationsComponent implements OnInit, AfterViewInit {
     'Actions',
   ];
 
+  // Filter Date Range
+  rangeFilterDate = new FormGroup({
+    start: new FormControl('', Validators.required),
+    end: new FormControl('', Validators.required),
+  });
+
+  filterType: string = 'departureDate';
+  ///////////
+
   dataSource: MatTableDataSource<embarcation> = new MatTableDataSource();
 
   data: embarcation[] = [];
@@ -47,7 +57,8 @@ export class EmbarcationsComponent implements OnInit, AfterViewInit {
   constructor(
     private embarcationService: EmbarcationsService,
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private datePipe: DatePipe
   ) {}
 
   ngOnInit(): void {
@@ -56,6 +67,66 @@ export class EmbarcationsComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator;
+  }
+
+  onToggleChange(value: any) {
+    this.filterType = value;
+    console.log(this.filterType);
+  }
+
+  resetFilter(){
+    this.rangeFilterDate.reset()
+    this.loadData();
+  }
+
+  applyFilter() {
+    const startDate = this.rangeFilterDate.controls['start'].value;
+    const endDate = this.rangeFilterDate.controls['end'].value;
+
+    const formatStartDate = this.datePipe.transform(startDate, 'yyyy-MM-dd');
+    const formatEndDate = this.datePipe.transform(endDate, 'yyyy-MM-dd');
+
+
+    switch (this.filterType) {
+      case 'departureDate':
+        this.embarcationService
+          .getByDepartureDate(
+            formatStartDate,
+            formatEndDate,
+            this.currentPage,
+            this.pageSize
+          )
+          .pipe(first())
+          .subscribe({
+            next: (data) => {
+              this.dataSource.data = data.embarcations;
+            },
+            error: (e) => console.log(e),
+          });
+        break;
+      case 'arrivingDate':
+        this.embarcationService
+          .getByArrivingDate(
+            formatStartDate,
+            formatEndDate,
+            this.currentPage,
+            this.pageSize
+          )
+          .pipe(first())
+          .subscribe({
+            next: (data) => {
+              this.dataSource.data = data.embarcations;
+            },
+            error: (e) => console.log(e),
+          });
+        break;
+      default:
+        this.loadData();
+    }
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
   loadData() {
