@@ -27,9 +27,10 @@
                 formControlName="firstName"
                 matInput
                 placeholder="First Name"
+                required
               />
+            <mat-error *ngIf="pInfoFormErrors.firstName">{{pInfoFormErrors.firstName}}</mat-error>
             </mat-form-field>
-
             <mat-form-field appearance="fill">
               <mat-label> Middle Name </mat-label>
               <input
@@ -55,7 +56,7 @@
                 placeholder="User Name"
               />
             </mat-form-field>
-            <div>
+            <div class="stepButton">
               <button
                 type="button"
                 mat-stroked-button

@@ -1,3 +1,5 @@
+import { ParamsToolbarComponent } from './../../../../components/params-toolbar/params-toolbar.component';
+import { PackageCatalogComponent } from './../../package-catalog/package-catalog.component';
 import { ServiceTypesComponent } from './../../service-types/service-types.component';
 import { ShippingTypesComponent } from './../../shipping-types/shipping-types.component';
 import { PackagesTypesComponent } from './../../packages-types/packages-types.component';
@@ -20,7 +22,9 @@ import { TrackingStatesComponent } from '../../tracking-states/tracking-states.c
     TrackingStatesComponent,
     PackagesTypesComponent,
     ShippingTypesComponent,
-    ServiceTypesComponent
+    ServiceTypesComponent,
+    PackageCatalogComponent,
+    ParamsToolbarComponent
   ],
   imports: [CommonModule, CommomModulesModule, ParametersRoutingModule],
 })

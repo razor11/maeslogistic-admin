@@ -1,3 +1,4 @@
+import { PackageCatalogComponent } from './../../package-catalog/package-catalog.component';
 import { ServiceTypesComponent } from './../../service-types/service-types.component';
 import { CountriesComponent } from './../../countries/countries.component';
 import { AddressTypesComponent } from './../../address-types/address-types.component';
@@ -39,6 +40,10 @@ const routes: Routes = [
         path: 'services-types',
         component: ServiceTypesComponent,
       },
+      {
+        path: 'package-catalog',
+        component: PackageCatalogComponent
+      }
     ],
   },
 ];

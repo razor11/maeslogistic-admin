@@ -11,16 +11,18 @@
       mat-raised-button
       class="demo-button"
     >
-      <mat-icon aria-label="Example icon-button with a heart icon"
+      <mat-icon
         >add</mat-icon
       >
       Add
     </button>
   </mat-toolbar-row>
-  <mat-progress-bar
+  <div [hidden]="!isLoadingResults">
+    <mat-progress-bar
     mode="indeterminate"
-    *ngIf="isLoadingResults"
   ></mat-progress-bar>
+  </div>
+
 
   <app-params-data-table
     *ngIf="!isLoadingResults"

@@ -42,6 +42,8 @@ import { ChartsModule} from 'ng2-charts';
 import { LoDetailViewComponent } from './pages/logistic-operators/lo-detail-view/lo-detail-view.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DatePipe } from '@angular/common';
+import { PackageCatalogService } from './core/services/package-catalog/package-catalog.service';
+import { AddUpdatePackageComponent } from './pages/parameters/package-catalog/add-update-package/add-update-package/add-update-package.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -59,7 +61,9 @@ export function tokenGetter() {
     ParametersUpdateDialogComponent,
     AddParameterDialogComponent,
     ConfirmDialogComponent,
-    LoDetailViewComponent
+    LoDetailViewComponent,
+    AddUpdatePackageComponent,
+
 
 
   ],
@@ -102,6 +106,8 @@ export function tokenGetter() {
     DatePipe,
     AddressTypesService,
     CountriesService,
+    PackageCatalogService,
+
     {
       provide: HTTP_INTERCEPTORS,
       useClass:JwtInterceptor,

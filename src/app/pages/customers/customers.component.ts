@@ -1,7 +1,7 @@
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Customers } from './../../models/customers';
-import { first } from 'rxjs/operators';
+import { first, startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DataCustomersService } from 'src/app/core/services/customers/data-customers.service';
 
@@ -11,6 +11,7 @@ import {
   ConfirmDialogComponent,
   ConfirmDialogModel,
 } from 'src/app/components/confirm-dialog/confirm-dialog.component';
+import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
 
 /**
  * @title Basic use of `<table mat-table>`
@@ -24,13 +25,14 @@ import {
 export class CustomersComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  clients: Customers[] = [];
+  customers: Customers[] = [];
   isDeleting: boolean = false;
   totalRows = 0;
   pageSize = 5;
   currentPage = 0;
   pageEvent: PageEvent;
   isLoading: boolean = true;
+  isRateLimitReached = false;
 
   displayedColumns: string[] = ['Name', 'Email', 'User Name', 'Actions'];
   dataSource: MatTableDataSource<Customers> = new MatTableDataSource();
@@ -38,30 +40,52 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   constructor(
     private customersService: DataCustomersService,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: SnackbarService
   ) {}
 
-  ngOnInit() {
-    this.loadCustomers();
-  }
+  ngOnInit() {}
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoading = true;
+          return this.customersService!.getAll(
+            this.paginator.pageIndex,
+            this.paginator.pageSize
+          ).pipe(catchError(() => observableOf(null)));
+        }),
+        map((data) => {
+          this.isLoading = false;
+          this.isRateLimitReached = data === null;
+
+          if (data === null) {
+            return [];
+          }
+
+          this.totalRows = data.CustomerCant;
+          return data.customers;
+        })
+      )
+      .subscribe({
+        next: (data) => {
+          this.dataSource.data = data;
+        },
+        error: (e) => console.log(e),
+      });
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
 
-    if (filterValue.length) {
-      this.customersService
-        .getByName(this.currentPage, this.pageSize, filterValue)
-        .subscribe((data) => {
-          this.dataSource.data = data.customers;
-          this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
-        });
-    } else {
-      this.loadCustomers();
-    }
+    this.customersService
+      .getByName(this.paginator.pageIndex, this.paginator.pageSize, filterValue)
+      .subscribe((data) => {
+        this.dataSource.data = data.customers;
+        this.dataSource.filter = filterValue.trim().toLocaleLowerCase();
+      });
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
@@ -79,19 +103,17 @@ export class CustomersComponent implements OnInit, AfterViewInit {
         setTimeout(() => {
           this.paginator.pageIndex = this.currentPage;
           this.paginator.length = data.CustomerCant;
-
         });
         this.isLoading = false;
-
       });
   }
 
-  pageChanged(event: PageEvent) {
+  /*   pageChanged(event: PageEvent) {
     console.log({ event });
     this.pageSize = event.pageSize;
-    this.currentPage = event.pageIndex;
+    this.paginator.pageIndex = event.pageIndex;
     this.loadCustomers();
-  }
+  } */
 
   confirmDialog(id: string): void {
     const message = `Are you want to delete this customer?`;
@@ -110,21 +132,25 @@ export class CustomersComponent implements OnInit, AfterViewInit {
 
   deleteClient(id: any) {
     const client = this.dataSource.data.find((x) => x.id === id);
-    console.log(client);
     if (!client) return;
     this.isDeleting = true;
     this.customersService
       .deleteClient(Number(id))
       .pipe(first())
-      .subscribe(() => {
-        this.dataSource.data = this.dataSource.data.filter((x) => x.id !== id);
-        this.loadCustomers();
+      .subscribe({
+        next: () => {
+          this.dataSource.data = this.dataSource.data.filter(
+            (x) => x.id !== id
+          );
+        },
+        error: (e) => this.snackBar.openSnackBar(e, 'Dismiss'),
+        complete: () => {
+          this.snackBar.openSnackBar('Customer deleted succesfully', 'Dismiss');
+          this.paginator.firstPage()},
       });
   }
 }
 
-/*
-.subscribe(data => {this.dataSource = new MatTableDataSource<Customers>(data);
-  this.dataSource.paginator = this.paginator;
-});
-} */
+function observableOf(arg0: null): any {
+  throw new Error('Function not implemented.');
+}

@@ -43,8 +43,19 @@
             routerLink="/home"
             routerLinkActive="active-list-item"
           >
-            <mat-icon matListIcon aria-hidden="false">dashboard</mat-icon>
+            <mat-icon matListIcon aria-hidden="false">dashboard</mat-icon>`
             <span matLine>Dashboard</span>
+          </a>
+        </div>
+
+        <div>
+          <a
+            mat-list-item
+            routerLink="/offices"
+            routerLinkActive="active-list-item"
+          >
+            <fa-icon matListIcon [icon]="faShop"></fa-icon>
+            <span matLine>Offices</span>
           </a>
         </div>
 
@@ -230,6 +241,17 @@
                 <span matLine>Packages Types</span>
               </a>
 
+              <a
+                mat-list-item
+                routerLink="/parameters/package-catalog"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <fa-icon matListIcon [icon]="faCubes"></fa-icon>
+
+                <span matLine>Package Catalog</span>
+              </a>
 
               <a
                 mat-list-item
@@ -244,16 +266,16 @@
               </a>
 
               <a
-              mat-list-item
-              routerLink="/parameters/services-types"
-              routerLinkActive="active-list-item"
-              [routerLinkActiveOptions]="{ exact: true }"
-              (isActiveChange)="this.expand($event)"
-            >
-              <fa-icon matListIcon [icon]="faServicesTypes"></fa-icon>
+                mat-list-item
+                routerLink="/parameters/services-types"
+                routerLinkActive="active-list-item"
+                [routerLinkActiveOptions]="{ exact: true }"
+                (isActiveChange)="this.expand($event)"
+              >
+                <fa-icon matListIcon [icon]="faServicesTypes"></fa-icon>
 
-              <span matLine>Service Types</span>
-            </a>
+                <span matLine>Service Types</span>
+              </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
@@ -262,8 +284,6 @@
 
     <mat-sidenav-content fullscreen>
       <router-outlet></router-outlet>
-
     </mat-sidenav-content>
   </mat-sidenav-container>
-
 </div>

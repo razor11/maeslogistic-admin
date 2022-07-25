@@ -1,5 +1,8 @@
 <mat-card  *ngIf="customer">
   <mat-toolbar-row >
+    <mat-card-title>
+      Customer: {{customer.id}}
+    </mat-card-title>
     <span class="spacer"></span>
     <button mat-button [matMenuTriggerFor]="menu">
       <mat-icon class="mat-18">more_horiz</mat-icon>Options
@@ -20,25 +23,23 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <div
+  <mat-card-content
     class="container"
     fxLayout="row"
-    fxLayout.xs="column"
-    fxFlexFill
-    fxLayoutGap="10"
-    fxLayoutAlign="space-around"
+    fxLayout.sm="column"
+      fxLayout.xs="column"
+      fxFlexFill
+      fxLayoutGap="10"
+      fxLayoutAlign="space-around"
   >
-    <div fxFlex="50%" fxFlex.xs="55">
-      <mat-icon class="card-icon" aria-hidden="false" aria-label="person icon"
-        >person</mat-icon
-      >
-      <mat-card-header *ngIf="customer">
-        <mat-card-title>
-          {{ customer.firstName | titlecase }}
-          {{ customer.lastName | titlecase }}
-        </mat-card-title>
-        <mat-card-subtitle>Total Shipments: 33</mat-card-subtitle>
-      </mat-card-header>
+    <div class="header-row" fxFlex="50%" fxFlex.xs="55">
+      <mat-card-header class="detail-header" *ngIf="customer">
+         <mat-card-title>
+          {{ customer.firstName | titlecase }} {{ customer.lastName | titlecase }}
+         </mat-card-title>
+         <mat-card-subtitle>Total Shipments: 33</mat-card-subtitle>
+        </mat-card-header>
+
       <button
         type="button"
         routerLink="/manage-addresses/{{ id }}"
@@ -160,7 +161,7 @@
         </div>
       </form>
     </div>
-  </div>
+  </mat-card-content>
 </mat-card>
 <!--  <pre>
   {{form.value | json}}

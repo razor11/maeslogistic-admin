@@ -17,6 +17,8 @@ import { StepperOrientation } from '@angular/cdk/stepper';
 import { AddressTypesService } from 'src/app/core/services/address-types/address-types.service';
 import { Parameters } from 'src/app/models/parameters';
 
+
+
 @Component({
   selector: 'app-add-update',
   templateUrl: './add-update.component.html',
@@ -35,6 +37,40 @@ export class AddUpdateComponent implements OnInit {
   addressTypes: Parameters[];
   stepperOrientation: Observable<StepperOrientation>;
 
+
+
+  pInfoFormErrors: any = {
+    'firstName': '',
+    'lastName': '',
+    'userName': '',
+  };
+
+  validationMessages: any = {
+    firstName: {
+      required: 'First Name is required.',
+      minlength: 'First Name must be at least 2 characters long.',
+      maxlength: 'FirstName cannot be more than 25 characters long.',
+    },
+    lastName: {
+      required: 'Last Name is required.',
+      minlength: 'Last Name must be at least 2 characters long.',
+      maxlength: 'Last Name cannot be more than 25 characters long.',
+    },
+    userName: {
+      required: 'User Name is required.',
+      minlength: 'User Name must be at least 2 characters long.',
+      maxlength: 'User Name cannot be more than 25 characters long.',
+    },
+    telnum: {
+      required: 'Tel. number is required.',
+      pattern: 'Tel. number must contain only numbers.',
+    },
+    email: {
+      required: 'Email is required.',
+      email: 'Email not in valid format.',
+    },
+  };
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -48,6 +84,7 @@ export class AddUpdateComponent implements OnInit {
     this.stepperOrientation = breakpointObserver
       .observe('(max-width: 1920px)')
       .pipe(map(({ matches }) => (matches ? 'vertical' : 'horizontal')));
+    this.createForms();
   }
 
   ngOnInit() {
@@ -58,12 +95,28 @@ export class AddUpdateComponent implements OnInit {
     const formOptions: AbstractControlOptions = {
       validators: MustMatch('password', 'confirmPassword'),
     };
+  }
 
+  createForms(): void {
     this.personalInfo = this.fb.group({
-      firstName: ['', Validators.required],
+      firstName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(25),
+        ],
+      ],
       middleName: [''],
-      lastName: ['', Validators.required],
-      userName: ['', Validators.required],
+      lastName: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.maxLength(25),
+        ],
+      ],
+      userName: ['', [Validators.required, Validators.minLength(2)]],
     });
 
     this.password = this.fb.group({
@@ -80,6 +133,32 @@ export class AddUpdateComponent implements OnInit {
     this.addressInfo = this.fb.group({
       addresses: this.fb.array([]),
     });
+
+    this.personalInfo.valueChanges.subscribe( data => this.pInfoFormOnValueChange(data));
+
+    this.pInfoFormOnValueChange();
+  }
+
+
+  pInfoFormOnValueChange(data?:any){
+      if(!this.personalInfo){ return; }
+      const form = this.personalInfo;
+
+      for(const field in this.pInfoFormErrors){
+        if(this.pInfoFormErrors.hasOwnProperty(field)){
+          this.pInfoFormErrors[field] = '';
+          const control = form.get(field)
+          if (control && control.dirty && !control.valid) {
+            const messages = this.validationMessages[field];
+            for (const key in control.errors) {
+              if (control.errors.hasOwnProperty(key)) {
+                this.pInfoFormErrors[field] += messages[key] + ' ';
+              }
+            }
+          }
+        }
+
+      }
   }
 
   loadParams() {
@@ -184,7 +263,7 @@ export class AddUpdateComponent implements OnInit {
             this.snackBar.openSnackBar(this.error, actionText);
             return;
           } else {
-            this.snackBar.openSnackBar('Customer created', 'Dismiss')
+            this.snackBar.openSnackBar('Customer created', 'Dismiss');
             this.router.navigate(['../'], { relativeTo: this.route });
           }
           //

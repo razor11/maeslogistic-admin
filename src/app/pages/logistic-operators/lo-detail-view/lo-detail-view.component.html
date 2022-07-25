@@ -24,7 +24,10 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <mat-progress-bar *ngIf="!this.operator" mode="query"></mat-progress-bar>
+  <div [hidden]="operator">
+    <mat-progress-bar mode="query"></mat-progress-bar>
+  </div>
+
   <mat-card-content *ngIf="this.operator">
     <div
       class="container"

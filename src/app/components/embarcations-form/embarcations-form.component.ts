@@ -1,5 +1,4 @@
 import { first } from 'rxjs/operators';
-import { EmbarcationsService } from 'src/app/core/services/embarcations/embarcations.service';
 import { LogisticOperatorsService } from 'src/app/core/services/logistic-operators/logistic-operators.service';
 import { Parameters } from 'src/app/models/parameters';
 import { embarcation } from './../../models/embarcation';
@@ -71,25 +70,12 @@ export class EmbarcationsFormComponent implements OnInit, AfterContentInit {
   constructor(
     private fb: FormBuilder,
     private loService: LogisticOperatorsService,
-    private trackingTypesService: TrackingStatusService,
+    private trackingTypesService: TrackingStatusService
   ) {
     const currentYear = new Date().getFullYear();
     this.minDate = new Date(currentYear - 0, 0, 1);
     this.maxDate = new Date(currentYear + 1, 11, 31);
-
-    this.form = this.fb.group({
-      EstimatedDepartureDate: [''],
-      EstimatedArrivingDate: [''],
-      VeselNumber: ['', Validators.required],
-      LogisticOperator: this.fb.group({
-        id: ['', Validators.required],
-      }),
-      WeigthCapacity: ['', Validators.required],
-      volumeCapacity: ['', Validators.required],
-      tracking: this.fb.group({
-        id: ['', Validators.required],
-      }),
-    });
+    this.createForm();
   }
 
   ngOnInit(): void {
@@ -108,6 +94,22 @@ export class EmbarcationsFormComponent implements OnInit, AfterContentInit {
         this.onTouched();
       })
     );
+  }
+
+  createForm() {
+    this.form = this.fb.group({
+      EstimatedDepartureDate: [''],
+      EstimatedArrivingDate: [''],
+      VeselNumber: ['', Validators.required],
+      LogisticOperator: this.fb.group({
+        id: ['', Validators.required],
+      }),
+      WeigthCapacity: ['', Validators.required],
+      volumeCapacity: ['', Validators.required],
+      tracking: this.fb.group({
+        id: ['', Validators.required],
+      }),
+    });
   }
 
   loadParams() {
