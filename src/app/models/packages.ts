@@ -3,9 +3,11 @@
 export class Packages {
   description: string;
   weigth: number;
-  wightUnits: string;
-  volumen: number;
-  units: string;
+  packageType: {
+    id: number,
+    description: string
+  };
+  price: number;
   large: number;
   heigth: number;
   width: number;

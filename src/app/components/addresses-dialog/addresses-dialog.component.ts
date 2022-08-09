@@ -33,7 +33,8 @@ export class AddressesDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.isAddMode = !isNaN(this.data)
+  //  this.isAddMode = !isNaN(this.data)
+    this.data ? this.isAddMode = false : this.isAddMode = true;
     this.loadParams();
 
       this.customerId = this.data
@@ -55,7 +56,6 @@ export class AddressesDialogComponent implements OnInit {
     });
 
     if (!this.isAddMode) {
-      console.log(this.data)
       this.form.patchValue(this.data);
       this.title = 'Update'
     }

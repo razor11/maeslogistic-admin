@@ -1,3 +1,5 @@
+import { SnackbarService } from 'src/app/core/services/snackbar/snackbar.service';
+import { AddUpdatePackageComponent } from './add-update-package/add-update-package/add-update-package.component';
 import { first, switchMap, startWith, catchError, map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { PageEvent, MatPaginator } from '@angular/material/paginator';
@@ -8,12 +10,11 @@ import { PackageCatalogService } from 'src/app/core/services/package-catalog/pac
 @Component({
   selector: 'app-package-catalog',
   templateUrl: './package-catalog.component.html',
-  styleUrls: ['./package-catalog.component.css']
+  styleUrls: ['./package-catalog.component.css'],
 })
 export class PackageCatalogComponent implements OnInit, AfterViewInit {
-
-  title = "Package Catalog"
-  packageCatalog : Packages[] = [];
+  title = 'Package Catalog';
+  packageCatalog: Packages[] = [];
 
   resultsLength = 0;
   isLoadingResults = true;
@@ -23,53 +24,76 @@ export class PackageCatalogComponent implements OnInit, AfterViewInit {
   currentPage = 0;
   pageEvent: PageEvent;
 
-  displayedColumns: string[] = [
-    'Description',
-    'State',
-    'Actions',
-  ];
+  displayedColumns: string[] = ['Description', 'Weigth', 'Price', 'Actions'];
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private packageCatService: PackageCatalogService,
-              public dialog: MatDialog) {
+  constructor(
+    private packageCatService: PackageCatalogService,
+    public dialog: MatDialog,
+    public snackBar: SnackbarService
+  ) {}
 
-               }
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ngAfterViewInit() {
-    this.paginator.page.pipe(
-      startWith({}),
-      switchMap(() => {
-        this.isLoadingResults = true;
-        return this.packageCatService!.getAll(
-          this.paginator.pageIndex,
-          this.paginator.pageSize
-        ).pipe(catchError(() => observableOf(null)));
-      }),
-      map(data => {
-        this.isLoadingResults = false;
-        this.isRateLimitReached = data === null;
-
-        if(data === null){
-          return [];
-        }
-
-        return data.packages;
-      }),
-    )
-    .subscribe(data => {this.packageCatalog = data
-    console.log(this.packageCatalog)});
-
+    this.loadData();
   }
 
+  loadData() {
+    this.paginator.page
+      .pipe(
+        startWith({}),
+        switchMap(() => {
+          this.isLoadingResults = true;
+          return this.packageCatService!.getAll(
+            this.paginator.pageIndex,
+            this.paginator.pageSize
+          ).pipe(catchError(() => observableOf(null)));
+        }),
+        map((data) => {
+          this.isLoadingResults = false;
+          this.isRateLimitReached = data === null;
 
+          if (data === null) {
+            return [];
+          }
+          this.resultsLength = data.packageCant;
+          return data.packages;
+        })
+      )
+      .subscribe((data) => {
+        this.packageCatalog = data;
+      });
+  }
 
+  addDialog(id?: any): void {
+    const dialogRef = this.dialog.open(AddUpdatePackageComponent, {
+      width: '580px',
+      data: id,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.snackBar.openSnackBar('Record was added successfully', 'dismiss');
+        this.loadData();
+      }
+    });
+  }
+
+  updateDialog(param: any): void {
+    const dialogRef = this.dialog.open(AddUpdatePackageComponent, {
+      width: '580px',
+      data: param,
+    });
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.snackBar.openSnackBar('Record was updated successfully', 'dismiss');
+        this.loadData();
+      }
+    });
+  }
 }
 
 function observableOf(arg0: null): any {
   throw new Error('Function not implemented.');
 }
-

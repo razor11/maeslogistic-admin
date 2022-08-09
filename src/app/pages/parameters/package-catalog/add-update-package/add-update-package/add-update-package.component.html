@@ -1,1 +1,102 @@
-<p>add-update-package works!</p>
+<h1 mat-dialog-title>{{ title }} Package</h1>
+<div mat-dialog-content>
+  <form [formGroup]="packageForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Package Description</mat-label>
+      <input
+        matInput
+        type="text"
+        formControlName="description"
+        placeholder="description"
+        required
+      />
+    </mat-form-field>
+    <mat-form-field formGroupName="packageType" appearance="fill">
+      <mat-label>Package Type</mat-label>
+      <mat-select formControlName="id">
+        <mat-option *ngFor="let type of packageTypes" [value]="type.id">
+          {{ type.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <div>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Package Price</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="price"
+          placeholder="0"
+          required
+          class="right-align"
+          pattern
+        />
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>.00</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Package Weigth</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="weigth"
+          placeholder="0"
+          required
+          class="right-align"
+          pattern
+        />
+        <span matPrefix>Kg&nbsp;</span>
+        <span matSuffix>.00 </span>
+      </mat-form-field>
+    </div>
+    <div></div>
+    <div>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Large</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="large"
+          placeholder="0"
+          required
+        />
+        <span matSuffix> Inch</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Heigth</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="heigth"
+          placeholder="0"
+          required
+        />
+        <span matSuffix> Inch</span>
+      </mat-form-field>
+      <mat-form-field appearance="fill" floatLabel="always">
+        <mat-label>Width</mat-label>
+        <input
+          matInput
+          type="number"
+          formControlName="width"
+          placeholder="0"
+          required
+        />
+        <span matSuffix> Inch</span>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button type="button"  mat-button   mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button
+    [mat-dialog-close]="this.packageForm.valid"
+    type="button"
+    color="primary"
+    mat-raised-button
+    (click)="onSubmit()"
+    [disabled]="!this.packageForm.valid"
+  >Save</button>
+</div>
+

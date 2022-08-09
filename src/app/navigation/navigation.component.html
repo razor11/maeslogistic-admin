@@ -6,6 +6,8 @@
     <h1 class="example-app-name" style="padding-top: 10px">
       <img alt="logo" src="../../assets/img/Logo.png" width="140" />
     </h1>
+
+
     <span class="spacer"></span>
 
     <!--     <span style="padding-right: 10px; font-size: medium;"> {{clock}}</span> -->
@@ -23,6 +25,7 @@
         <mat-icon>exit_to_app</mat-icon>
         <span>Exit</span>
       </button>
+      <span class="version-info" style="color:black!important; padding: 15px;">Current build: 1.0.0</span>
     </mat-menu>
   </mat-toolbar>
 
@@ -32,11 +35,14 @@
   >
     <mat-sidenav
       #snav
+      mode="side" opened
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
+
       <mat-nav-list>
+
         <div>
           <a
             mat-list-item
@@ -184,7 +190,7 @@
 
         <div>
           <mat-accordion>
-            <mat-expansion-panel [expanded]="url.startsWith('/parameters')">
+            <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
