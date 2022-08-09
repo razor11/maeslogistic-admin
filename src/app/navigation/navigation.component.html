@@ -66,6 +66,20 @@
         </div>
 
         <div>
+              <a
+                mat-list-item
+                routerLink="/embarcations"
+                routerLinkActive="active-list-item"
+
+
+              >
+              <fa-icon matListIcon [icon]="faEmbarcations"></fa-icon>
+                <span matLine>Embarcations</span>
+              </a>
+
+        </div>
+
+        <div>
           <a mat-list-item>
             <fa-icon matListIcon [icon]="fausers"></fa-icon>
             <span matLine>Users</span>
@@ -124,31 +138,7 @@
           </mat-accordion>
         </div>
 
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel [expanded]="url.startsWith('/embarcations')">
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <!-- Cabeceras del submenu -->
-                  <a mat-list-item>
-                    <fa-icon matListIcon [icon]="faEmbarcations"></fa-icon>
-                    <span matLine>Embarcations</span>
-                  </a>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <a
-                mat-list-item
-                routerLink="/embarcations"
-                routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: false }"
-                (isActiveChange)="this.expand($event)"
-              >
-                <fa-icon matListIcon [icon]="faList"></fa-icon>
-                <span matLine>List</span>
-              </a>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
+
         <div>
           <mat-accordion>
             <mat-expansion-panel

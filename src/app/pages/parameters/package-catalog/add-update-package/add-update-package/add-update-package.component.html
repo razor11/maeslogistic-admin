@@ -38,7 +38,7 @@
         <mat-label>Package Weigth</mat-label>
         <input
           matInput
-          type="text"
+          type="number"
           formControlName="weigth"
           placeholder="0"
           required
@@ -89,7 +89,7 @@
 </div>
 
 <div mat-dialog-actions align="end">
-  <button type="button"  mat-button   mat-raised-button (click)="onNoClick()">Cancel</button>
+  <button type="button"  mat-button   (click)="onNoClick()">Cancel</button>
   <button
     [mat-dialog-close]="this.packageForm.valid"
     type="button"
