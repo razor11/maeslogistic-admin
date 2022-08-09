@@ -44,6 +44,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DatePipe } from '@angular/common';
 import { PackageCatalogService } from './core/services/package-catalog/package-catalog.service';
 import { AddUpdatePackageComponent } from './pages/parameters/package-catalog/add-update-package/add-update-package/add-update-package.component';
+import { AddUpdateBranchOfficeComponent } from './pages/offices/add-update-branch-office/add-update-branch-office.component';
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -63,6 +64,7 @@ export function tokenGetter() {
     ConfirmDialogComponent,
     LoDetailViewComponent,
     AddUpdatePackageComponent,
+    AddUpdateBranchOfficeComponent,
 
 
 

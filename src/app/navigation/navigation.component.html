@@ -7,7 +7,6 @@
       <img alt="logo" src="../../assets/img/Logo.png" width="140" />
     </h1>
 
-
     <span class="spacer"></span>
 
     <!--     <span style="padding-right: 10px; font-size: medium;"> {{clock}}</span> -->
@@ -25,7 +24,9 @@
         <mat-icon>exit_to_app</mat-icon>
         <span>Exit</span>
       </button>
-      <span class="version-info" style="color:black!important; padding: 15px;">Current build: 1.0.0</span>
+      <span class="version-info" style="color: black !important; padding: 15px"
+        >Current build: 1.0.0</span
+      >
     </mat-menu>
   </mat-toolbar>
 
@@ -35,14 +36,13 @@
   >
     <mat-sidenav
       #snav
-      mode="side" opened
+      mode="side"
+      opened
       [mode]="mobileQuery.matches ? 'over' : 'side'"
       [fixedInViewport]="mobileQuery.matches"
       fixedTopGap="56"
     >
-
       <mat-nav-list>
-
         <div>
           <a
             mat-list-item
@@ -66,17 +66,14 @@
         </div>
 
         <div>
-              <a
-                mat-list-item
-                routerLink="/embarcations"
-                routerLinkActive="active-list-item"
-
-
-              >
-              <fa-icon matListIcon [icon]="faEmbarcations"></fa-icon>
-                <span matLine>Embarcations</span>
-              </a>
-
+          <a
+            mat-list-item
+            routerLink="/embarcations"
+            routerLinkActive="active-list-item"
+          >
+            <fa-icon matListIcon [icon]="faEmbarcations"></fa-icon>
+            <span matLine>Embarcations</span>
+          </a>
         </div>
 
         <div>
@@ -103,7 +100,7 @@
 
         <div>
           <mat-accordion>
-            <mat-expansion-panel [expanded]="url.startsWith('/customers')">
+            <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -118,7 +115,6 @@
                 routerLink="/customers"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faList"></fa-icon>
                 <span matLine> Customers List</span>
@@ -129,7 +125,6 @@
                 routerLink="/customers/add"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
                 <span matLine>Add Customer</span>
@@ -138,12 +133,9 @@
           </mat-accordion>
         </div>
 
-
         <div>
           <mat-accordion>
-            <mat-expansion-panel
-              [expanded]="url.startsWith('/logistic-operators')"
-            >
+            <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -158,7 +150,6 @@
                 routerLink="/logistic-operators"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faList"></fa-icon>
                 <span matLine>List</span>
@@ -169,7 +160,6 @@
                 routerLink="/logistic-operators/add"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
                 <span matLine>Add</span>
@@ -180,7 +170,7 @@
 
         <div>
           <mat-accordion>
-            <mat-expansion-panel >
+            <mat-expansion-panel>
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   <!-- Cabeceras del submenu -->
@@ -195,7 +185,6 @@
                 routerLink="/parameters/address-types"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <mat-icon matListIcon aria-hidden="false">pin_drop</mat-icon>
                 <span matLine>Address Types</span>
@@ -206,7 +195,6 @@
                 routerLink="/parameters/countries"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faCountries"></fa-icon>
                 <span matLine>Countries</span>
@@ -217,7 +205,6 @@
                 routerLink="/parameters/tracking-status"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <mat-icon matListIcon aria-hidden="false"
                   >track_changes</mat-icon
@@ -230,7 +217,6 @@
                 routerLink="/parameters/packages-types"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faPackageTypes"></fa-icon>
 
@@ -242,7 +228,6 @@
                 routerLink="/parameters/package-catalog"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faCubes"></fa-icon>
 
@@ -254,7 +239,6 @@
                 routerLink="/parameters/shipping-types"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faTruck"></fa-icon>
 
@@ -266,7 +250,6 @@
                 routerLink="/parameters/services-types"
                 routerLinkActive="active-list-item"
                 [routerLinkActiveOptions]="{ exact: true }"
-                (isActiveChange)="this.expand($event)"
               >
                 <fa-icon matListIcon [icon]="faServicesTypes"></fa-icon>
 

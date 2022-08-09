@@ -10,7 +10,6 @@ import {
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { SelectionModel } from '@angular/cdk/collections';
 import { MediaMatcher } from '@angular/cdk/layout';
 import {
   faBoxes,
@@ -24,7 +23,7 @@ import {
   faTruckFast,
   faCartFlatbed,
   faCubes,
-  faShop
+  faShop,
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -48,7 +47,7 @@ export class NavigationComponent implements OnInit {
   facustomers = faPeopleGroup;
   faList = faTableList;
   fausers = faUsersGear;
-  faTruck = faTruckFast
+  faTruck = faTruckFast;
   faServicesTypes = faCartFlatbed;
   faCubes = faCubes;
   faShop = faShop;
