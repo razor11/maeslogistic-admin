@@ -92,6 +92,26 @@ export class PackageCatalogComponent implements OnInit, AfterViewInit {
       }
     });
   }
+
+  delete(id: any) {
+    const client = this.packageCatalog.find((x) => x.id === id);
+    if (!client) return;
+    this.packageCatService
+      .delete(Number(id))
+      .pipe(first())
+      .subscribe({
+        next: () => {
+          this.packageCatalog = this.packageCatalog.filter(
+            (x) => x.id !== id
+          );
+        },
+        error: (e) => this.snackBar.openSnackBar(e, 'Dismiss'),
+        complete: () => {
+          this.snackBar.openSnackBar('Record was  deleted succesfully', 'Dismiss');
+         this.loadData();
+        },
+      });
+  }
 }
 
 function observableOf(arg0: null): any {

@@ -1,3 +1,8 @@
 .container{
-  padding: 70px;
+  padding: 35px;
+ }
+
+ .mat-list-base .mat-list-item .mat-list-icon, .mat-list-base .mat-list-option .mat-list-icon {
+
+  font-size: 34px;
  }

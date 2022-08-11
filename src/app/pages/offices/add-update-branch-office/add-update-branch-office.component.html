@@ -1,1 +1,17 @@
-<p>add-update-branch-office works!</p>
+<h1 mat-dialog-title>{{ title }} Branch Office</h1>
+<div mat-dialog-content>
+  <form action="" [formGroup]="branchOfficeForm"></form>
+</div>
+<div mat-dialog-actions align="end">
+  <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    [mat-dialog-close]="this.branchOfficeForm.valid"
+    type="button"
+    color="primary"
+    mat-raised-button
+    (click)="onSubmit()"
+    [disabled]="!this.branchOfficeForm.valid"
+  >
+    Save
+  </button>
+</div>

@@ -10,24 +10,54 @@
 
   <mat-card-content class="table-container">
     <label class="test" for="">Filter By: </label>
-    <mat-button-toggle-group  name="dateRangeFilter"  aria-label="dateRangeFilter" value="departureDate">
-      <mat-button-toggle  value="departureDate" (change)="onToggleChange($event.value)">Departure date range</mat-button-toggle>
-      <mat-button-toggle value="arrivingDate" (change)="onToggleChange($event.value)">Arriving date range</mat-button-toggle>
+    <mat-button-toggle-group
+      name="dateRangeFilter"
+      aria-label="dateRangeFilter"
+      value="departureDate"
+    >
+      <mat-button-toggle
+        value="departureDate"
+        (change)="onToggleChange($event.value)"
+        >Departure date range</mat-button-toggle
+      >
+      <mat-button-toggle
+        value="arrivingDate"
+        (change)="onToggleChange($event.value)"
+        >Arriving date range</mat-button-toggle
+      >
     </mat-button-toggle-group>
 
     <div>
       <mat-form-field [formGroup]="rangeFilterDate" appearance="fill">
         <mat-label>Enter a date range</mat-label>
         <mat-date-range-input [rangePicker]="picker">
-          <input matStartDate formControlName="start" placeholder="Start date" />
+          <input
+            matStartDate
+            formControlName="start"
+            placeholder="Start date"
+          />
           <input matEndDate formControlName="end" placeholder="End date" />
         </mat-date-range-input>
         <mat-hint>Start date – End date</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-date-range-picker #picker></mat-date-range-picker>
       </mat-form-field>
-      <button mat-mini-fab color="primary" (click)="applyFilter()" [disabled]="!rangeFilterDate.valid"><mat-icon>search</mat-icon></button>
-      <button mat-mini-fab color="primary" (click)="resetFilter()" [disabled]="!rangeFilterDate.valid"><mat-icon>refresh</mat-icon></button>
+      <button
+        mat-mini-fab
+        color="primary"
+        (click)="applyFilter()"
+        [disabled]="!rangeFilterDate.valid"
+      >
+        <mat-icon>search</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        color="primary"
+        (click)="resetFilter()"
+        [disabled]="!rangeFilterDate.valid"
+      >
+        <mat-icon>refresh</mat-icon>
+      </button>
     </div>
 
     <div class="table-loading-shade" *ngIf="isLoadingResults">
@@ -91,11 +121,11 @@
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-
-      <tr class="mat-row" *matNoDataRow>
-        <td class="mat-cell" colspan="4">No data matching the filter</td>
-      </tr>
-
+      <div *ngIf="!rangeFilterDate">
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">No data matching the filter</td>
+        </tr>
+      </div>
     </table>
     <mat-paginator
       #paginator

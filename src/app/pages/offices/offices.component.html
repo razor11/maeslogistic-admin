@@ -1,29 +1,45 @@
 <mat-card class="container">
   <mat-toolbar-row>
     <mat-card-header>
-      <mat-card-title>
-        Branch Offices
-      </mat-card-title>
+      <mat-card-title> Branch Offices </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
-    <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon> Options
+    <button color="primary" (click)="addDialog()"  mat-raised-button>
+      <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
+      Add
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon aria-label="Example icon-button with a heart icon"
-          >keyboard_backspace</mat-icon
-        >
-        Back
-      </button>
-      <button mat-menu-item type="button">
-        <mat-icon>add</mat-icon>
-        Add new Address
-      </button>
-    </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <mat-card-content>
+  <mat-card-content class="card">
+    <mat-card class="address-card">
+      <mat-card-title>Office Name</mat-card-title>
 
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <mat-icon matListIcon>store</mat-icon>
+            <h2 matLine>Contact Name</h2>
+            <p matLine>Contact Number:</p>
+            <p matLine>Address</p>
+            <p matLine>Address 2</p>
+            <p matLine>Telephone:</p>
+          </mat-list-item>
+
+        </mat-list>
+
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button mat-raised-button mat-button >
+          Edit
+        </button>
+        <button
+          mat-raised-button
+          mat-button
+          color="warn"
+        >
+          <mat-icon aria-label="Delete">delete</mat-icon>
+        </button>
+       </mat-card-actions>
+    </mat-card>
   </mat-card-content>
 </mat-card>

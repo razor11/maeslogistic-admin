@@ -1,6 +1,7 @@
 
 
 export class Packages {
+  id: string;
   description: string;
   weigth: number;
   packageType: {

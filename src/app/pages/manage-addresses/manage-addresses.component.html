@@ -23,10 +23,9 @@
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <mat-card-content>
+  <mat-card-content class="card">
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-    <div class="space" fxLayout="column wrap" fxLayoutGap="30px">
-      <mat-card *ngFor="let item of addresses">
+      <mat-card class="address-card" *ngFor="let item of addresses">
         <h2>{{ item.contactName }}</h2>
         <mat-card-subtitle>{{
           item.addressType.description
@@ -44,7 +43,7 @@
           <p>Primary Phone: {{ item.phoneNumber1 }}</p>
           <p>Secondary Phone: {{ item.phoneNumber2 }}</p>
         </mat-card-content>
-        <mat-card-actions>
+        <mat-card-actions align="end">
           <button mat-raised-button mat-button (click)="updateDialog(item)">
             Edit
           </button>
@@ -58,6 +57,6 @@
           </button>
         </mat-card-actions>
       </mat-card>
-    </div>
+
   </mat-card-content>
 </mat-card>

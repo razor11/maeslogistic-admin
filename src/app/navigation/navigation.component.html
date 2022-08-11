@@ -68,6 +68,18 @@
         <div>
           <a
             mat-list-item
+            routerLink="/customers"
+            routerLinkActive="active-list-item"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <fa-icon matListIcon [icon]="facustomers"></fa-icon>
+            <span matLine> Customers</span>
+          </a>
+        </div>
+
+        <div>
+          <a
+            mat-list-item
             routerLink="/embarcations"
             routerLinkActive="active-list-item"
           >
@@ -94,41 +106,6 @@
                   </a>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <!-- Cabeceras del submenu -->
-                  <a mat-list-item routerLinkActive="active-list-item">
-                    <fa-icon matListIcon [icon]="facustomers"></fa-icon>
-                    <span matLine>Customers</span>
-                  </a>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <a
-                mat-list-item
-                routerLink="/customers"
-                routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <fa-icon matListIcon [icon]="faList"></fa-icon>
-                <span matLine> Customers List</span>
-              </a>
-
-              <a
-                mat-list-item
-                routerLink="/customers/add"
-                routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
-                <span matLine>Add Customer</span>
-              </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
