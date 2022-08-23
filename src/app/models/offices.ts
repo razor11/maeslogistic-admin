@@ -1,4 +1,5 @@
 export class Offices {
+  id: number;
   Name: string;
   Country: string;
   State: string;
@@ -10,5 +11,4 @@ export class Offices {
   Longitude: string;
   ContactName: string;
   ContactNumber: string;
-  ContacName: string;
 }

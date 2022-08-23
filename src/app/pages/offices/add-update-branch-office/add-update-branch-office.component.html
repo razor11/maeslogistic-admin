@@ -1,6 +1,96 @@
 <h1 mat-dialog-title>{{ title }} Branch Office</h1>
 <div mat-dialog-content>
-  <form action="" [formGroup]="branchOfficeForm"></form>
+  <form autocomplete="off" [formGroup]="branchOfficeForm">
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Office Name</mat-label>
+      <input matInput formControlName="Name" placeholder="Office Name" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Contact Name</mat-label>
+      <input
+        matInput
+        formControlName="ContactName"
+        placeholder="Contact Name"
+      />
+    </mat-form-field>
+
+    <mat-form-field
+      class="example-full-width"
+      floatLabel="always"
+      appearance="fill"
+    >
+      <mat-label>Contact Telephone</mat-label>
+      <input
+        type="tel"
+        formControlName="ContactNumber"
+        matInput
+        placeholder="555-555-1234"
+      />
+      <mat-icon matSuffix>call</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Address</mat-label>
+      <input
+        #addressField
+        autocomplete="off"
+        matInput
+        formControlName="Street"
+        placeholder="Address"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Suite, apartment, unit, or floor </mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        formControlName="Suite"
+        placeholder="Suite, apartment, unit, or floor "
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>City </mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        formControlName="City"
+        placeholder="City "
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>State</mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        formControlName="State"
+        placeholder="State"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>ZipCode</mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        formControlName="ZipCode"
+        placeholder="Zipcode"
+      />
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Country</mat-label>
+      <input
+        autocomplete="off"
+        matInput
+        formControlName="Country"
+        placeholder="Country"
+      />
+    </mat-form-field>
+  </form>
 </div>
 <div mat-dialog-actions align="end">
   <button type="button" mat-button (click)="onNoClick()">Cancel</button>
@@ -15,3 +105,9 @@
     Save
   </button>
 </div>
+
+<!-- <pre>
+  {{ branchOfficeForm.value | json
+ }}
+</pre>
+ -->

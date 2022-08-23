@@ -8,12 +8,12 @@ import { environment } from 'src/environments/environment';
 })
 export class BranchOfficesService {
   private readonly API_URL = environment.APIURL;
-  private readonly API_METHOD = '/api/v1/branc-offices';
+  private readonly API_METHOD = '/api/v1/branch-offices';
 
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get<Offices>(`${this.API_URL}${this.API_METHOD}`);
+    return this.http.get<Offices[]>(`${this.API_URL}${this.API_METHOD}`);
   }
 
   getById(id: number) {

@@ -19,6 +19,8 @@ export class Customers {
       state: string;
       zipCode: string;
       country: string;
+      latitude: string;
+      longitude: string;
       addressType: {
         id: number,
         description: string

@@ -4,42 +4,46 @@
       <mat-card-title> Branch Offices </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
-    <button color="primary" (click)="addDialog()"  mat-raised-button>
+    <button color="primary" (click)="addDialog()" mat-raised-button>
       <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
       Add
     </button>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
-  <mat-card-content class="card">
-    <mat-card class="address-card">
-      <mat-card-title>Office Name</mat-card-title>
+  <div *ngIf="isLoadingResults">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+  <mat-card-content class="card" *ngIf="branchOffices">
+    <mat-card class="address-card" *ngFor="let item of branchOffices">
+      <mat-card-title>{{ item.Name }}</mat-card-title>
 
       <mat-card-content>
         <mat-list>
           <mat-list-item>
             <mat-icon matListIcon>store</mat-icon>
-            <h2 matLine>Contact Name</h2>
-            <p matLine>Contact Number:</p>
-            <p matLine>Address</p>
-            <p matLine>Address 2</p>
-            <p matLine>Telephone:</p>
+            <h2 matLine>
+              Contact Name: <b>{{ item.ContactName }}</b>
+            </h2>
+            <p matLine>
+              Contact Number: <b> {{ item.ContactNumber }}</b>
+            </p>
+            <p matLine>
+              Address: <b> {{ item.Street }} </b>
+            </p>
+            <p matLine *ngIf="item.Suite">
+              Suite,apartment,unit: {{ item.Suite }}
+            </p>
           </mat-list-item>
-
         </mat-list>
-
       </mat-card-content>
       <mat-card-actions align="end">
-        <button mat-raised-button mat-button >
+        <button (click)="updateDialog(item)" mat-raised-button mat-button>
           Edit
         </button>
-        <button
-          mat-raised-button
-          mat-button
-          color="warn"
-        >
+        <button mat-raised-button mat-button color="warn">
           <mat-icon aria-label="Delete">delete</mat-icon>
         </button>
-       </mat-card-actions>
+      </mat-card-actions>
     </mat-card>
   </mat-card-content>
 </mat-card>
