@@ -53,13 +53,13 @@
             Operator
           </button>
 
-          <button type="button" mat-menu-item>
+          <button type="button" mat-menu-item (click)="deleteLogisticOperator(element.id)">
             <mat-icon color="basic" aria-label="Delete">delete</mat-icon>
             Delete
           </button>
         </mat-menu>
       </td>
-    </ng-container>
+    </ng-container>å
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

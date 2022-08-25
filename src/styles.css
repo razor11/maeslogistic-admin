@@ -75,6 +75,10 @@ body {
 
 }
 
+.fullWidth{
+  width: 100%;
+}
+
 
 .card-icon{
   font-size: 90px;

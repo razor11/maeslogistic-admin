@@ -1,8 +1,9 @@
+import { GoogleAddressService } from './../../../core/services/google-address/google-address.service';
 import { CountriesService } from './../../../core/services/countries/countries.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { SnackbarService } from './../../../core/services/snackbar/snackbar.service';
 import { DataCustomersService } from 'src/app/core/services/customers/data-customers.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import {
   AbstractControlOptions,
   FormArray,
@@ -17,14 +18,12 @@ import { StepperOrientation } from '@angular/cdk/stepper';
 import { AddressTypesService } from 'src/app/core/services/address-types/address-types.service';
 import { Parameters } from 'src/app/models/parameters';
 
-
-
 @Component({
   selector: 'app-add-update',
   templateUrl: './add-update.component.html',
   styleUrls: ['./add-update.component.css'],
 })
-export class AddUpdateComponent implements OnInit {
+export class AddUpdateComponent implements OnInit, AfterViewInit {
   personalInfo: FormGroup;
   contactInfo: FormGroup;
   addressInfo: FormGroup;
@@ -36,13 +35,13 @@ export class AddUpdateComponent implements OnInit {
   countries: Parameters[];
   addressTypes: Parameters[];
   stepperOrientation: Observable<StepperOrientation>;
-
-
+  autocomplete: google.maps.places.Autocomplete;
+  formattedAddress: string;
 
   pInfoFormErrors: any = {
-    'firstName': '',
-    'lastName': '',
-    'userName': '',
+    firstName: '',
+    lastName: '',
+    userName: '',
   };
 
   validationMessages: any = {
@@ -71,6 +70,10 @@ export class AddUpdateComponent implements OnInit {
     },
   };
 
+  place!: any;
+  @ViewChild('addressField') addressField: any;
+
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -79,6 +82,7 @@ export class AddUpdateComponent implements OnInit {
     private snackBar: SnackbarService,
     private addrTypeService: AddressTypesService,
     private countriesDataService: CountriesService,
+    private googleAddressService: GoogleAddressService,
     breakpointObserver: BreakpointObserver
   ) {
     this.stepperOrientation = breakpointObserver
@@ -95,6 +99,10 @@ export class AddUpdateComponent implements OnInit {
     const formOptions: AbstractControlOptions = {
       validators: MustMatch('password', 'confirmPassword'),
     };
+  }
+
+  ngAfterViewInit(): void {
+    this.getPlaceAutomplete();
   }
 
   createForms(): void {
@@ -131,34 +139,93 @@ export class AddUpdateComponent implements OnInit {
     });
 
     this.addressInfo = this.fb.group({
-      addresses: this.fb.array([]),
+      contactName: [''],
+      phoneNumber1: [''],
+      phoneNumber2: [''],
+      email: ['', [Validators.required, Validators.email]],
+      street: [''],
+      city: [''],
+      state: [''],
+      zipCode: [''],
+      country: [''],
+      latitude: [''],
+      longitude:[''],
+      addressType: this.fb.group({
+        id: [''],
+      }),
     });
 
-    this.personalInfo.valueChanges.subscribe( data => this.pInfoFormOnValueChange(data));
+    this.personalInfo.valueChanges.subscribe((data) =>
+      this.pInfoFormOnValueChange(data)
+    );
 
     this.pInfoFormOnValueChange();
   }
 
 
-  pInfoFormOnValueChange(data?:any){
-      if(!this.personalInfo){ return; }
-      const form = this.personalInfo;
+  private getPlaceAutomplete() {
+    this.autocomplete = new google.maps.places.Autocomplete(
+      this.addressField.nativeElement,
+      {
+        componentRestrictions: { country: ['us', 'ca'] },
+        fields: ['address_components', 'geometry'],
+        types: ['address'],
+      }
+    );
 
-      for(const field in this.pInfoFormErrors){
-        if(this.pInfoFormErrors.hasOwnProperty(field)){
-          this.pInfoFormErrors[field] = '';
-          const control = form.get(field)
-          if (control && control.dirty && !control.valid) {
-            const messages = this.validationMessages[field];
-            for (const key in control.errors) {
-              if (control.errors.hasOwnProperty(key)) {
-                this.pInfoFormErrors[field] += messages[key] + ' ';
-              }
+    this.autocomplete.addListener('place_changed', () => {
+      this.place = this.autocomplete.getPlace();
+      this.formattedAddress = this.googleAddressService.getFormattedAddress(
+        this.place
+      );
+      this.patchGoogleAddress();
+
+    });
+  }
+
+
+  patchGoogleAddress() {
+    const Street =
+      this.googleAddressService.getStreetNumber(this.place) +
+      this.googleAddressService.getStreet(this.place);
+    const ZipCode = this.googleAddressService.getPostCode(this.place);
+    const City = this.googleAddressService.getLocality(this.place);
+    const Country = this.googleAddressService.getCountry(this.place);
+    const State = this.googleAddressService.getState(this.place);
+    const Latitude = this.place.geometry!.location!.lat().toString();
+    const Longitude = this.place.geometry!.location!.lng().toString();
+
+    this.addressInfo.patchValue({
+      street: Street,
+      zipCode: ZipCode,
+      city: City,
+      country: Country,
+      state: State,
+      latitude: Latitude,
+      longitude: Longitude,
+    });
+  }
+
+  pInfoFormOnValueChange(data?: any) {
+    if (!this.personalInfo) {
+      return;
+    }
+    const form = this.personalInfo;
+
+    for (const field in this.pInfoFormErrors) {
+      if (this.pInfoFormErrors.hasOwnProperty(field)) {
+        this.pInfoFormErrors[field] = '';
+        const control = form.get(field);
+        if (control && control.dirty && !control.valid) {
+          const messages = this.validationMessages[field];
+          for (const key in control.errors) {
+            if (control.errors.hasOwnProperty(key)) {
+              this.pInfoFormErrors[field] += messages[key] + ' ';
             }
           }
         }
-
       }
+    }
   }
 
   loadParams() {
@@ -171,68 +238,6 @@ export class AddUpdateComponent implements OnInit {
         this.addressTypes = data[0];
         this.countries = data[1];
       });
-  }
-
-  get addresses() {
-    return this.addressInfo.get('addresses') as FormArray;
-  }
-
-  addNewShipmentAddr() {
-    const add = this.addressInfo.get('addresses') as FormArray;
-    add.push(
-      this.fb.group({
-        contactName: [''],
-        phoneNumber1: [''],
-        phoneNumber2: [''],
-        email: ['', [Validators.required, Validators.email]],
-        street: [''],
-        city: [''],
-        state: [''],
-        zipCode: [''],
-        country: [''],
-        addressType: this.fb.group({
-          id: [''],
-        }),
-      })
-    );
-  }
-
-  getShipment(
-    contacName: string,
-    tel1: string,
-    tel2: string,
-    email: string,
-    street: string,
-    city: string,
-    state: string,
-    zipCode: string,
-    country: string,
-    addressType: number
-  ) {
-    const add = this.addressInfo.get('addresses') as FormArray;
-    add.push(
-      this.fb.group({
-        contactName: contacName,
-        phoneNumber1: tel1,
-        phoneNumber2: tel2,
-        email: email,
-        street: street,
-        city: city,
-        state: state,
-        zipCode: zipCode,
-        country: country,
-        addressType: addressType,
-      })
-    );
-  }
-
-  removeShipmentAddr(index: number) {
-    const remove = this.addressInfo.get('addresses') as FormArray;
-    remove.removeAt(index);
-  }
-
-  get f() {
-    return this.form.controls;
   }
 
   onSubmit() {

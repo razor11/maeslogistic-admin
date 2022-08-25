@@ -94,6 +94,19 @@
             <span matLine>Users</span>
           </a>
         </div>
+
+        <div>
+          <a
+            mat-list-item
+            routerLink="/logistic-operators"
+            routerLinkActive="active-list-item"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <fa-icon matListIcon [icon]="faLogisticOper"></fa-icon>
+            <span matLine>Logistic Operators</span>
+          </a>
+        </div>
+
         <div>
           <mat-accordion>
             <mat-expansion-panel>
@@ -106,41 +119,6 @@
                   </a>
                 </mat-panel-title>
               </mat-expansion-panel-header>
-            </mat-expansion-panel>
-          </mat-accordion>
-        </div>
-
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <!-- Cabeceras del submenu -->
-                  <a mat-list-item>
-                    <fa-icon matListIcon [icon]="faLogisticOper"></fa-icon>
-                    <span matLine>Logistic Operators</span>
-                  </a>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-              <a
-                mat-list-item
-                routerLink="/logistic-operators"
-                routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <fa-icon matListIcon [icon]="faList"></fa-icon>
-                <span matLine>List</span>
-              </a>
-
-              <a
-                mat-list-item
-                routerLink="/logistic-operators/add"
-                routerLinkActive="active-list-item"
-                [routerLinkActiveOptions]="{ exact: true }"
-              >
-                <mat-icon matListIcon aria-hidden="false">add_box</mat-icon>
-                <span matLine>Add</span>
-              </a>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
