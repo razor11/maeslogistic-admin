@@ -40,6 +40,19 @@ const routes: Routes = [
       },
 
       {
+        path: 'zones',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../../pages/zones/modules/zones.module').then(
+                (m) => m.ZonesModule
+              ),
+          },
+        ],
+      },
+
+      {
         path: 'logistic-operators',
         children: [
           {
@@ -91,20 +104,6 @@ const routes: Routes = [
               import('../../modules/customer/customer.module').then(
                 (m) => m.CustomerModule
               ),
-          },
-        ],
-      },
-
-      {
-        path: 'manage-addresses',
-        children: [
-          {
-            path: ':id',
-            component: ManageAddressesComponent,
-            loadChildren: () =>
-              import(
-                '../../modules/manage-addresses/manage-addresses.module'
-              ).then((m) => m.ManageAddressesModule),
           },
         ],
       },

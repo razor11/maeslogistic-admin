@@ -8,6 +8,7 @@ import { Addresses } from 'src/app/models/addresses';
 import { first, forkJoin, of } from 'rxjs';
 import { Parameters } from 'src/app/models/parameters';
 import { CountriesService } from 'src/app/core/services/countries/countries.service';
+import { GoogleAddressService } from 'src/app/core/services/google-address/google-address.service';
 
 @Component({
   selector: 'app-addresses-dialog',
@@ -29,6 +30,7 @@ export class AddressesDialogComponent implements OnInit {
     private addrService: DataAddressesService,
     private countriesDataService: CountriesService,
     private addrTypeService: AddressTypesService,
+    private googleAddressService: GoogleAddressService
 
   ) {}
 

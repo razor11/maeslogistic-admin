@@ -61,7 +61,7 @@
           </button>
           <button
             type="button"
-            routerLink="/manage-addresses/{{ element.id }}"
+            routerLink="manage-addresses/{{ element.id }}"
             [queryParams]="{
               customerName: element.firstName,
               customerLastName: element.lastName
@@ -93,6 +93,7 @@
       </td>
     </tr>
   </div>
+
 
   </mat-table>
   <mat-paginator

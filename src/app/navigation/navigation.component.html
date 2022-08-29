@@ -68,6 +68,17 @@
         <div>
           <a
             mat-list-item
+            routerLink="/zones"
+            routerLinkActive="active-list-item"
+          >
+            <fa-icon matListIcon [icon]="faRoute"></fa-icon>
+            <span matLine>Zones</span>
+          </a>
+        </div>
+
+        <div>
+          <a
+            mat-list-item
             routerLink="/customers"
             routerLinkActive="active-list-item"
             [routerLinkActiveOptions]="{ exact: false }"

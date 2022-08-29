@@ -1,3 +1,4 @@
+import { ManageAddressesComponent } from './../../pages/manage-addresses/manage-addresses.component';
 import { UpdateCustomerComponent } from './../../pages/customers/update-customer/update-customer.component';
 import { CustomersComponent } from './../../pages/customers/customers.component';
 import { AddUpdateComponent } from './../../pages/customers/add-update/add-update.component';
@@ -26,6 +27,7 @@ import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/ad
     ChangePasswordComponent,
     UpdateCustomerComponent,
     AddressesDialogComponent,
+    ManageAddressesComponent
 
 
   ],

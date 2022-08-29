@@ -1,3 +1,4 @@
+import { GoogleAddressService } from './core/services/google-address/google-address.service';
 import { SnackbarService } from './core/services/snackbar/snackbar.service';
 import { LoginComponent } from './pages/login/login.component';
 import { NgModule } from '@angular/core';
@@ -45,6 +46,9 @@ import { DatePipe } from '@angular/common';
 import { PackageCatalogService } from './core/services/package-catalog/package-catalog.service';
 import { AddUpdatePackageComponent } from './pages/parameters/package-catalog/add-update-package/add-update-package/add-update-package.component';
 import { AddUpdateBranchOfficeComponent } from './pages/offices/add-update-branch-office/add-update-branch-office.component';
+import { ZonesService } from './core/services/zones/zones.service';
+import { AddUpdateZoneComponent } from './pages/zones/add-update-zone/add-update-zone.component';
+
 
 export function tokenGetter() {
   return localStorage.getItem("access_token");
@@ -65,6 +69,7 @@ export function tokenGetter() {
     LoDetailViewComponent,
     AddUpdatePackageComponent,
     AddUpdateBranchOfficeComponent,
+    AddUpdateZoneComponent,
 
 
 
@@ -109,6 +114,8 @@ export function tokenGetter() {
     AddressTypesService,
     CountriesService,
     PackageCatalogService,
+    ZonesService,
+    GoogleAddressService,
 
     {
       provide: HTTP_INTERCEPTORS,

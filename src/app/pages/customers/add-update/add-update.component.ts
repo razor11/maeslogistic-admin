@@ -1,3 +1,4 @@
+import { Addresses } from './../../../models/addresses';
 import { GoogleAddressService } from './../../../core/services/google-address/google-address.service';
 import { CountriesService } from './../../../core/services/countries/countries.service';
 import { BreakpointObserver } from '@angular/cdk/layout';
@@ -144,6 +145,7 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
       phoneNumber2: [''],
       email: ['', [Validators.required, Validators.email]],
       street: [''],
+      suite:[''],
       city: [''],
       state: [''],
       zipCode: [''],
@@ -182,6 +184,8 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
 
     });
   }
+
+
 
 
   patchGoogleAddress() {
@@ -251,12 +255,14 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
   }
 
   private createCustomer() {
+    const addresses = {addresses: [this.addressInfo.value]};
     const data = Object.assign(
       this.personalInfo.value,
       this.password.value,
       this.contactInfo.value,
-      this.addressInfo.value
+      addresses
     );
+    console.log(data)
     this.customerService
       .addCLient(data)
       .pipe(first())
@@ -290,3 +296,4 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
     );
   }
 }
+

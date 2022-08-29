@@ -1,3 +1,4 @@
+import { GoogleAddressService } from './../../core/services/google-address/google-address.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Addresses } from './../../models/addresses';
 import { first } from 'rxjs/operators';
@@ -24,7 +25,7 @@ export class ManageAddressesComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit() {

@@ -15,6 +15,7 @@ export class Customers {
       phoneNumber2: string;
       email: string;
       street: string;
+      suite:string;
       city: string;
       state: string;
       zipCode: string;
