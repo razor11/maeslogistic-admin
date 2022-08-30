@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Zones } from 'src/app/models/zones';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -12,7 +13,7 @@ export class ZonesService {
   constructor(private http: HttpClient) {}
 
   getAll() {
-    return this.http.get(`${this.API_URL}${this.API_METHOD}`);
+    return this.http.get<Zones[]>(`${this.API_URL}${this.API_METHOD}`);
   }
 
   getById(id: number) {
@@ -20,14 +21,14 @@ export class ZonesService {
   }
 
   addZone(params: any) {
-    return this.http.post(
+    return this.http.post<Zones>(
       `${this.API_URL}${this.API_METHOD}`,
       params
     );
   }
 
   update(id: number, params: any) {
-    return this.http.patch(
+    return this.http.patch<Zones>(
       `${this.API_URL}${this.API_METHOD}/${id}`,
       params
     );

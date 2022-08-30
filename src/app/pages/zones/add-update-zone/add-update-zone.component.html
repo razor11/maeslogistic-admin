@@ -1,1 +1,58 @@
-<p>add-update-zone works!</p>
+<h1 mat-dialog-title>{{ title }} Zone</h1>
+<div mat-dialog-content>
+  <form autocomplete="off" [formGroup]="zonesForm">
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Zone description</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="description"
+        placeholder="Description"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Min distance</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="minDistance"
+        placeholder="Min Distance"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Max distance</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="maxDistance"
+        placeholder="Max Distance"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Zone Fee</mat-label>
+      <input
+        type="number"
+        matInput
+        formControlName="fee"
+        placeholder="Zone Fee for pickup"
+      />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end">
+  <button type="button" mat-button (click)="onNoClick()">Cancel</button>
+  <button
+    [mat-dialog-close]="zonesForm.valid"
+    type="button"
+    color="primary"
+    mat-raised-button
+    (click)="onSubmit()"
+    [disabled]="!zonesForm.valid"
+  >
+    Save
+  </button>
+</div>
