@@ -9,6 +9,9 @@
         <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
         Add
       </button>
+      <button color="primary" (click)="loadData()" mat-raised-button>
+        <mat-icon aria-label="icon-button with an add icon">refresh</mat-icon>
+      </button>
     </mat-toolbar-row>
 
     <div class="loading-shade" *ngIf="isLoadingResults">
@@ -16,7 +19,7 @@
     </div>
 
     <div class="table-container">
-      <table mat-table [dataSource]="zones" class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort matSortDirection="asc">
         <ng-container matColumnDef="Description">
           <th mat-header-cell *matHeaderCellDef>Description</th>
           <td mat-cell *matCellDef="let row">{{ row.description }}</td>
@@ -57,9 +60,47 @@
           </td>
         </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <ng-container matColumnDef="zone-description">
+          <th mat-header-cell *matHeaderCellDef>Name of the zone</th>
+        </ng-container>
+
+        <ng-container matColumnDef="max-distance-description">
+          <th mat-header-cell *matHeaderCellDef>
+            Max distance of the zone in milles
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="fee-description">
+          <th mat-header-cell *matHeaderCellDef>
+            Extra Cost of the shipment pickup in USD per zone
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="actions-description">
+          <th mat-header-cell *matHeaderCellDef>Record actions</th>
+        </ng-container>
+
+        <tr
+          class="first-header-row"
+          mat-header-row
+          *matHeaderRowDef="displayedColumns"
+        ></tr>
+        <tr
+          class="second-header-row"
+          mat-header-row
+          *matHeaderRowDef="[
+            'zone-description',
+            'max-distance-description',
+            'fee-description',
+            'actions-description'
+          ]"
+        ></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
       </table>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons>
+</mat-paginator>
     </div>
   </mat-card>
 </div>

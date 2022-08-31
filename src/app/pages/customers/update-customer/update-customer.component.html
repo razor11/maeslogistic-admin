@@ -54,6 +54,21 @@
           >location_on</mat-icon
         >
       </button>
+
+      <button
+      type="button"
+      routerLink="/customers"
+      [queryParams]="{
+        customerName: customer.firstName,
+        customerLastName: customer.lastName
+      }"
+      mat-raised-button
+      color="primary"
+    >
+      Customers List<mat-icon aria-hidden="false" aria-label="map icon"
+        >list</mat-icon
+      >
+    </button>
     </div>
     <div fxFlex="50%" fxFlex.xs="55" fxLayoutAlign="center center">
       <form [formGroup]="form">

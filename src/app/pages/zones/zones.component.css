@@ -14,3 +14,11 @@ table {
   max-height: 400px;
 
 }
+
+.irst-header-row th {
+  border-bottom: none;
+}
+
+.second-header-row {
+  font-style: italic;
+}

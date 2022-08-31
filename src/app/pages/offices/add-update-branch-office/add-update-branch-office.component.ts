@@ -99,7 +99,7 @@ export class AddUpdateBranchOfficeComponent implements OnInit, AfterViewInit {
 
   patchGoogleAddress() {
     const Street =
-      this.googleAddrService.getStreetNumber(this.place) +
+      this.googleAddrService.getStreetNumber(this.place) + ' ' +
       this.googleAddrService.getStreet(this.place);
     const ZipCode = this.googleAddrService.getPostCode(this.place);
     const City = this.googleAddrService.getLocality(this.place);

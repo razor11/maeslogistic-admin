@@ -1,17 +1,20 @@
+import { MatTableDataSource } from '@angular/material/table';
 import { AddUpdateZoneComponent } from './add-update-zone/add-update-zone.component';
 import { first } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { SnackbarService } from './../../core/services/snackbar/snackbar.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { ZonesService } from 'src/app/core/services/zones/zones.service';
 import { Zones } from 'src/app/models/zones';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort, Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-zones',
   templateUrl: './zones.component.html',
   styleUrls: ['./zones.component.css'],
 })
-export class ZonesComponent implements OnInit {
+export class ZonesComponent implements OnInit, AfterViewInit {
   zones: Zones[] = [];
   isLoadingResults = true;
   displayedColumns: string[] = [
@@ -21,6 +24,11 @@ export class ZonesComponent implements OnInit {
     'Actions',
   ];
   id: number;
+  dataSource: MatTableDataSource<Zones> = new MatTableDataSource();
+
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     private zonesService: ZonesService,
@@ -32,6 +40,15 @@ export class ZonesComponent implements OnInit {
     this.loadData();
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    const sortState: Sort = {active: 'updated', direction: 'desc'};
+    this.sort.active = sortState.active;
+    this.sort.direction = sortState.direction;
+    this.sort.sortChange.emit(sortState);
+  }
+
   loadData() {
     this.isLoadingResults = true;
     this.zonesService
@@ -39,7 +56,7 @@ export class ZonesComponent implements OnInit {
       .pipe(first())
       .subscribe({
         next: (data) => {
-          this.zones = data;
+          this.dataSource.data = data;
           this.isLoadingResults = false;
         },
       });
@@ -53,6 +70,7 @@ export class ZonesComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
+        this.loadData();
       }
     });
   }
@@ -66,7 +84,6 @@ export class ZonesComponent implements OnInit {
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.loadData();
-        console.log('test');
       }
     });
   }

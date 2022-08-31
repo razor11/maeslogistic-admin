@@ -4,4 +4,5 @@ export class Zones {
   minDistance: number;
   maxDistance: number;
   fee: number;
+  updated: string;
 }

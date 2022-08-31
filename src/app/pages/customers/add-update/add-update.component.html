@@ -15,10 +15,13 @@
     <div fxLayout="row" fxLayoutAlign="space-around center">
       <mat-stepper
         [orientation]="(stepperOrientation | async)!"
-        [linear]="true"
+        [linear]="false"
         #stepper
       >
-        <mat-step [stepControl]="personalInfo">
+        <mat-step
+          [stepControl]="personalInfo"
+          [errorMessage]="stepsErrorMessages.personalInfo"
+        >
           <form [formGroup]="personalInfo">
             <ng-template matStepLabel>Fill customer personal info</ng-template>
             <mat-form-field appearance="fill">
@@ -59,19 +62,14 @@
               />
             </mat-form-field>
             <div class="stepButton">
-              <button
-                type="button"
-                mat-stroked-button
-                color="primary"
-                matStepperNext
-              >
+              <button type="button" mat-button color="primary" matStepperNext>
                 Next
               </button>
             </div>
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="password">
+        <mat-step [stepControl]="password" [optional]="isOptional">
           <form autocomplete="off" [formGroup]="password">
             <ng-template matStepLabel>Set customer password</ng-template>
 
@@ -92,29 +90,23 @@
             />
           </mat-form-field> -->
             <div>
-              <button
-                color="basic"
-                type="button"
-                mat-stroked-button
-                matStepperPrevious
-              >
+              <button color="basic" type="button" mat-button matStepperPrevious>
                 Back
               </button>
-              <button
-                color="primary"
-                type="button"
-                mat-stroked-button
-                matStepperNext
-              >
+              <button color="primary" type="button" mat-button matStepperNext>
                 Next
               </button>
             </div>
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="contactInfo">
+        <mat-step
+          [stepControl]="contactInfo"
+          state="phone"
+          [errorMessage]="stepsErrorMessages.contactInfo"
+        >
           <form [formGroup]="contactInfo">
-            <ng-template matStepLabel>Fill customer contact info</ng-template>
+            <ng-template matStepLabel>Fill out contact info</ng-template>
             <mat-form-field appearance="fill">
               <mat-label> Telephone </mat-label>
               <input
@@ -160,26 +152,19 @@
             </mat-form-field>
 
             <div>
-              <button
-                color="basic"
-                type="button"
-                mat-stroked-button
-                matStepperPrevious
-              >
+              <button color="basic" type="button" mat-button matStepperPrevious>
                 Back
               </button>
-              <button
-                color="primary"
-                type="button"
-                mat-stroked-button
-                matStepperNext
-              >
+              <button color="primary" type="button" mat-button matStepperNext>
                 Next
               </button>
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="addressInfo">
+        <mat-step
+          [stepControl]="addressInfo"
+          [errorMessage]="stepsErrorMessages.address"
+        >
           <form autocomplete="off" [formGroup]="addressInfo">
             <ng-template matStepLabel>Customer addresses</ng-template>
 
@@ -228,7 +213,11 @@
                 </mat-form-field>
                 <br />
 
-                <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+                <mat-form-field
+                  class="fullWidth"
+                  appearance="fill"
+                  floatLabel="always"
+                >
                   <mat-label>Address </mat-label>
                   <input
                     #addressField
@@ -238,10 +227,16 @@
                     placeholder="Address"
                   />
                   <mat-icon matSuffix>location_on</mat-icon>
-                  <mat-hint>Yo have to select a  verified address from google</mat-hint>
+                  <mat-hint
+                    >Yo have to select a verified address from google</mat-hint
+                  >
                 </mat-form-field>
 
-                <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+                <mat-form-field
+                  class="fullWidth"
+                  appearance="fill"
+                  floatLabel="always"
+                >
                   <mat-label>Suite,apartment,unit: </mat-label>
                   <input
                     #addressField
@@ -309,20 +304,10 @@
             </div>
 
             <div>
-              <button
-                color="basic"
-                type="button"
-                mat-stroked-button
-                matStepperPrevious
-              >
+              <button color="basic" type="button" mat-button matStepperPrevious>
                 Back
               </button>
-              <button
-                color="primary"
-                type="button"
-                mat-stroked-button
-                matStepperNext
-              >
+              <button color="primary" type="button" mat-button matStepperNext>
                 Next
               </button>
             </div>
@@ -331,11 +316,17 @@
 
         <mat-step>
           <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
+          <p>
+            {{
+              this.personalInfo.invalid ||
+              this.addressInfo.invalid ||
+              this.contactInfo.invalid
+                ? "You must to complete the form"
+                : "You are now done."
+            }}
+          </p>
           <div>
-            <button color="basic" mat-stroked-button matStepperPrevious>
-              Back
-            </button>
+            <button color="basic" mat-button matStepperPrevious>Back</button>
             <!-- <button mat-button (click)="stepper.reset()">Reset</button> -->
             <button
               mat-flat-button
@@ -343,9 +334,9 @@
               (click)="onSubmit()"
               type="submit"
               [disabled]="
-                !this.personalInfo.valid &&
-                !this.password.valid &&
-                !this.contactInfo.valid
+                this.personalInfo.invalid ||
+                this.addressInfo.invalid ||
+                this.contactInfo.invalid
               "
             >
               Save
@@ -354,12 +345,10 @@
         </mat-step>
       </mat-stepper>
 
-
       <!--      <div class="button-row">
           <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">Save</button>
-          <a routerLink="/customers" mat-stroked-button color="primary" type="submit">Cancel</a>
+          <a routerLink="/customers" mat-button color="primary" type="submit">Cancel</a>
       </div> -->
     </div>
   </div>
 </mat-card>
-

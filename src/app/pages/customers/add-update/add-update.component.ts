@@ -15,7 +15,10 @@ import {
 import { ActivatedRoute, Router } from '@angular/router';
 import { MustMatch } from 'src/app/core/helpers/validators/must-match.validator';
 import { first, forkJoin, map, Observable } from 'rxjs';
-import { StepperOrientation } from '@angular/cdk/stepper';
+import {
+  StepperOrientation,
+  STEPPER_GLOBAL_OPTIONS,
+} from '@angular/cdk/stepper';
 import { AddressTypesService } from 'src/app/core/services/address-types/address-types.service';
 import { Parameters } from 'src/app/models/parameters';
 
@@ -23,6 +26,12 @@ import { Parameters } from 'src/app/models/parameters';
   selector: 'app-add-update',
   templateUrl: './add-update.component.html',
   styleUrls: ['./add-update.component.css'],
+  providers: [
+    {
+      provide: STEPPER_GLOBAL_OPTIONS,
+      useValue: { showError: true },
+    },
+  ],
 })
 export class AddUpdateComponent implements OnInit, AfterViewInit {
   personalInfo: FormGroup;
@@ -39,6 +48,17 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
   autocomplete: google.maps.places.Autocomplete;
   formattedAddress: string;
   isplaceChange = false;
+
+  isOptional = true;
+
+  stepsErrorMessages: any = {
+    personalInfo: 'Fill out the required fields',
+    contactInfo: 'Complete the fields marks in red',
+    address:
+      'You have to select a verified address and complete the fields marks in red',
+  };
+
+
 
   pInfoFormErrors: any = {
     firstName: '',
@@ -74,7 +94,6 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
 
   place!: any;
   @ViewChild('addressField') addressField: any;
-
 
   constructor(
     private route: ActivatedRoute,
@@ -146,13 +165,13 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
       phoneNumber2: [''],
       email: ['', [Validators.required, Validators.email]],
       street: [''],
-      suite:[''],
-      city: [{value: '', disabled: true}],
-      state: [{value: '', disabled: true}],
-      zipCode: [{value: '', disabled: true}],
-      country: [{value: '', disabled: true}],
+      suite: [''],
+      city: [{ value: '', disabled: true }],
+      state: [{ value: '', disabled: true }],
+      zipCode: [{ value: '', disabled: true }],
+      country: [{ value: '', disabled: true }],
       latitude: ['', Validators.required],
-      longitude:['', Validators.required],
+      longitude: ['', Validators.required],
       addressType: this.fb.group({
         id: [''],
       }),
@@ -164,7 +183,6 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
 
     this.pInfoFormOnValueChange();
   }
-
 
   private getPlaceAutomplete() {
     this.autocomplete = new google.maps.places.Autocomplete(
@@ -183,23 +201,20 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
       );
 
       this.patchGoogleAddress();
-
     });
   }
 
-  enableFormsControls(){
+  enableFormsControls() {
     this.addressInfo.controls['city'].enable();
     this.addressInfo.controls['state'].enable();
     this.addressInfo.controls['zipCode'].enable();
     this.addressInfo.controls['country'].enable();
   }
 
-
-
-
   patchGoogleAddress() {
     const Street =
       this.googleAddressService.getStreetNumber(this.place) +
+      ' ' +
       this.googleAddressService.getStreet(this.place);
     const ZipCode = this.googleAddressService.getPostCode(this.place);
     const City = this.googleAddressService.getLocality(this.place);
@@ -264,14 +279,14 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
   }
 
   private createCustomer() {
-    const addresses = {addresses: [this.addressInfo.value]};
+    const addresses = { addresses: [this.addressInfo.value] };
     const data = Object.assign(
       this.personalInfo.value,
       this.password.value,
       this.contactInfo.value,
       addresses
     );
-    console.log(data)
+    console.log(data);
     this.customerService
       .addCLient(data)
       .pipe(first())
@@ -305,4 +320,5 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
     );
   }
 }
+
 

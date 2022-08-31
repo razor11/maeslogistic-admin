@@ -108,13 +108,6 @@ export class CustomersComponent implements OnInit, AfterViewInit {
       });
   }
 
-  /*   pageChanged(event: PageEvent) {
-    console.log({ event });
-    this.pageSize = event.pageSize;
-    this.paginator.pageIndex = event.pageIndex;
-    this.loadCustomers();
-  } */
-
   confirmDialog(id: string): void {
     const message = `Are you want to delete this customer?`;
     const dialogData = new ConfirmDialogModel('Confirm Changes', message);
@@ -146,7 +139,8 @@ export class CustomersComponent implements OnInit, AfterViewInit {
         error: (e) => this.snackBar.openSnackBar(e, 'Dismiss'),
         complete: () => {
           this.snackBar.openSnackBar('Customer deleted succesfully', 'Dismiss');
-          this.paginator.firstPage()},
+          this.paginator.firstPage();
+        },
       });
   }
 }
