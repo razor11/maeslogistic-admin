@@ -29,7 +29,8 @@ import { Parameters } from 'src/app/models/parameters';
   providers: [
     {
       provide: STEPPER_GLOBAL_OPTIONS,
-      useValue: { showError: true },
+      useValue: { showError: true,
+        displayDefaultIndicatorType: false },
     },
   ],
 })

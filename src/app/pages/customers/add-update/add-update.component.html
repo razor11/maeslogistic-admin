@@ -16,6 +16,7 @@
       <mat-stepper
         [orientation]="(stepperOrientation | async)!"
         [linear]="false"
+        state="person"
         #stepper
       >
         <mat-step
@@ -69,7 +70,7 @@
           </form>
         </mat-step>
 
-        <mat-step [stepControl]="password" [optional]="isOptional">
+        <mat-step [stepControl]="password" [optional]="isOptional" state="lock">
           <form autocomplete="off" [formGroup]="password">
             <ng-template matStepLabel>Set customer password</ng-template>
 
@@ -164,6 +165,7 @@
         <mat-step
           [stepControl]="addressInfo"
           [errorMessage]="stepsErrorMessages.address"
+          state="location_on"
         >
           <form autocomplete="off" [formGroup]="addressInfo">
             <ng-template matStepLabel>Customer addresses</ng-template>
@@ -314,7 +316,7 @@
           </form>
         </mat-step>
 
-        <mat-step>
+        <mat-step state="done_outline">
           <ng-template matStepLabel>Done</ng-template>
           <p>
             {{
@@ -343,12 +345,20 @@
             </button>
           </div>
         </mat-step>
+
+        <!-- Icon overrides. -->
+        <ng-template matStepperIcon="phone">
+          <mat-icon>phone</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="lock">
+          <mat-icon>lock</mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="location_on">
+          <mat-icon>location_on</mat-icon>
+        </ng-template>
       </mat-stepper>
 
-      <!--      <div class="button-row">
-          <button mat-flat-button color="primary" (click)="onSubmit()" type="submit" [disabled]="!form.valid">Save</button>
-          <a routerLink="/customers" mat-button color="primary" type="submit">Cancel</a>
-      </div> -->
+
     </div>
   </div>
 </mat-card>
