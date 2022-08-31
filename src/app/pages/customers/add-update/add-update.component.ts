@@ -38,6 +38,7 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
   stepperOrientation: Observable<StepperOrientation>;
   autocomplete: google.maps.places.Autocomplete;
   formattedAddress: string;
+  isplaceChange = false;
 
   pInfoFormErrors: any = {
     firstName: '',
@@ -146,12 +147,12 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
       email: ['', [Validators.required, Validators.email]],
       street: [''],
       suite:[''],
-      city: [''],
-      state: [''],
-      zipCode: [''],
-      country: [''],
-      latitude: [''],
-      longitude:[''],
+      city: [{value: '', disabled: true}],
+      state: [{value: '', disabled: true}],
+      zipCode: [{value: '', disabled: true}],
+      country: [{value: '', disabled: true}],
+      latitude: ['', Validators.required],
+      longitude:['', Validators.required],
       addressType: this.fb.group({
         id: [''],
       }),
@@ -180,9 +181,17 @@ export class AddUpdateComponent implements OnInit, AfterViewInit {
       this.formattedAddress = this.googleAddressService.getFormattedAddress(
         this.place
       );
+
       this.patchGoogleAddress();
 
     });
+  }
+
+  enableFormsControls(){
+    this.addressInfo.controls['city'].enable();
+    this.addressInfo.controls['state'].enable();
+    this.addressInfo.controls['zipCode'].enable();
+    this.addressInfo.controls['country'].enable();
   }
 
 
