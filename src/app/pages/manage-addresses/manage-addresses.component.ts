@@ -48,10 +48,11 @@ export class ManageAddressesComponent implements OnInit {
   }
 
 
-  addDialog(id:any): void {
+  addDialog(id?:any): void {
     const dialogRef = this.dialog.open(AddressesDialogComponent, {
-      width: '480',
-      data:id
+      width: '980px',
+      data:id,
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
@@ -63,8 +64,9 @@ export class ManageAddressesComponent implements OnInit {
 
   updateDialog(param: any): void {
     const dialogRef = this.dialog.open(AddressesDialogComponent, {
-      width: '480',
+      width: '980px',
       data: param,
+      disableClose: true,
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {

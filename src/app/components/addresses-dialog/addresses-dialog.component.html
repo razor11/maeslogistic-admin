@@ -1,24 +1,18 @@
-<h1 mat-dialog-title>{{title}} Address</h1>
+<h1 mat-dialog-title>{{ title }} Address</h1>
 <div mat-dialog-content>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div>
-      <mat-form-field formGroupName="addressType" appearance="fill">
-        <mat-label>Address Type</mat-label>
-        <mat-select formControlName="id">
-          <mat-option *ngFor="let type of addrTypes" [value]="type.id">
-            {{ type.description }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Contact Name</mat-label>
-        <input
-          matInput
-          formControlName="contactName"
-          placeholder="Contact Name"
-        />
-      </mat-form-field>
-    </div>
+    <mat-form-field appearance="fill">
+      <mat-label>Contact Name</mat-label>
+      <input
+        matInput
+        formControlName="contactName"
+        placeholder="Contact Name"
+      />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" placeholder="Email" />
+    </mat-form-field>
 
     <mat-form-field appearance="fill">
       <mat-label>Primary Phone Number</mat-label>
@@ -37,38 +31,93 @@
       />
     </mat-form-field>
 
-    <mat-form-field appearance="fill">
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email" placeholder="Email" />
+    <mat-form-field
+      class="fullWidth"
+      formGroupName="addressType"
+      appearance="fill"
+    >
+      <mat-label>Address Type</mat-label>
+      <mat-select #addressType formControlName="id">
+        <mat-option *ngFor="let type of addrTypes" [value]="type.id">
+          {{ type.description }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
-    <br />
-    <mat-form-field appearance="fill">
-      <mat-label>Street</mat-label>
-      <input matInput formControlName="street" placeholder="Street" />
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>City</mat-label>
-      <input matInput formControlName="city" placeholder="City" />
-    </mat-form-field>
-
-    <div>
-      <mat-form-field appearance="fill">
-        <mat-label>State</mat-label>
-        <input matInput formControlName="state" placeholder="State" />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>ZipCode</mat-label>
-        <input matInput formControlName="zipCode" placeholder="ZipCode" />
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Country</mat-label>
-        <mat-select formControlName="country">
-          <mat-option *ngFor="let country of countries" [value]="country.description">
-            {{ country.description }}
-          </mat-option>
-        </mat-select>
+    <div [hidden]="addressType.value == 14">
+      <mat-form-field class="fullWidth" appearance="fill">
+        <mat-label>Start typing the customer address </mat-label>
+        <input
+          #addressField
+          autocomplete="off"
+          type="text"
+          matInput
+          placeholder="Start typing the customer address"
+        />
+        <mat-icon matPrefix>search</mat-icon>
+        <button
+          type="button"
+          *ngIf="addressField.value"
+          matSuffix
+          mat-icon-button
+          aria-label="Clear"
+          (click)="addressField.value = ''"
+        >
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-hint>Yo have to select a verified address from google</mat-hint>
       </mat-form-field>
     </div>
+
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Address Line</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="street"
+        placeholder="Address line"
+      />
+      <mat-icon matSuffix>location_on</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field class="fullWidth" appearance="fill" floatLabel="always">
+      <mat-label>Suite,apartment,unit: </mat-label>
+      <input
+        type="text"
+        formControlName="suite"
+        matInput
+        placeholder="Suite,apartment,unit:"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Town/City</mat-label>
+      <input
+        type="text"
+        matInput
+        formControlName="city"
+        placeholder="Town/City"
+      />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>State</mat-label>
+      <input matInput formControlName="state" placeholder="State" />
+    </mat-form-field>
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>ZipCode</mat-label>
+      <input matInput formControlName="zipCode" placeholder="ZipCode" />
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Country</mat-label>
+      <mat-select formControlName="country">
+        <mat-option
+          *ngFor="let country of countries"
+          [value]="country.description"
+        >
+          {{ country.description }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </form>
 </div>
 <div mat-dialog-actions align="end">

@@ -51,6 +51,7 @@ export class OfficesComponent implements OnInit, AfterViewInit {
     });
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
+        this.loadData();
       }
     });
   }
