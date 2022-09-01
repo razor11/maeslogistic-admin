@@ -168,7 +168,7 @@
           state="location_on"
         >
           <form autocomplete="off" [formGroup]="addressInfo">
-            <ng-template matStepLabel>Customer addresses</ng-template>
+            <ng-template matStepLabel>Customer address</ng-template>
 
             <div>
               <mat-card class="addSpace">
@@ -215,20 +215,25 @@
                 </mat-form-field>
                 <br />
 
-                <mat-form-field
-                  class="fullWidth"
-                  appearance="fill"
-                  floatLabel="always"
-                >
-                  <mat-label>Address </mat-label>
+                <mat-form-field class="fullWidth" appearance="fill">
+                  <mat-label>Start typing the customer address </mat-label>
                   <input
                     #addressField
                     type="text"
-                    formControlName="street"
                     matInput
                     placeholder="Address"
                   />
-                  <mat-icon matSuffix>location_on</mat-icon>
+                  <mat-icon matPrefix>search</mat-icon>
+                  <button
+                  type="button"
+                    *ngIf="addressField.value"
+                    matSuffix
+                    mat-icon-button
+                    aria-label="Clear"
+                    (click)="addressField.value = ''"
+                  >
+                    <mat-icon>close</mat-icon>
+                  </button>
                   <mat-hint
                     >Yo have to select a verified address from google</mat-hint
                   >
@@ -239,9 +244,24 @@
                   appearance="fill"
                   floatLabel="always"
                 >
-                  <mat-label>Suite,apartment,unit: </mat-label>
+                  <mat-label>Address Line </mat-label>
                   <input
                     #addressField
+                    type="text"
+                    formControlName="street"
+                    matInput
+                    placeholder="Address"
+                  />
+                  <mat-icon matSuffix>location_on</mat-icon>
+                </mat-form-field>
+
+                <mat-form-field
+                  class="fullWidth"
+                  appearance="fill"
+                  floatLabel="always"
+                >
+                  <mat-label>Suite,apartment,unit: </mat-label>
+                  <input
                     type="text"
                     formControlName="suite"
                     matInput
@@ -250,7 +270,7 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="fill" floatLabel="always">
-                  <mat-label>City </mat-label>
+                  <mat-label>Town/City </mat-label>
                   <input
                     type="text"
                     formControlName="city"
@@ -357,8 +377,6 @@
           <mat-icon>location_on</mat-icon>
         </ng-template>
       </mat-stepper>
-
-
     </div>
   </div>
 </mat-card>
