@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Offices } from 'src/app/models/offices';
@@ -12,19 +13,19 @@ export class BranchOfficesService {
 
   constructor(private http: HttpClient) {}
 
-  getAll() {
+  getAll(): Observable<Offices[]> {
     return this.http.get<Offices[]>(`${this.API_URL}${this.API_METHOD}`);
   }
 
-  getById(id: number) {
+  getById(id: number): Observable<Offices> {
     return this.http.get<Offices>(`${this.API_URL}${this.API_METHOD}/${id}`);
   }
 
-  addBranchOffice(params: any) {
+  addBranchOffice(params: any): Observable<Offices> {
     return this.http.post<Offices>(`${this.API_URL}${this.API_METHOD}`, params);
   }
 
-  updateBranchOffice(id: number, params: any) {
+  updateBranchOffice(id: number, params: any): Observable<any> {
     return this.http.patch<any>(
       `${this.API_URL}${this.API_METHOD}/${id}`,
       params

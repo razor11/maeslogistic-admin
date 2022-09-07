@@ -1,3 +1,5 @@
+import { OrdersModule } from './../../pages/orders/modules/orders.module';
+import { OrdersComponent } from './../../pages/orders/orders.component';
 import { ParametersLayoutComponent } from './../../pages/parameters/parameters-layout/parameters-layout.component';
 import { LayoutComponent } from './../../pages/customers/layout/layout.component';
 import { NavigationComponent } from '../../navigation/navigation.component';
@@ -76,6 +78,20 @@ const routes: Routes = [
               import(
                 '../../pages/parameters/modules/parameters/parameters.module'
               ).then((m) => m.ParametersModule),
+          },
+        ],
+      },
+
+      {
+        path: 'orders',
+        children: [
+          {
+            path: '',
+            component: OrdersComponent,
+            loadChildren: () =>
+              import('../../pages/orders/modules/orders.module').then(
+                (m) => m.OrdersModule
+              ),
           },
         ],
       },

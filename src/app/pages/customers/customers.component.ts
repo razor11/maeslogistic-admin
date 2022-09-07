@@ -4,7 +4,7 @@ import { Customers } from './../../models/customers';
 import { first, startWith, switchMap, catchError, map } from 'rxjs/operators';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { DataCustomersService } from 'src/app/core/services/customers/data-customers.service';
-
+import { faBoxOpen } from '@fortawesome/free-solid-svg-icons';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import {
@@ -33,6 +33,8 @@ export class CustomersComponent implements OnInit, AfterViewInit {
   pageEvent: PageEvent;
   isLoading: boolean = true;
   isRateLimitReached = false;
+
+  orderIcon= faBoxOpen;
 
   displayedColumns: string[] = ['Name', 'Email', 'User Name', 'Actions'];
   dataSource: MatTableDataSource<Customers> = new MatTableDataSource();

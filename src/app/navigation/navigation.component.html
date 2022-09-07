@@ -89,6 +89,19 @@
         </div>
 
         <div>
+          <!-- Cabeceras del submenu -->
+          <a
+            mat-list-item
+            routerLink="/orders"
+            routerLinkActive="active-list-item"
+            [routerLinkActiveOptions]="{ exact: false }"
+          >
+            <fa-icon matListIcon [icon]="faShipments"></fa-icon>
+            <span matLine>orders</span>
+          </a>
+        </div>
+
+        <div>
           <a
             mat-list-item
             routerLink="/embarcations"
@@ -116,22 +129,6 @@
             <fa-icon matListIcon [icon]="faLogisticOper"></fa-icon>
             <span matLine>Logistic Operators</span>
           </a>
-        </div>
-
-        <div>
-          <mat-accordion>
-            <mat-expansion-panel>
-              <mat-expansion-panel-header>
-                <mat-panel-title>
-                  <!-- Cabeceras del submenu -->
-                  <a mat-list-item>
-                    <fa-icon matListIcon [icon]="faShipments"></fa-icon>
-                    <span matLine>Shipments</span>
-                  </a>
-                </mat-panel-title>
-              </mat-expansion-panel-header>
-            </mat-expansion-panel>
-          </mat-accordion>
         </div>
 
         <div>

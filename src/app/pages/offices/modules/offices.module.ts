@@ -4,14 +4,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfficesRoutingModule } from './offices-routing.module';
 
-
-
 @NgModule({
   declarations: [OfficesComponent],
-  imports: [
-    CommonModule,
-    CommomModulesModule,
-    OfficesRoutingModule
-  ]
+  imports: [CommonModule, CommomModulesModule, OfficesRoutingModule],
 })
-export class OfficesModule { }
+export class OfficesModule {}

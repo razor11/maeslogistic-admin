@@ -11,6 +11,7 @@ import { MaterialModule } from 'src/app/shared/modules/material/material.module'
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ChangePasswordComponent } from 'src/app/pages/customers/change-password/change-password.component';
 import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/addresses-dialog.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -19,7 +20,8 @@ import { AddressesDialogComponent } from 'src/app/components/addresses-dialog/ad
     ReactiveFormsModule,
     FormsModule,
     MaterialModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FontAwesomeModule
   ],
   declarations: [LayoutComponent,
     CustomersComponent,

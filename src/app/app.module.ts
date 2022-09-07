@@ -49,7 +49,6 @@ import { AddUpdateBranchOfficeComponent } from './pages/offices/add-update-branc
 import { ZonesService } from './core/services/zones/zones.service';
 import { AddUpdateZoneComponent } from './pages/zones/add-update-zone/add-update-zone.component';
 
-
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
