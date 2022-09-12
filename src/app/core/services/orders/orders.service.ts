@@ -40,6 +40,12 @@ export class OrdersService {
     );
   }
 
+  getOrderResumeByStatus(id: number): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      `${this.API_URL}${this.API_METHOD}/resume/order-status/${id}`
+    );
+  }
+
   getOrderResumeByDate(
     firstOrderDate: string,
     lastOrderDate: string
@@ -68,6 +74,16 @@ export class OrdersService {
   ): Observable<Order[]> {
     return this.http.get<Order[]>(
       `${this.API_URL}${this.API_METHOD}/detail/embarcation/${id}/${page}/${limit}`
+    );
+  }
+
+  getOrderDetailByStatus(
+    id: number,
+    page: number,
+    limit: number
+  ): Observable<Order[]> {
+    return this.http.get<Order[]>(
+      `${this.API_URL}${this.API_METHOD}/detail/order-status/${id}/${page}/${limit}`
     );
   }
 
