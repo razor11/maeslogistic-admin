@@ -1,3 +1,4 @@
+import { OrdersStatusComponent } from './../../orders-status/orders-status.component';
 import { PackageCatalogComponent } from './../../package-catalog/package-catalog.component';
 import { ServiceTypesComponent } from './../../service-types/service-types.component';
 import { CountriesComponent } from './../../countries/countries.component';
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'package-catalog',
         component: PackageCatalogComponent
+      },
+      {
+        path: 'orders-status',
+        component: OrdersStatusComponent
       }
     ],
   },

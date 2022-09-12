@@ -1,0 +1,29 @@
+<mat-card>
+  <mat-toolbar-row>
+    <mat-card-header>
+      <mat-card-title>Order Status Types </mat-card-title>
+    </mat-card-header>
+    <span class="spacer"></span>
+    <button
+      type="button"
+      (click)="openAddDialog()"
+      color="primary"
+      mat-raised-button
+      class="demo-button"
+    >
+      <mat-icon>add</mat-icon>
+      Add
+    </button>
+  </mat-toolbar-row>
+  <div [hidden]="!isLoadingResults">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+
+  <app-params-data-table
+    *ngIf="!isLoadingResults"
+    [dataTable]="data"
+    [displayedColumns]="displayedColumns"
+    (updateParam)="openUpdateDialog($event)"
+    (deleteParam)="deleteStatus($event)"
+  ></app-params-data-table>
+</mat-card>

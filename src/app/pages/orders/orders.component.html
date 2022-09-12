@@ -1,4 +1,24 @@
-<div class="container">
-  <p>orders works!</p>
-</div>
+<mat-card class="container">
+  <mat-card-header class="card-header-padding">
+    <mat-card-title>Orders</mat-card-title>
+    <span class="spacer"></span>
+    <button color="primary" routerLink="/customers/add" mat-raised-button>
+      <mat-icon aria-label="icon-button with an add icon">add</mat-icon>
+      Create order
+    </button>
+  </mat-card-header>
 
+  <mat-form-field appearance="standard" class="searchBox">
+    <mat-label>Filter by Customer Name</mat-label>
+    <input matInput placeholder="Ex. Mia" #input />
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+
+  <mat-card-content>
+    <mat-tab-group mat-align-tabs="center" mat-stretch-tabs>
+      <mat-tab label="Ordered">Ordered</mat-tab>
+      <mat-tab label="Completed">Completed</mat-tab>
+      <mat-tab label="Canceled">Canceled</mat-tab>
+    </mat-tab-group>
+  </mat-card-content>
+</mat-card>

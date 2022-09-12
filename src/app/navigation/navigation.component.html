@@ -176,6 +176,17 @@
               </a>
 
               <a
+              mat-list-item
+              routerLink="parameters/orders-status"
+              routerLinkActive="active-list-item"
+              [routerLinkActiveOptions]="{ exact: true }"
+            >
+              <fa-icon matListIcon [icon]="faOrderStat"></fa-icon>
+
+              <span matLine>Order Status Types</span>
+            </a>
+
+              <a
                 mat-list-item
                 routerLink="/parameters/packages-types"
                 routerLinkActive="active-list-item"

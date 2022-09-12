@@ -24,7 +24,8 @@ import {
   faCartFlatbed,
   faCubes,
   faShop,
-  faRoute
+  faRoute,
+  faFileCircleExclamation
 } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -53,6 +54,7 @@ export class NavigationComponent implements OnInit {
   faCubes = faCubes;
   faShop = faShop;
   faRoute = faRoute
+  faOrderStat = faFileCircleExclamation;
 
   @Output() isActiveChange!: EventEmitter<boolean>;
 
