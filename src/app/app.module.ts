@@ -50,6 +50,7 @@ import { ZonesService } from './core/services/zones/zones.service';
 import { AddUpdateZoneComponent } from './pages/zones/add-update-zone/add-update-zone.component';
 import { OrderStatusService } from './core/services/order-status/order-status.service';
 
+
 export function tokenGetter() {
   return localStorage.getItem("access_token");
 }
@@ -70,6 +71,7 @@ export function tokenGetter() {
     AddUpdatePackageComponent,
     AddUpdateBranchOfficeComponent,
     AddUpdateZoneComponent,
+
 
 
 

@@ -1,18 +1,32 @@
+import { OrdersLayoutComponent } from './../orders-layout/orders-layout.component';
+import { CreateOrderComponent } from './../create-order/create-order.component';
 import { RouterModule, Routes } from '@angular/router';
 import { OrdersComponent } from './../orders.component';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 const routes: Routes = [
   {
     path: '',
-    component: OrdersComponent,
+    component: OrdersLayoutComponent,
+
+    children:[
+      {
+        path: '',
+        component: OrdersComponent,
+
+      },
+      {
+        path:'create-order',
+        component: CreateOrderComponent,
+
+      }
+    ]
   },
 ];
 
 @NgModule({
-  declarations: [],
-  imports: [CommonModule, RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
 export class OrdersRoutingModule {}

@@ -1,3 +1,4 @@
+import { OrdersLayoutComponent } from './../../pages/orders/orders-layout/orders-layout.component';
 import { OrdersModule } from './../../pages/orders/modules/orders.module';
 import { OrdersComponent } from './../../pages/orders/orders.component';
 import { ParametersLayoutComponent } from './../../pages/parameters/parameters-layout/parameters-layout.component';
@@ -87,7 +88,7 @@ const routes: Routes = [
         children: [
           {
             path: '',
-            component: OrdersComponent,
+            component: OrdersLayoutComponent,
             loadChildren: () =>
               import('../../pages/orders/modules/orders.module').then(
                 (m) => m.OrdersModule
