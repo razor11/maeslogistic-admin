@@ -119,6 +119,7 @@ export function tokenGetter() {
     ZonesService,
     GoogleAddressService,
     OrderStatusService,
+    DataCustomersService,
 
     {
       provide: HTTP_INTERCEPTORS,

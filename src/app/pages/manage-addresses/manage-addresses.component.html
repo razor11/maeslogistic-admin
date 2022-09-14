@@ -2,12 +2,14 @@
   <mat-toolbar-row>
     <mat-card-header>
       <mat-card-title>
-        Manage {{ customerName | titlecase }} {{ customerLastName | titlecase }} Addresses
+        Manage {{ customerName | titlecase }}
+        {{ customerLastName | titlecase }} Addresses
       </mat-card-title>
     </mat-card-header>
     <span class="spacer"></span>
+
     <button mat-button [matMenuTriggerFor]="menu">
-      <mat-icon class="mat-18">more_horiz</mat-icon> Options
+      <mat-icon class="mat-18">more_horiz</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
       <button (click)="goBack()" mat-menu-item>
@@ -18,45 +20,42 @@
       </button>
       <button mat-menu-item type="button" (click)="addDialog()">
         <mat-icon>add</mat-icon>
-        Add new Address
+        Add address
       </button>
     </mat-menu>
   </mat-toolbar-row>
   <mat-divider></mat-divider>
   <mat-card-content class="card">
     <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
-      <mat-card class="address-card" *ngFor="let item of addresses">
-        <h2>{{ item.contactName }}</h2>
-        <mat-card-subtitle>{{
-          item.addressType.description
-        }}</mat-card-subtitle>
+    <mat-card class="address-card" *ngFor="let item of addresses">
+      <h2>{{ item.contactName }}</h2>
+      <mat-card-subtitle>{{ item.addressType.description }}</mat-card-subtitle>
 
-        <mat-card-content>
-          <p>{{ item.street | uppercase }}</p>
-          <p>
-            {{ item.city | uppercase }}, {{ item.state | uppercase }},
-            {{ item.zipCode | uppercase }}
-          </p>
-          <p>
-            {{ item.country }}
-          </p>
-          <p>Primary Phone: {{ item.phoneNumber1 }}</p>
-          <p>Secondary Phone: {{ item.phoneNumber2 }}</p>
-        </mat-card-content>
-        <mat-card-actions align="end">
-          <button mat-raised-button mat-button (click)="updateDialog(item)">
-            Edit
-          </button>
-          <button
-            mat-raised-button
-            mat-button
-            color="warn"
-            (click)="deleteAddr(item.id)"
-          >
-            <mat-icon aria-label="Delete">delete</mat-icon>
-          </button>
-        </mat-card-actions>
-      </mat-card>
-
+      <mat-card-content>
+        <p>{{ item.street | uppercase }}</p>
+        <p>
+          {{ item.city | uppercase }}, {{ item.state | uppercase }},
+          {{ item.zipCode | uppercase }}
+        </p>
+        <p>
+          {{ item.country }}
+        </p>
+        <p>Primary Phone: {{ item.phoneNumber1 }}</p>
+        <p>Secondary Phone: {{ item.phoneNumber2 }}</p>
+      </mat-card-content>
+      <mat-card-actions align="end">
+        <button
+          mat-stroke-button
+          mat-button
+          color="warn"
+          (click)="deleteAddr(item.id)"
+        >
+          Delete
+        </button>
+        <button mat-raised-button mat-button (click)="updateDialog(item)">
+          Edit
+        </button>
+      </mat-card-actions>
+    </mat-card>
   </mat-card-content>
 </mat-card>

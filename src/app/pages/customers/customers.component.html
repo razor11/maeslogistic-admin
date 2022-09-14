@@ -51,7 +51,7 @@
           <mat-icon class="mat-18">more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-          <button type="button" mat-menu-item color="basic">
+          <button type="button" mat-menu-item color="basic" [routerLink]="['/orders/create-order', element.id]">
             <mat-icon color="basic" aria-label="View">add</mat-icon>Create order
           </button>
 
@@ -72,8 +72,8 @@
             }"
             mat-menu-item
           >
-            <mat-icon color="basic" aria-label="Edit">person_pin</mat-icon>
-            Manage addresses
+            <mat-icon color="basic" aria-label="Edit">contacts</mat-icon>
+            Address book
           </button>
 
           <button
