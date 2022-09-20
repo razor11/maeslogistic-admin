@@ -49,6 +49,7 @@ import { AddUpdateBranchOfficeComponent } from './pages/offices/add-update-branc
 import { ZonesService } from './core/services/zones/zones.service';
 import { AddUpdateZoneComponent } from './pages/zones/add-update-zone/add-update-zone.component';
 import { OrderStatusService } from './core/services/order-status/order-status.service';
+import { AddressBookDialogComponent } from './pages/orders/address-book-dialog/address-book-dialog.component';
 
 
 export function tokenGetter() {
@@ -71,6 +72,7 @@ export function tokenGetter() {
     AddUpdatePackageComponent,
     AddUpdateBranchOfficeComponent,
     AddUpdateZoneComponent,
+    AddressBookDialogComponent,
 
 
 
@@ -120,6 +122,7 @@ export function tokenGetter() {
     GoogleAddressService,
     OrderStatusService,
     DataCustomersService,
+    DataAddressesService,
 
     {
       provide: HTTP_INTERCEPTORS,

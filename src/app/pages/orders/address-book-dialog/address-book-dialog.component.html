@@ -1,0 +1,36 @@
+
+
+<button mat-icon-button class="close-button" [mat-dialog-close]="false">
+  <mat-icon class="close-icon" color="warn">close</mat-icon>
+</button>
+
+
+<h1 mat-dialog-title>Address Book</h1>
+<button mat-stroked-button class="add-button" (click)="addAddress(id)" >
+  <mat-icon>add</mat-icon> Add new address
+</button>
+
+<div mat-dialog-content>
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <ng-container matColumnDef="Name">
+      <th mat-header-cell *matHeaderCellDef>Name</th>
+      <td mat-cell *matCellDef="let row">{{ row.contactName }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Address">
+      <th mat-header-cell *matHeaderCellDef>Address</th>
+      <td mat-cell *matCellDef="let row">{{ row.street }}</td>
+    </ng-container>
+    <ng-container matColumnDef="City">
+      <th mat-header-cell *matHeaderCellDef>City</th>
+      <td mat-cell *matCellDef="let row">{{ row.city }}</td>
+    </ng-container>
+    <ng-container matColumnDef="Country">
+      <th mat-header-cell *matHeaderCellDef>Country</th>
+      <td mat-cell *matCellDef="let row">{{ row.country }}</td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row [mat-dialog-close]="row" *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+</div>

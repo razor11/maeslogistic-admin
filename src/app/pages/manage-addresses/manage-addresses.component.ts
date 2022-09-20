@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../core/services/snackbar/snackbar.service';
 import { GoogleAddressService } from './../../core/services/google-address/google-address.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Addresses } from './../../models/addresses';
@@ -25,6 +26,7 @@ export class ManageAddressesComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
+    public snackBar: SnackbarService,
     public dialog: MatDialog,
   ) {}
 
@@ -51,7 +53,7 @@ export class ManageAddressesComponent implements OnInit {
   addDialog(id?:any): void {
     const dialogRef = this.dialog.open(AddressesDialogComponent, {
       width: '980px',
-      data:id,
+      data:this.id,
       disableClose: true,
     });
     dialogRef.afterClosed().subscribe((res) => {

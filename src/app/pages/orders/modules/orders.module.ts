@@ -8,6 +8,6 @@ import { CreateOrderComponent } from '../create-order/create-order.component';
 
 @NgModule({
   declarations: [OrdersLayoutComponent, OrdersComponent, CreateOrderComponent],
-  imports: [CommonModule, CommomModulesModule, OrdersRoutingModule],
+  imports: [CommonModule, CommomModulesModule,  OrdersRoutingModule],
 })
 export class OrdersModule {}

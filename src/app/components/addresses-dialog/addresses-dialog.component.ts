@@ -1,3 +1,4 @@
+import { SnackbarService } from './../../core/services/snackbar/snackbar.service';
 import { ActivatedRoute } from '@angular/router';
 import { AddressTypesService } from './../../core/services/address-types/address-types.service';
 import { DataAddressesService } from './../../core/services/addresses/data-addresses.service';
@@ -43,7 +44,8 @@ export class AddressesDialogComponent implements OnInit, AfterViewInit {
     private addrService: DataAddressesService,
     private countriesDataService: CountriesService,
     private addrTypeService: AddressTypesService,
-    private googleAddressService: GoogleAddressService
+    private googleAddressService: GoogleAddressService,
+    public snackBar: SnackbarService
   ) {
     this.loadParams();
   }
@@ -57,14 +59,14 @@ export class AddressesDialogComponent implements OnInit, AfterViewInit {
   }
 
   buildForm() {
-    this.data
+    typeof this.data === 'object'
       ? ((this.isAddMode = false), (this.title = 'Update'))
       : ((this.isAddMode = true), (this.title = 'Add'));
 
     this.form = this.fb.group({
       contactName: ['', Validators.required],
       phoneNumber1: ['', Validators.required],
-      phoneNumber2: ['', Validators.required],
+      phoneNumber2: [''],
       email: ['', Validators.email],
       street: ['', Validators.required],
       suite: [''],
@@ -155,10 +157,15 @@ export class AddressesDialogComponent implements OnInit, AfterViewInit {
 
   addAddress() {
     this.addrService
-      .addNewAddr(this.customerId, this.form.value)
+      .addNewAddr(this.data, this.form.value)
       .pipe(first())
-      .subscribe(() => {
-        this.dialogRef.close();
+      .subscribe({
+        next: () =>{
+
+
+        },
+        error: (e) => this.snackBar.openSnackBar(e, 'dismiss'),
+        complete: () => this.dialogRef.close()
       });
   }
 
@@ -166,8 +173,13 @@ export class AddressesDialogComponent implements OnInit, AfterViewInit {
     this.addrService
       .updateAddr(this.data.id, this.form.value)
       .pipe(first())
-      .subscribe(() => {
-        this.dialogRef.close();
+      .subscribe({
+        next: () => {
+          this.snackBar.openSnackBar('The address has been updated successfully', 'dismiss');
+          this.dialogRef.close();
+        },
+        error: (e) => this.snackBar.openSnackBar(e, 'dismiss'),
+        complete: () => this.dialogRef.close()
       });
   }
 }
