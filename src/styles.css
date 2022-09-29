@@ -29,6 +29,9 @@ body {
   margin: 20px;
 }
 
+.right-align {
+  text-align: right;
+}
 
 
 .mat-form-field-disabled {

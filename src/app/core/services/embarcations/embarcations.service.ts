@@ -1,9 +1,8 @@
 import { PageEvent } from '@angular/material/paginator';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { embarcation } from 'src/app/models/embarcation';
 import { environment } from 'src/environments/environment';
-
+import { embarcation } from 'src/app/models/embarcation';
 @Injectable({
   providedIn: 'root',
 })
@@ -44,6 +43,12 @@ export class EmbarcationsService {
   ) {
     return this.http.get<any>(
       `${this.API_URL}${this.API_METHOD}/ArrivingDates/${firstDate}/${lastDate}/${page}/${limit}`
+    );
+  }
+
+  getEmbarcationByStatus(id: any, page: number, limit: number){
+    return this.http.get<any>(
+      `${this.API_URL}${this.API_METHOD}/${id}/${page}/${limit}`
     );
   }
 

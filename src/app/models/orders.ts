@@ -15,10 +15,7 @@ export class Order {
     packageType: number;
     packageCant: number;
     packageContent: string;
-    packageDimensions: string;
     value: number;
-    serviceCost: number;
-    marineInsurance: number;
   };
   embarcation: {
     embarcation: number;

@@ -1,4 +1,27 @@
 .extend{
   width: 100%;
 }
+.right-align {
+  text-align: right;
+}
+.orderFormInputs{
+  width: 10%;
+}
+
+.mh{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+
+.addButton{
+  float: right;
+}
+
+
+
+input.right-align::-webkit-outer-spin-button,
+input.right-align::-webkit-inner-spin-button {
+  display: none;
+}
 
