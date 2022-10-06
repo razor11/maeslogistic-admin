@@ -168,96 +168,106 @@
             <table>
               <thead>
                 <th>Description</th>
-                <th>Quantity</th>
+                <th>Price</th>
                 <th>Weight Kg</th>
                 <th>Dimensions in.</th>
               </thead>
               <tbody formArrayName="orderDetail">
                 <tr
-                class="trBackground"
+                  class="trBackground"
                   *ngFor="
                     let packages of packages().controls;
                     let packsIndex = index
                   "
                   [formGroupName]="packsIndex"
                 >
-                <td>
-                  <mat-form-field  appearance="fill">
-                    <input
-                    matInput
-                    type="text"
-                    placeholder="Select packaging"
-                    formControlName="description"
-                  />
+                  <td>
+                    <mat-form-field  appearance="fill">
+                      <mat-label>Select packaging</mat-label>
+                      <mat-select  (selectionChange)="patchPackage(packsIndex,$event.value)">
+                        <mat-option
+                          *ngFor="let package of packagesCatalog"
+                          [value]="package"
+                        >
+                          {{ package.description  }}
+                        </mat-option>
+                      </mat-select>
                     </mat-form-field>
 
-                </td>
+                  </td>
 
-                <td>
-                  <mat-form-field style="width: 70px;" appearance="fill">
-                    <input
-                    matInput
-                    type="text"
-                    placeholder="0"
-                    formControlName="description"
-                  />
-                    </mat-form-field>
-                </td>
-
-                <td>
-                  <mat-form-field  style="width: 75px;"  appearance="fill">
-                    <input
-                    matInput
-                    type="number"
-                    placeholder="0"
-                    formControlName="weight"
-                  />
-                    </mat-form-field>
-                </td>
-
-                <td>
-
-                    <mat-form-field  style="width: 75px;"  appearance="fill">
+                  <td>
+                    <mat-form-field style="width: 75px"  appearance="fill">
                       <input
-                      matInput
-                      type="number"
-                      placeholder="length"
-                      formControlName="length"
-                    />
-                      </mat-form-field>
-                      <span class="mh">X</span>
-                      <mat-form-field  style="width: 75px;"  appearance="fill">
-                        <input
+                        matInput
+                        type="number"
+                        class="right-align"
+                        placeholder="0"
+                        formControlName="amount"
+                      />
+                      <span matPrefix>$&nbsp;</span>
+                    </mat-form-field>
+                  </td>
+
+                  <td>
+                    <mat-form-field style="width: 75px" appearance="fill">
+                      <input
+                        matInput
+                        type="number"
+                        placeholder="0"
+                        formControlName="weight"
+                      />
+                    </mat-form-field>
+                  </td>
+
+                  <td>
+                    <mat-form-field style="width: 75px" appearance="fill">
+                      <input
+                        matInput
+                        type="number"
+                        placeholder="length"
+                        formControlName="length"
+                      />
+                    </mat-form-field>
+                    <span class="mh">X</span>
+                    <mat-form-field style="width: 75px" appearance="fill">
+                      <input
                         matInput
                         type="number"
                         placeholder="width"
                         formControlName="width"
                       />
-                        </mat-form-field>
-                        <span class="mh">X</span>
-                        <mat-form-field  style="width: 70px;"  appearance="fill">
-                          <input
-                          matInput
-                          type="number"
-                          placeholder="height"
-                          formControlName="height"
-                        />
-                          </mat-form-field>
-                </td>
+                    </mat-form-field>
+                    <span class="mh">X</span>
+                    <mat-form-field style="width: 70px" appearance="fill">
+                      <input
+                        matInput
+                        type="number"
+                        placeholder="height"
+                        formControlName="height"
+                      />
+                    </mat-form-field>
+                  </td>
 
-                <td>
-                  <div class="mh">
-                    <button (click)="removePackage(packsIndex)"  type="button" mat-stroked-button color="warn">Delete</button>
-                  </div>
-
-                </td>
-              </tr>
+                  <td>
+                    <div class="mh">
+                      <button
+                        (click)="removePackage(packsIndex)"
+                        type="button"
+                        mat-stroked-button
+                        color="danger"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
               </tbody>
               <tfoot>
                 <tr>
                   <td>Subtotal</td>
-                  <td>0</td>
-                  <td>0 Kg</td>
+                  <td>{{subtotal}}</td>
+                  <td>{{weightTotal}} Kg</td>
                 </tr>
               </tfoot>
             </table>
@@ -278,14 +288,14 @@
             <button type="button" mat-button color="warn" (click)="prevStep()">
               Previous
             </button>
-            <button
+<!--             <button
               type="button"
               mat-button
               color="primary"
               (click)="nextStep()"
             >
               End
-            </button>
+            </button> -->
           </mat-action-row>
         </mat-expansion-panel>
       </mat-accordion>

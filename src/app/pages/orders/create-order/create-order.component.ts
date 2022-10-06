@@ -1,3 +1,4 @@
+import { PackageCatalogService } from './../../../core/services/package-catalog/package-catalog.service';
 import { embarcation } from './../../../models/embarcation';
 import { EmbarcationsService } from './../../../core/services/embarcations/embarcations.service';
 import { PackagesTypesService } from './../../../core/services/packages-types/packages-types.service';
@@ -21,7 +22,8 @@ import { DataCustomersService } from 'src/app/core/services/customers/data-custo
 import { DataAddressesService } from 'src/app/core/services/addresses/data-addresses.service';
 import { faAddressBook } from '@fortawesome/free-solid-svg-icons';
 import { ServicesTypesService } from 'src/app/core/services/services-types/services-types.service';
-import { forkJoin } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
+import { Packages } from 'src/app/models/packages';
 
 const today = new Date();
 const embarcationStatusId = 15;
@@ -38,6 +40,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
   serviceTypes: Parameters[];
   packageTypes: Parameters[];
   embarcations: any[];
+  packagesCatalog: Packages[];
 
   customerId: any;
   customerName = new FormControl('');
@@ -46,6 +49,10 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
   customer: Customers;
   step = 0;
 
+
+  subtotal:number = 0;
+  subscription: Subscription;
+  weightTotal: number = 0;
 
 
   // icons
@@ -63,7 +70,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
     private shippingTypeService: ShippingTypesService,
     private serviceTypesService: ServicesTypesService,
     private packageTypeService: PackagesTypesService,
-    private embarcationService: EmbarcationsService
+    private embarcationService: EmbarcationsService,
+    private packageCatalogService: PackageCatalogService
   ) {
     this.loadParams();
     this.buildForms();
@@ -79,10 +87,12 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.addPackage();
+
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   setStep(index: number) {
     this.step = index;
@@ -101,8 +111,9 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
     const serviceTypes = this.serviceTypesService.getAll();
     const packageTypes = this.packageTypeService.getAll();
     const embarcations = this.embarcationService.getEmbarcationByStatus(embarcationStatusId,1,100);
+    const packageCatalog = this.packageCatalogService.getAll(1,100);
 
-    forkJoin([shippingTypes, serviceTypes, packageTypes, embarcations])
+    forkJoin([shippingTypes, serviceTypes, packageTypes, embarcations, packageCatalog])
       .pipe(first())
       .subscribe({
         next: (data) => {
@@ -110,6 +121,9 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
           this.serviceTypes = data[1];
           this.packageTypes = data[2];
           this.embarcations = data[3].embarcations;
+          this.packagesCatalog = data[4].packages;
+          console.log(this.packagesCatalog)
+
         },
         error: (e) => {
           console.log(e);
@@ -140,6 +154,11 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
       }),
       orderDetail: this.fb.array([])
     });
+
+    this.subscription = this.packages().valueChanges.subscribe(data => {
+      this.subtotal = data.reduce((a: any,b: any) => a + +b.amount, 0);
+      this.weightTotal = data.reduce((a:any, b:any) => a + +b.weight, 0);
+    })
   }
 
   packages() :FormArray{
@@ -147,21 +166,31 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
   }
 
   newPackage(): FormGroup {
+
     return this.fb.group({
-      description: "",
+      description: ['', Validators.required],
       weight: "",
       height: "",
       width: "",
       length: "",
-      price:"",
-      discount: "",
-      taxes: "",
-      subtotal:"",
+      amount: "",
     });
   }
 
  addPackage(){
   this.packages().push(this.newPackage());
+ }
+
+ patchPackage(index:number, parcel:any){
+  console.log(parcel)
+     this.packages().at(index).patchValue({
+      description: parcel.description,
+      weight: parcel.weigth,
+      height: parcel.heigth,
+      width: parcel.width,
+      length: parcel.large,
+      amount: parcel.price
+     });
  }
 
  removePackage(index: number){

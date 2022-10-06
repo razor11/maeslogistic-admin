@@ -20,16 +20,18 @@ export class Order {
   embarcation: {
     embarcation: number;
   };
-  orderDetail: {
+  orderDetail: [
+    {
     itemsCant: number;
     description: string;
     weight: number;
     height: number;
     width: number;
     length: number;
-    price: number;
+    amount: number;
+    }
+  ];
+  totals: {
     discount: number;
-    taxes: number;
-    subtotal: number;
-  };
+  }
 }
