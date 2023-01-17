@@ -122,7 +122,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
           this.packageTypes = data[2];
           this.embarcations = data[3].embarcations;
           this.packagesCatalog = data[4].packages;
-          console.log(this.packagesCatalog)
+
 
         },
         error: (e) => {
@@ -159,6 +159,8 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
       this.subtotal = data.reduce((a: any,b: any) => a + +b.amount, 0);
       this.weightTotal = data.reduce((a:any, b:any) => a + +b.weight, 0);
     })
+
+    this.addPackage();
   }
 
   packages() :FormArray{
@@ -182,7 +184,7 @@ export class CreateOrderComponent implements OnInit, AfterViewInit {
  }
 
  patchPackage(index:number, parcel:any){
-  console.log(parcel)
+
      this.packages().at(index).patchValue({
       description: parcel.description,
       weight: parcel.weigth,

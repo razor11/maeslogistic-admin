@@ -185,6 +185,7 @@
                     <mat-form-field  appearance="fill">
                       <mat-label>Select packaging</mat-label>
                       <mat-select  (selectionChange)="patchPackage(packsIndex,$event.value)">
+                        <mat-option value="Custom">Custom</mat-option>
                         <mat-option
                           *ngFor="let package of packagesCatalog"
                           [value]="package"
